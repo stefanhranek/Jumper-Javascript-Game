@@ -71,6 +71,9 @@ Player() {
   this.speed
 }
 
+Player.prototype.startPosition() {
+}
+
 Player.prototype.movement() {
 }
 
