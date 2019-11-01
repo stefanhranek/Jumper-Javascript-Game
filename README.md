@@ -74,17 +74,47 @@ Player.prototype.movement() {
 Player.prototype.screenCollision () {
 }
 
+Player.prototype.enemyCollision () {
+}
 
+Player.prototype.winCollision () {
+}
+
+Player.prototype.draw() {
+  this.ctx.fillStyle
+  this.ctx.fillRect
+}
 ```
 
 ### enemy.js
 ```
+Enemy() {
+  this.canvas
+  this.ctx
+  this.size
+  this.x
+  this.y
+  this.speed
+}
 
+Enemy.prototype.draw() {
+  this.ctx
+  this.ctx.FillRect
+    this.x
+    this.y
+    this.size
+    this.size
+}
+
+Enemy.prototype.updatePosition() {
+}
+
+Enemy.prototype.isInsideScreen() {
+}
 ```
 
 
 ## States y States Transitions
-Definition of the different states and their transition (transition functions)
 ```
 - splashScreen
   - buildSplash()
@@ -92,7 +122,8 @@ Definition of the different states and their transition (transition functions)
 
 - gameScreen
   - buildGameScreen()
-  
+  - addEventListener(enemyCollision)
+  - addEventListener(winCollision)
 
 - gameoverScreen
   - buildGameOverScreen()
@@ -105,8 +136,29 @@ Definition of the different states and their transition (transition functions)
 ````
 
 ## Task
-Task definition in order of priority
-
+- Main - buildDom
+- Main - buildSplashScreen
+- Main - addEventListener
+- Main - buildGameScreen
+- Main - buildGameOverScreen
+- Main - buildWinScreen
+- Game - buildCanvas
+- Game - clearCanvas
+- Game - updateCanvas
+- Game - drawCanvas
+- Game - setGameOver
+- Game - setWin
+- Game - addEventListeners
+- Player - construct Player
+- Player - movement
+- Player - screenCollision
+- Player - enemyCollision
+- Player - winCollision
+- Enemy - construct Enemy
+- Enemy - setRandomLocation
+- Enemy - setDirection
+- Enemy - updatePosition
+- Enemy - isInsideOfScreen
 
 ## Links
 
