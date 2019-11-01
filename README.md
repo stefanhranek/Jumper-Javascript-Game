@@ -135,7 +135,7 @@ Enemy.prototype.isInsideScreen() {
 
 ````
 
-## Task
+## Tasks
 - Main - buildDom
 - Main - buildSplashScreen
 - Main - addEventListener
