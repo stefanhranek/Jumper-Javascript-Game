@@ -14,12 +14,15 @@ Jumper is a game where the player can move left, right and jump. The goal of the
   <li>Obstacles</li>
   <li>Coins</li>
   <li>Coin counter</li>
+  <li>Window(view) scrolling with character</li
   <li>Character sprite</li>
   <li>Star sprite</li>
   <li>Coin sprite</li>
   <li>Sprite "animation"</li>
   <li>Background & atmosphere styling</li>
   <li>Sceen transitions</li>
+  <li>Background Audio</li>
+  <li>Sounds Effects</li>
 </ul>
 
 ## Data structure
@@ -150,7 +153,8 @@ Enemy.prototype.isInsideScreen() {
 - Game - setWin
 - Game - addEventListeners
 - Player - construct Player
-- Player - movement
+- Player - basic movement
+- Player - jumping
 - Player - screenCollision
 - Player - enemyCollision
 - Player - winCollision
