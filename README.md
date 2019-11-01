@@ -132,7 +132,7 @@ Enemy.prototype.isInsideScreen() {
   - buildGameOverScreen()
   - addEventListener(startGame)
 
-- winScreen()
+- winScreen
   - buildWinScreen()
   - addEventListener(startGame)
 
