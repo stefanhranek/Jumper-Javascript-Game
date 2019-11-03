@@ -85,12 +85,26 @@ html {
     }
 
     .game .canvas-container {
-    flex: 1;
-    background: url(/images/background-pixels.jpg);
-    background-size: stretch;
+    flex: 1; 
+    margin: 0;
+    background: black; 
     }
+    
 
     /* --- my addition --- */
+
+    .game-dom-container {
+        display: inline-flex;
+        position: absolute;
+        color: white;
+        padding: 30px;
+        width: 100vw;
+        justify-content: flex-end;
+    }
+
+    .game-dom-container span {
+        font-size: 25px;
+    }
 
     .canvas-container {
         height: 100%;

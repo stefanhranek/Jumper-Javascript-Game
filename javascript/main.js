@@ -1,5 +1,7 @@
 'use strict'
 
+
+// Creates DOM elements from a string representation
 function buildDom(htmlString) {
     var div = document.createElement('div');
     div.innerHTML = htmlString;
@@ -7,8 +9,14 @@ function buildDom(htmlString) {
     return div.children[0];
 }
 
+
+// Runs on initial start and contains calls all other functions that manage the game
 function main() {
+    var game;
     var splashScreen;
+    var gameOverScreen;
+
+    // splash screen creation
 
     function createSplashScreen() {
         splashScreen = buildDom(`
@@ -29,14 +37,19 @@ function main() {
         });
     }
 
+
     function removeSplashScreen() {
         splashScreen.remove();
     }
 
+    // game screen creation
+
     function createGameScreen() {
         var gameScreen = buildDom(`
         <main class="game">
-            <span>Coins: </span><span id="coins">0</span><span>/10</span>
+            <div class ="game-dom-container">
+            <span id="coins">Coins: </span><span id="coins">0</span><span>/10</span>
+            </div>
             <section class="canvas-container">
             <canvas></canvas>
             </section>
@@ -48,17 +61,69 @@ function main() {
         return gameScreen;
     }
 
+    // game screen removal
+
+    function removeGameScreen() {
+        game.removeGameScreen();
+    }
+
+
+    // game over screen creation
+
+    function createGameOverScreen() {
+        gameOverScreen = buildDom(`
+        <main>
+            <h1>Game over</h1>
+            <p>Your score: <span></span></p>
+            <button>Restart</button>
+        </main>
+        `);
+
+        var button = gameOverScreen.querySelector('button');
+        button.addEventListener('click', startGame);
+
+        var span = gameOverScreen.querySelector('span');
+        span.innerText = coins;
+
+        document.body.appendChild(gameOverScreen);
+    }
+
+    
+    function removeGameOverScreen() {
+        if (gameOverScreen !== undefined) {
+            gameOverScreen.remove();
+        }
+    }
+
+
+    // setting the game state
+
+
     function startGame() {
         removeSplashScreen();
+        // later add clearing of the gameOverScreen
+        removeGameOverScreen();
 
-        var game = new Game();
+        game = new Game();
         game.gameScreen = createGameScreen();
 
         game.start();
+        // end the game
+        game.passGameOverCallback( function() {
+            gameOver(game.score);  // score may need to be changed or removed ***
+        });
     }
+
+
+    function gameOver(score) {
+        
+        removeGameScreen();
+        createGameOverScreen(score); // added score as argument, may need to remove or change *******
+    }
+
+    // initialize Splash screen on initial start
 
     createSplashScreen();
     }
 
-    window.onload = main;
-    
+    window.addEventListener('load', main);
