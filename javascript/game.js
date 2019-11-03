@@ -41,7 +41,7 @@ Game.prototype.start = function() {
             } 
         else if (event.key === 'ArrowDown') {
             console.log('DOWN');
-            this.player.movePlayer('down');   // disregard down movement for now
+            this.player.movePlayer('down');   // disable once gravity is in place
             }
         else if (event.keyCode === 37) {
             console.log('LEFT');

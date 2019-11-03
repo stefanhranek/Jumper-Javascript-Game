@@ -72,12 +72,12 @@ function main() {
 
     function createGameOverScreen() {
         gameOverScreen = buildDom(`
-        <main>
-            <h1>Game over</h1>
-            <p>Your score: <span></span></p>
-            <button>Restart</button>
+        <main class ="gameOver">
+        <h1 class="gO-title"><img src="/images/GameOverNoob.png" alt=""></h1>
+        <h2 class="gO-tryAgain"><img src="/images/try-again.png" alt=""></h2>
+        <div class="button-container"><button class="start-button">START GAME</button></div>
         </main>
-        `);
+        `); 
 
         var button = gameOverScreen.querySelector('button');
         button.addEventListener('click', startGame);

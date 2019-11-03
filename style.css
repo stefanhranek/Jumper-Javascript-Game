@@ -17,7 +17,7 @@ html {
 
     body {
     color: #111;
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: 'Press Start 2P', cursive;
     font-size: 16px;
     line-height: 147%;
     display: flex;
@@ -125,6 +125,12 @@ html {
         cursor: pointer;
         }
 
+    .gameOver {
+        display: flex;
+        flex-direction: column;
+
+    }
+
     .title {
         padding-bottom: 30px;
     }  
@@ -132,6 +138,21 @@ html {
         height: auto;
         width: 60vw;
         max-width: 750px;
+    }
+
+    .gO-title {
+        margin: 20px;
+    }  
+    .gO-title img {
+        height: auto;
+        width: 60vw;
+        max-width: 60vw;
+    }
+
+    .gO-tryAgain img {
+        height: auto;
+        width: 30vw;
+        max-width: 300px;
     }
 
     .how-to-play img {
