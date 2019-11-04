@@ -10,9 +10,9 @@ function Player(canvas, lives) {
     this.x              = canvas.width / 2;
     this.y              = canvas.height / 2; 
     
-    this.speed          = 50;
-    this.velocityX      = 0;    //(backlog) // for fluidity
-    this.velocityY      = 0;    //(backlog) // for fluidity
+    this.speed          = 33;
+    this.velocityX      = 0;    // implement for movement fluidity
+    this.velocityY      = 0;    //(backlog)  for movement fluidity
     this.friction       = 0.98;
     this.jumping        = true; // utilize to prevent double jump
 

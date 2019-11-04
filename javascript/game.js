@@ -7,8 +7,9 @@ function Game() {
     this.player = null;
     this.gameIsOver = false;
     this.gameScreen = null;
-    this.coins = 0;
+    this.coinCount = 0;
     this.walls = null;
+    this.winObject = null;
 }
 
 // Create the canvas, a `player`, and start the canvas loop
@@ -24,14 +25,16 @@ Game.prototype.start = function() {
     this.coinsElement = this.gameScreen.querySelector('coins'); // ('.coins .value') in code-along
 
     // Setting the canvas (ctx) to be the same as the viewport size
+    // @@@@@@@  MIGHT BE THE CAUSE OF MOVING ELEMENTS IN GAME ON DIFFERENT VIEWPORT SIZES @@@@@@@
     this.containerWidth = this.canvasContainer.offsetWidth; // look back at 'offset' functionality
     this.containerHeight = this.canvasContainer.offsetHeight; // same as above
     this.canvas.setAttribute('width', this.containerWidth);
     this.canvas.setAttribute('height', this.containerHeight);
 
-    //draw walls
+    //draw walls & coins
     this.floor = new Floor(this.canvas); // *************************************** edit/remove
-
+    this.coins = new Coins(this.canvas);
+    this.winObject = new WinObject(this.canvas);
     // Creating new player for the start of the game
     this.player = new Player(this.canvas, 1);
 
@@ -58,103 +61,75 @@ Game.prototype.start = function() {
         }
         };
 
-        this.handleKeyUp = function(event) {
-    
-            if (event.keyCode === 38) {
-                console.log('UP Release');
-                this.player.movement('up');  // change movement to jump
-                } 
-            else if (event.key === 'ArrowDown Release') {
-                console.log('DOWN Release');
-                this.player.movement('down');  // disregard down movement for now
-                }
-            else if (event.keyCode === 37) {
-                console.log('LEFT Release');   
-                this.player.moveLeft = true;
-            }
-            else if (event.keyCode === 39) {
-                console.log('RIGHT Release');
-                this.player.moveRight = true;
-            }
-            };
-
 
         document.body.addEventListener(
             'keydown', 
             this.handleKeyDown.bind(this)
         );
 
-    //}
 
     // Start the game loop
-
     this.startLoop();
+
 }
 
 Game.prototype.startLoop = function() {
+
     var loop = function() {
         console.log('in loop');
 
 
         // EVERYTHING HAPPENS HERE !!!!!
-
         // 1. UPDATE THE STATE OF PLAYER AND ENEMIES
-
-
-    // 0. Our player was already created - via `game.start()`
-
-
-    // 1. Create new enemies randomly
+         // 0. Our player was already created - via `game.start()`
+        // 1. Create new enemies randomly
         if (Math.random() > 0.98) {
-        var randomX = this.canvas.width * Math.random();    // later change randomY to randomX
-        this.enemies.push(new Enemy(this.canvas, randomX, 5));  // later change randomY to randomX
-        // var newEnemy = new Enemy(this.canvas, randomY, 1); used that previously instead of above
+        var randomX = this.canvas.width * Math.random();    
+        this.enemies.push(new Enemy(this.canvas, randomX, 5));  
         }
 
-    // 2. Check if player had hit any enemy (check all enemies)
+        // 2. Check if player had hit any enemy (check all enemies)
         this.checkCollisions();
 
+        // 3. Check if player is going off the screen
+        // & check object collision
+        this.player.handleFloorCollision();          // doesn't work
+        this.player.handleScreenCollision();
+        //this.player.handleObjectCollision();      //  need object collision
 
-    // 3. Check if player is going off the screen
-            // & check object collision
-            this.player.handleFloorCollision();
-            this.player.handleScreenCollision();
-
-        
-    // 4. Move existing enemies
-    // 5. Check if any enemy is going of the screen
+         // 4. Move existing enemies
+        // 5. Check if any enemy is going of the screen
         this.enemies = this.enemies.filter(function(enemy) {
             enemy.updatePosition();
             return enemy.isInsideScreen();
         });
 
 
-// 2. CLEAR THE CANVAS
+        // 2. CLEAR THE CANVAS
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
+        // 3. UPDATE THE CANVAS
+        // Draw the floor/walls/platforms/coins/winObject
+        this.floor.draw();      // floor & platforms drawn, but collision off
+        this.coins.draw();
+        this.winObject.draw();
 
-// 3. UPDATE THE CANVAS
-    // Draw the walls
-        this.floor.draw();
-
-    // Draw the player
+         // Draw the player
         this.player.draw();
 
-
-    // Draw the enemies
-    this.enemies.forEach(function(enemy) {  // in code-along src arg is item & item.draw below
-        enemy.draw();
+        // Draw the enemies
+        this.enemies.forEach(function(enemy) {  
+            enemy.draw();
         });
 
-
-// 4. TERMINATE LOOP IF GAME IS OVER
+        // 4. TERMINATE LOOP IF GAME IS OVER
         if (!this.gameIsOver) {
             window.requestAnimationFrame(loop);
         }
 
         //  5. Update Game data/stats
         this.updateGameStats();	
-        // ************************************update this later
+        // ************************************update this later for coin counter
 
 
     }.bind(this);
@@ -162,20 +137,18 @@ Game.prototype.startLoop = function() {
     window.requestAnimationFrame(loop);
 }
 
-    // further inspect the above startLoop function
-    // i don't quite understand it at the moment
+// end of loop function
 
+Game.prototype.checkCollisions = function() {         // USE SIMILAR FOR COIN COLLISION + COUNTER
 
-Game.prototype.checkCollisions = function() {
-
-    this.enemies.forEach( function(enemy) {
+    this.enemies.forEach(function(enemy) {
         if ( this.player.didCollide(enemy) ) {
 
             this.player.removeLife();
             console.log('lives', this.player.lives);
 
             // move enemy off the screen to the bottom
-            enemy.y = this.canvas.height + enemy.size; // change to bottom of canvas **
+            enemy.y = this.canvas.height + enemy.size; 
 
             if (this.player.lives === 0) {
                 this.gameOver();
@@ -186,9 +159,8 @@ Game.prototype.checkCollisions = function() {
 }
 
 Game.prototype.updateGameStats = function() {
-    // change to fit my game ************************************
-    // coins, not score ~ lives don't matter
-    this.coins += 1;
+
+    this.coinCount += 1;                                // UPDATE FOR COIN COUNTER
     // this.coinsElement.innerHTML = this.coins;
 }
 
@@ -204,63 +176,11 @@ Game.prototype.gameOver = function() {
 
     console.log('GAME OVER');
 
-    // Call the gameOver function from `main` to show the Game Over Screen
+    // call the gameOver function from `main` to show the Game Over Screen
     this.onGameOverCallback();
 }
 
 Game.prototype.removeGameScreen = function() {
     this.gameScreen.remove();   
-    // remove() is the DOM method which removes the DOM Node 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-
-document.onkeydown = function(e) {
-    switch (e.keyCode) {
-        case 37:
-            alert('left');
-            break;
-        case 38:
-            alert('up');
-            break;
-        case 39:
-            alert('right');
-            break;
-        case 40:
-            alert('down');
-            break;
-    }
-};
-
-*/
