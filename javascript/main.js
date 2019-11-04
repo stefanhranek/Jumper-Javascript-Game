@@ -25,8 +25,8 @@ function main() {
         <main class ="splash">
         <h1 class="title"><img src="https://fontmeme.com/permalink/191102/0a2f7a1615284af7dc53275c43ec1556.png" alt="pixel-fonts" border="0"></a></h1>
         <h2 class="how-to-play"><img src="https://fontmeme.com/permalink/191102/339920137fe87f8e521325a79a4d7402.png" alt="pixel-fonts" border="0"></a></h2>
-        <p class="controls"><img src="/images/arrow-keys.png"></p>
-        <p class="controls-text"><img src="/images/controls-text.png" alt=""></p>
+        <p class="controls"><img src="./images/arrow-keys.png"></p>
+        <p class="controls-text"><img src="./images/controls-text.png" alt=""></p>
         <div class="button-container"><button class="start-button">START GAME</button></div>
         </main>
         `);
@@ -75,8 +75,8 @@ function main() {
     function createGameOverScreen(coins) {     // has SCORE as argument on example
         gameOverScreen = buildDom(`
         <main class ="gameOver">
-        <h1 class="gO-title"><img src="/images/GameOverNoob.png" alt=""></h1>
-        <h2 class="gO-tryAgain"><img src="/images/try-again.png" alt=""></h2>
+        <h1 class="gO-title"><img src="./images/GameOverNoob.png" alt=""></h1>
+        <h2 class="gO-tryAgain"><img src="./images/try-again.png" alt=""></h2>
         <div class="button-container"><button class="start-button">START GAME</button></div>
         </main>
         `); 
