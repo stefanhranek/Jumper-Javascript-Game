@@ -7,6 +7,7 @@ function Game() {
     this.player = null;
     this.gameIsOver = false;
     this.gameScreen = null;
+    this.coins = 0;
 }
 
 // Create the canvas, a `player`, and start the canvas loop
@@ -19,7 +20,7 @@ Game.prototype.start = function() {
     this.ctx = this.canvas.getContext('2d');
 
     // save reference to coins collected
-    this.coinsElement = this.gameScreen.querySelector('coins'); // coins not set yet
+    this.coinsElement = this.gameScreen.querySelector('coins'); // ('.coins .value') in code-along
 
     // Setting the canvas (ctx) to be the same as the viewport size
     this.containerWidth = this.canvasContainer.offsetWidth; // look back at 'offset' functionality
@@ -100,29 +101,26 @@ Game.prototype.startLoop = function() {
 
 
     // 1. Create new enemies randomly
-        // if (Math.random() > 0.98) {
-        // var randomY = this.canvas.height * Math.random();
-        // var newEnemy = new Enemy(this.canvas, randomY, 5);
-        // this.enemies.push(newEnemy);
-    //}
+        if (Math.random() > 0.98) {
+        var randomY = this.canvas.height * Math.random();    // later change randomY to randomX
+        this.enemies.push(new Enemy(this.canvas, randomY, 5));  // later change randomY to randomX
+        // var newEnemy = new Enemy(this.canvas, randomY, 1); used that previously instead of above
+        }
 
     // 2. Check if player had hit any enemy (check all enemies)
-        // this.checkCollisions();
+        this.checkCollisions();
 
 
     // 3. Check if player is going off the screen
-        //this.player.handleScreenCollision();
+        this.player.handleScreenCollision();
 
         
     // 4. Move existing enemies
-        // empty for now
-
-
     // 5. Check if any enemy is going of the screen
-        // this.enemies = this.enemies.filter(function(enemy) {
-        //     enemy.updatePosition();
-        //     return enemy.isInsideScreen();
-        //   });
+        this.enemies = this.enemies.filter(function(enemy) {
+            enemy.updatePosition();
+            return enemy.isInsideScreen();
+        });
 
 
 // 2. CLEAR THE CANVAS
@@ -135,9 +133,9 @@ Game.prototype.startLoop = function() {
 
 
     // Draw the enemies
-    // this.enemies.forEach(function(enemy) {
-    //     enemy.draw();
-    //   });
+    this.enemies.forEach(function(enemy) {  // in code-along src arg is item & item.draw below
+        enemy.draw();
+        });
 
 
 // 4. TERMINATE LOOP IF GAME IS OVER
@@ -146,7 +144,7 @@ Game.prototype.startLoop = function() {
         }
 
         //  5. Update Game data/stats
-        // this.updateGameStats();	
+        this.updateGameStats();	
         // ************************************update this later
 
 
@@ -159,14 +157,30 @@ Game.prototype.startLoop = function() {
     // i don't quite understand it at the moment
 
 
-Game.prototype.checkCollisions = function() {}
+Game.prototype.checkCollisions = function() {
+
+    this.enemies.forEach( function(enemy) {
+        if ( this.player.didCollide(enemy) ) {
+
+            this.player.removeLife();
+            console.log('lives', this.player.lives);
+
+            // move enemy off the screen to the bottom
+            enemy.x = 0 - enemy.size; // change to bottom of canvas **
+
+            if (this.player.lives === 0) {
+                this.gameOver();
+            }
+        }
+    }, this);
+
+}
 
 Game.prototype.updateGameStats = function() {
     // change to fit my game ************************************
     // coins, not score ~ lives don't matter
-    this.score += 1;
-    this.livesElement.innerHTML = this.player.lives;
-    this.scoreElement.innerHTML = this.score;
+    this.coins += 1;
+    // this.coinsElement.innerHTML = this.coins;
 }
 
 Game.prototype.passGameOverCallback = function(gameOver) {

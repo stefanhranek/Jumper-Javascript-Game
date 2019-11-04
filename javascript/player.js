@@ -6,25 +6,24 @@ function Player(canvas, lives) {
     this.canvas         = canvas;
     this.ctx            = this.canvas.getContext('2d');
     this.lives          = lives;    // may not use lives *******************
-    this.size           = 15;
+    this.size           = 30;
     this.x              = canvas.width / 2;
     this.y              = canvas.height / 2; 
     
-    this.xVelocity      = 0; //(backlog) // for fluidity
-    this.yVelocity      = 0; //(backlog) // for fluidity
     this.speed          = 10;
-    this.friction       = 0.98;
     this.direction      = 0;
-    this.moveLeft       = false;
-    this.moveRight      = false;
-    this.jumping        = true;
+    this.velocityX      = 0;    //(backlog) // for fluidity
+    this.velocityY      = 0;    //(backlog) // for fluidity
+    this.friction       = 0.98;
+    this.jumping        = true; // utilize to prevent double jump
 
 }
 
 
 
 Player.prototype.movePlayer = function(direction) {
-// +1 down/right    -1 up/left
+// +1 y:down/x:right    -1 y::up/x:left
+
     if (direction === 'up') {
         this.y -= this.speed;
     }
@@ -40,10 +39,59 @@ Player.prototype.movePlayer = function(direction) {
 }
 
 Player.prototype.draw = function() {
-    this.ctx.fillStyle = 'orange';
+    this.ctx.fillStyle = 'salmon';
     // fillRect (x, y, width, height)
     this.ctx.fillRect(this.x, this.y, this.size, this.size);
 }
+
+
+
+Player.prototype.didCollide = function(enemy) {
+    var playerLeft = this.x;
+    var playerRight = this.x + this.size;
+    var playerTop = this.y;
+    var playerBottom = this.y + this.size;
+
+    var enemyLeft = enemy.x;
+    var enemyRight = enemy.x + enemy.size;
+    var enemyTop = enemy.y;
+    var enemyBottom = enemy.y + enemy.size;
+
+    // Check if the enemy intersects any of the player's sides
+    var crossLeft = enemyLeft <= playerRight && enemyLeft >= playerLeft;
+    var crossRight = enemyRight >= playerLeft && enemyRight <= playerRight;
+    var crossBottom = enemyBottom >= playerTop && enemyBottom <= playerBottom;
+    var crossTop = enemyTop <= playerBottom && enemyTop >= playerTop;
+
+    if ((crossLeft || crossRight) && (crossTop || crossBottom)) {
+        return true;
+    }
+    return false;
+};
+
+
+Player.prototype.handleScreenCollision = function() {
+    
+    var screenTop = 0;
+    var screenBottom = this.canvas.height-30;
+
+    if (this.y > screenBottom) this.y = screenBottom - 1;
+    
+    else if (this.y < screenTop) this.y = 1;
+};
+
+    
+    Player.prototype.removeLife = function() {
+        this.lives -= 1;
+    };   // probably not applicable *****
+    
+// window.addEventListener("keydown", Player.prototype,update.keyListener);
+/*
+window.addEventListener("keyup", controller.keyListener);
+window.requestAnimationFrame(moveLoop);
+*/
+
+// BELOW IS UN-USED GRAVITY & FRICTION CODE IN TESTING
 
 /*
 var controller = {
@@ -103,18 +151,3 @@ var moveLoop = function() {
 // Player.prototype.setGravity = function(gravity) {
 //     //
 // };
-
-
-Player.prototype.didCollide = function(enemy) {};
-
-
-Player.prototype.handleScreenCollision = function() {};
-
-
-Player.prototype.removeLife = function() {};   // probably not applicable *****
-
-// window.addEventListener("keydown", Player.prototype,update.keyListener);
-/*
-window.addEventListener("keyup", controller.keyListener);
-window.requestAnimationFrame(moveLoop);
-*/

@@ -1,9 +1,8 @@
 'use strict'
 
 
-// Creates DOM elements from a string representation
 function buildDom(htmlString) {
-    var div = document.createElement('div');
+    var div       = document.createElement('div');
     div.innerHTML = htmlString;
 
     return div.children[0];
@@ -17,7 +16,7 @@ function main() {
     var gameOverScreen;
 
     // splash screen creation
-
+    // re-create h1h2 images to save in local folder
     function createSplashScreen() {
         splashScreen = buildDom(`
         <main class ="splash">
@@ -70,7 +69,7 @@ function main() {
 
     // game over screen creation
 
-    function createGameOverScreen() {
+    function createGameOverScreen(coins) {     // has SCORE as argument on example
         gameOverScreen = buildDom(`
         <main class ="gameOver">
         <h1 class="gO-title"><img src="/images/GameOverNoob.png" alt=""></h1>
@@ -82,15 +81,15 @@ function main() {
         var button = gameOverScreen.querySelector('button');
         button.addEventListener('click', startGame);
 
-        var span = gameOverScreen.querySelector('span');
-        span.innerText = coins;
+        var span = gameOverScreen.querySelector('span');    // change span
+        // span.innerText = coins;     // coins --------- update later
 
         document.body.appendChild(gameOverScreen);
     }
 
     
     function removeGameOverScreen() {
-        if (gameOverScreen !== undefined) {
+        if (gameOverScreen) {
             gameOverScreen.remove();
         }
     }
@@ -101,7 +100,6 @@ function main() {
 
     function startGame() {
         removeSplashScreen();
-        // later add clearing of the gameOverScreen
         removeGameOverScreen();
 
         game = new Game();
@@ -109,16 +107,16 @@ function main() {
 
         game.start();
         // end the game
-        game.passGameOverCallback( function() {
-            gameOver(game.score);  // score may need to be changed or removed ***
+        game.passGameOverCallback(function() {
+            gameOver(game.coins);  // score may need to be changed or removed ***
         });
     }
 
 
-    function gameOver(score) {
+    function gameOver(coins) {
         
         removeGameScreen();
-        createGameOverScreen(score); // added score as argument, may need to remove or change *******
+        createGameOverScreen(coins); // added score as argument, may need to remove or change *******
     }
 
     // initialize Splash screen on initial start
@@ -127,3 +125,10 @@ function main() {
     }
 
     window.addEventListener('load', main);
+
+
+
+
+
+
+    // DOUBLE-CHECKED

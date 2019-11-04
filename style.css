@@ -58,7 +58,7 @@ html {
     text-align: center;
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: 100%;                   /* revisit container size */
     width: 100%   /* --- my change --- */
     }
 
@@ -72,7 +72,7 @@ html {
     flex: 1;
     }
 
-    .game .score {
+    .game .coins {
     flex: 1;
     }
 
@@ -87,7 +87,7 @@ html {
     .game .canvas-container {
     flex: 1; 
     margin: 0;
-    background: black; 
+    background: rgb(101, 148, 146, 100%);   /* change to black later ---------- */
     }
     
 
