@@ -102,8 +102,8 @@ Game.prototype.startLoop = function() {
 
     // 1. Create new enemies randomly
         if (Math.random() > 0.98) {
-        var randomY = this.canvas.height * Math.random();    // later change randomY to randomX
-        this.enemies.push(new Enemy(this.canvas, randomY, 5));  // later change randomY to randomX
+        var randomX = this.canvas.width * Math.random();    // later change randomY to randomX
+        this.enemies.push(new Enemy(this.canvas, randomX, 5));  // later change randomY to randomX
         // var newEnemy = new Enemy(this.canvas, randomY, 1); used that previously instead of above
         }
 
@@ -166,7 +166,7 @@ Game.prototype.checkCollisions = function() {
             console.log('lives', this.player.lives);
 
             // move enemy off the screen to the bottom
-            enemy.x = 0 - enemy.size; // change to bottom of canvas **
+            enemy.y = this.canvas.height + enemy.size; // change to bottom of canvas **
 
             if (this.player.lives === 0) {
                 this.gameOver();

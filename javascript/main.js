@@ -1,6 +1,7 @@
 'use strict'
 
 
+
 function buildDom(htmlString) {
     var div       = document.createElement('div');
     div.innerHTML = htmlString;
@@ -11,9 +12,11 @@ function buildDom(htmlString) {
 
 // Runs on initial start and contains calls all other functions that manage the game
 function main() {
+
     var game;
     var splashScreen;
     var gameOverScreen;
+
 
     // splash screen creation
     // re-create h1h2 images to save in local folder
