@@ -8,6 +8,7 @@ function Game() {
     this.gameIsOver = false;
     this.gameScreen = null;
     this.coins = 0;
+    this.walls = null;
 }
 
 // Create the canvas, a `player`, and start the canvas loop
@@ -27,6 +28,9 @@ Game.prototype.start = function() {
     this.containerHeight = this.canvasContainer.offsetHeight; // same as above
     this.canvas.setAttribute('width', this.containerWidth);
     this.canvas.setAttribute('height', this.containerHeight);
+
+    //draw walls
+    this.floor = new Floor(this.canvas); // *************************************** edit/remove
 
     // Creating new player for the start of the game
     this.player = new Player(this.canvas, 1);
@@ -112,7 +116,9 @@ Game.prototype.startLoop = function() {
 
 
     // 3. Check if player is going off the screen
-        this.player.handleScreenCollision();
+            // & check object collision
+            this.player.handleFloorCollision();
+            this.player.handleScreenCollision();
 
         
     // 4. Move existing enemies
@@ -128,6 +134,9 @@ Game.prototype.startLoop = function() {
 
 
 // 3. UPDATE THE CANVAS
+    // Draw the walls
+        this.floor.draw();
+
     // Draw the player
         this.player.draw();
 
