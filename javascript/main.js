@@ -16,6 +16,7 @@ function main() {
     var game;
     var splashScreen;
     var gameOverScreen;
+    var gameWinScreen;
 
 
     // splash screen creation
@@ -97,6 +98,33 @@ function main() {
         }
     }
 
+        // game WIN screen creation
+
+        function createGameWinScreen(coins) {     // has SCORE as argument on example
+            gameWinScreen = buildDom(`
+            <main class ="gameWin">
+            <h1 class="win-title">YOU WIN (place picture)</h1>
+            <h2 class="congrats">Good Job!</h2>
+            <div class="button-container"><button class="start-button">START GAME</button></div>
+            </main>
+            `); 
+    
+            var button = gameWinScreen.querySelector('button');
+            button.addEventListener('click', startGame);
+    
+            var span = gameWinScreen.querySelector('span');    // change span
+            // span.innerText = coins;     // coins --------- update later
+    
+            document.body.appendChild(gameWinScreen);
+        }
+    
+        
+        function removeGameWinScreen() {
+            if (gameWinScreen) {
+                gameWinScreen.remove();
+            }
+        }
+
 
     // setting the game state
 
@@ -104,14 +132,21 @@ function main() {
     function startGame() {
         removeSplashScreen();
         removeGameOverScreen();
+        removeGameWinScreen();
 
         game = new Game();
         game.gameScreen = createGameScreen();
 
         game.start();
+
         // end the game
+            //lose
         game.passGameOverCallback(function() {
             gameOver(game.coins);  // score may need to be changed or removed ***
+        });
+            //win
+        game.passGameWinCallback(function() {
+            gameWin(game.coins);
         });
     }
 
@@ -122,6 +157,11 @@ function main() {
         createGameOverScreen(coins); // added score as argument, may need to remove or change *******
     }
 
+
+    function gameWin(coins) {
+        removeGameScreen();
+        createGameWinScreen(coins); 
+    }
     // initialize Splash screen on initial start
 
     createSplashScreen();

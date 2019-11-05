@@ -6,6 +6,7 @@ function Game() {
     this.enemies = [];
     this.player = null;
     this.gameIsOver = false;
+    this.gameWin = false;
     this.gameScreen = null;
     this.coinCount = 0;
     this.walls = null;
@@ -25,7 +26,7 @@ Game.prototype.start = function() {
     this.coinsElement = this.gameScreen.querySelector('coins'); // ('.coins .value') in code-along
 
     // Setting the canvas (ctx) to be the same as the viewport size
-    // @@@@@@@  MIGHT BE THE CAUSE OF MOVING ELEMENTS IN GAME ON DIFFERENT VIEWPORT SIZES @@@@@@@
+    // @@@@@@@  MIGHT BE THE CAUSE OF SHIFTING ELEMENTS IN GAME ON DIFFERENT VIEWPORT SIZES @@@@@@@
     this.containerWidth = this.canvasContainer.offsetWidth; // look back at 'offset' functionality
     this.containerHeight = this.canvasContainer.offsetHeight; // same as above
     this.canvas.setAttribute('width', this.containerWidth);
@@ -44,19 +45,16 @@ Game.prototype.start = function() {
     this.handleKeyDown = function(event) {
     
         if (event.keyCode === 38) {
-            console.log('UP');
+
             this.player.movePlayer('up');   // change movement to jump
             } 
-        else if (event.key === 'ArrowDown') {
-            console.log('DOWN');
+        else if (event.key === 'ArrowDown') {;
             this.player.movePlayer('down');   // disable once gravity is in place
             }
         else if (event.keyCode === 37) {
-            console.log('LEFT');
             this.player.movePlayer('left');
         }
         else if (event.keyCode === 39) {
-            console.log('RIGHT');
             this.player.movePlayer('right');
         }
         };
@@ -93,7 +91,8 @@ Game.prototype.startLoop = function() {
 
         // 3. Check if player is going off the screen
         // & check object collision
-        this.player.handleObjectCollision();          // doesn't work
+        // this.player.didCollideWin();
+        this.player.handleObjectCollision();          // doesn't work                           WORKING ON WIN COLLISION @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
         this.player.handleScreenCollision();
         //this.player.handleObjectCollision();      //  need object collision
 
@@ -122,8 +121,8 @@ Game.prototype.startLoop = function() {
             enemy.draw();
         });
 
-        // 4. TERMINATE LOOP IF GAME IS OVER
-        if (!this.gameIsOver) {
+        // 4. TERMINATE LOOP IF GAME IS OVER OR GAME WIN
+        if (!this.gameIsOver && !this.gameWin) {
             window.requestAnimationFrame(loop);
         }
 
@@ -158,6 +157,10 @@ Game.prototype.checkCollisions = function() {         // USE SIMILAR FOR COIN CO
 
 }
 
+
+
+
+
 Game.prototype.updateGameStats = function() {
 
     this.coinCount += 1;                                // UPDATE FOR COIN COUNTER
@@ -167,6 +170,11 @@ Game.prototype.updateGameStats = function() {
 Game.prototype.passGameOverCallback = function(gameOver) {
     // need to understand this better
     this.onGameOverCallback = gameOver;
+}
+
+Game.prototype.passGameWinCallback = function(youWin) {
+    // need to understand this better
+    this.onYouWinCallback = youWin;
 }
 
 
@@ -179,6 +187,19 @@ Game.prototype.gameOver = function() {
     // call the gameOver function from `main` to show the Game Over Screen
     this.onGameOverCallback();
 }
+
+
+Game.prototype.youWin = function() {
+    // `gameIsOver = true` stops the loop
+    this.gameWin = true;                     
+
+    console.log('YOU WIN');
+
+    // call the gameOver function from `main` to show the Game Over Screen
+    this.onYouWinCallback();
+}
+
+
 
 Game.prototype.removeGameScreen = function() {
     this.gameScreen.remove();   

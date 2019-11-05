@@ -69,8 +69,31 @@ Player.prototype.didCollide = function(enemy) {     // later rename
 };
 
 
+Player.prototype.didCollideWin = function(WinObject) {    //////////////////////////// verify that its working , log
+
+    var winLeft = WinObject.x;
+    var winRight = WinObject.x + WinObject.size;
+    var winTop = WinObject.y;
+    var winBottom = WinObject.y + WinObject.size;
+
+    // Check if the winObj intersects any of the player's sides
+    var crossLeftWin = winLeft <= playerRight && winLeft >= playerLeft;
+    var crossRightWin = winRight >= playerLeft && winRight <= playerRight;
+    var crossBottomWin = winBottom >= playerTop && winBottom <= playerBottom;
+    var crossTopWin = winTop <= playerBottom && winTop >= playerTop;
+
+    if ((crossLeftWin || crossRightWin || crossTopWin || crossBottomWin)) {
+        console.log('WIN COLLISION IS WORKING');
+        return true;
+    }
+    console.log('WIN COLLISION IS WORKING');
+    return false;
+};
+
+
+
 Player.prototype.handleObjectCollision = function() {
-    // CURRENTLY WORKING ON *** floor collision not working ********************
+    // CURRENTLY WORKING ON ***  collision not working **********************************************
 
     // USE FOR WALL COLLISION
     // var wallTop = 0;
@@ -82,8 +105,6 @@ Player.prototype.handleObjectCollision = function() {
 
     if (this.y > objectTop) this.y = PhysicalObjects.y - 1;
 
-
-    
 };
 
 
@@ -108,15 +129,17 @@ Player.prototype.handleScreenCollision = function() {
     
     Player.prototype.removeLife = function() {
         this.lives -= 1;
-    };   // probably not applicable *****
-    
+    };   
+
+
+
 // window.addEventListener("keydown", Player.prototype,update.keyListener);
 /*
 window.addEventListener("keyup", controller.keyListener);
 window.requestAnimationFrame(moveLoop);
 */
 
-// BELOW IS UN-USED GRAVITY & FRICTION CODE IN TESTING
+// BELOW IS UN-USED GRAVITY & FRICTION CODE IN TESTING *******************************************************
 
 /*
 var controller = {

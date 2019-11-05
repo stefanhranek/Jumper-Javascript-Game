@@ -618,29 +618,27 @@ Coins.prototype.draw = function() {
 
 // WIN OBJECT
 
-var win;
+
 
 function WinObject(canvas) {
 
-    win = {        
-        canvas         : canvas,
-        ctx            : canvas.getContext('2d'),
-        height         : 30,
-        width          : 15,
-        x              : canvas.width-60,              
-        y              : canvas.height-835
+        this.canvas         = canvas;
+        this.ctx            = canvas.getContext('2d');
+        this.height         = 30;
+        this.width          = 15;
+        this.x              = canvas.width-60;             
+        this.y              = canvas.height-835;
     };
 
-}
 
 WinObject.prototype.draw = function() {
 
-    win.ctx.fillStyle = "cyan";
-    win.ctx.fillRect(
-        win.x,
-        win.y,
-        win.width,
-        win.height    
+    this.ctx.fillStyle = "cyan";
+    this.ctx.fillRect(
+        this.x,
+        this.y,
+        this.width,
+        this.height    
     );
 
 }
