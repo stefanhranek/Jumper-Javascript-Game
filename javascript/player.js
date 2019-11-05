@@ -10,7 +10,7 @@ function Player(canvas, lives) {
     this.x              = canvas.width / 2;
     this.y              = canvas.height / 2; 
     
-    this.speed          = 33;
+    this.speed          = 11;
     this.velocityX      = 0;    // implement for movement fluidity
     this.velocityY      = 0;    //(backlog)  for movement fluidity
     this.friction       = 0.98;
@@ -69,7 +69,7 @@ Player.prototype.didCollide = function(enemy) {     // later rename
 };
 
 
-Player.prototype.handleFloorCollision = function() {
+Player.prototype.handleObjectCollision = function() {
     // CURRENTLY WORKING ON *** floor collision not working ********************
 
     // USE FOR WALL COLLISION
@@ -78,9 +78,9 @@ Player.prototype.handleFloorCollision = function() {
 
 
     // top of floor collision
-    var floorTop = Floor.y // hard coded without Floor 
+    var objectTop = PhysicalObjects.y // hard coded without Floor 
 
-    if (this.y > floorTop) this.y = Floor.y - 1;
+    if (this.y > objectTop) this.y = PhysicalObjects.y - 1;
 
 
     

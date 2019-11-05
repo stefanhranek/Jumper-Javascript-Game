@@ -6,9 +6,10 @@
 
 var floor, w2, w3, w4, w5, w6, w7, w8, w9, w10, w11, w12, w13, w14, w15, w16, w17;
 var s1, s2, s3, s4, s5, s6, s7, s8, s9, s9;
+var b1, b2, b3;
 
 
-function Floor(canvas) {
+function PhysicalObjects(canvas) {
 
     // platforms start in ascending order ~ floor to top
     // currently incrementing each height by 100 
@@ -21,6 +22,36 @@ function Floor(canvas) {
         width          : canvas.width,
         x              : 0,                     
         y              : canvas.height-50
+        // can shorten by spreading?
+    }
+
+    b1 = {
+        canvas         : canvas,
+        ctx            : canvas.getContext('2d'),
+        height         : 60,
+        width          : 60,
+        x              : canvas.width-1625,                     
+        y              : canvas.height-110
+        // can shorten by spreading?
+    }
+
+    b2 = {
+        canvas         : canvas,
+        ctx            : canvas.getContext('2d'),
+        height         : 160,
+        width          : 60,
+        x              : canvas.width-1423,                     
+        y              : canvas.height-210
+        // can shorten by spreading?
+    }
+
+    b3 = {
+        canvas         : canvas,
+        ctx            : canvas.getContext('2d'),
+        height         : 60,
+        width          : 60,
+        x              : canvas.width-1220,                     
+        y              : canvas.height-110
         // can shorten by spreading?
     }
 
@@ -206,7 +237,7 @@ function Floor(canvas) {
     }
 }
 
-Floor.prototype.draw = function() {
+PhysicalObjects.prototype.draw = function() {
 
     floor.ctx.fillStyle = "rgba(87, 195, 209, 0.65)";
     floor.ctx.fillRect(
@@ -214,6 +245,30 @@ Floor.prototype.draw = function() {
         floor.y,
         floor.width,
         floor.height
+    );
+
+    b1.ctx.fillStyle = "rgba(87, 195, 209, 0.65)";
+    b1.ctx.fillRect(
+        b1.x,
+        b1.y,
+        b1.width,
+        b1.height    
+    );
+
+    b2.ctx.fillStyle = "rgba(87, 195, 209, 0.65)";
+    b2.ctx.fillRect(
+        b2.x,
+        b2.y,
+        b2.width,
+        b2.height    
+    );
+
+    b3.ctx.fillStyle = "rgba(87, 195, 209, 0.65)";
+    b3.ctx.fillRect(
+        b3.x,
+        b3.y,
+        b3.width,
+        b3.height    
     );
 
     w2.ctx.fillStyle = "rgba(87, 195, 209, 0.65)";
@@ -454,7 +509,7 @@ function Coins(canvas) {
         height         : 30,
         width          : 15,
         x              : canvas.width-1400,                
-        y              : canvas.height-210
+        y              : canvas.height-320
     }
 
     c9 = {        

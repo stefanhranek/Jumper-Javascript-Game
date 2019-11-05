@@ -32,7 +32,7 @@ Game.prototype.start = function() {
     this.canvas.setAttribute('height', this.containerHeight);
 
     //draw walls & coins
-    this.floor = new Floor(this.canvas); // *************************************** edit/remove
+    this.physObj = new PhysicalObjects(this.canvas); // *************************************** edit/remove
     this.coins = new Coins(this.canvas);
     this.winObject = new WinObject(this.canvas);
     // Creating new player for the start of the game
@@ -93,7 +93,7 @@ Game.prototype.startLoop = function() {
 
         // 3. Check if player is going off the screen
         // & check object collision
-        this.player.handleFloorCollision();          // doesn't work
+        this.player.handleObjectCollision();          // doesn't work
         this.player.handleScreenCollision();
         //this.player.handleObjectCollision();      //  need object collision
 
@@ -110,7 +110,7 @@ Game.prototype.startLoop = function() {
 
         // 3. UPDATE THE CANVAS
         // Draw the floor/walls/platforms/coins/winObject
-        this.floor.draw();      // floor & platforms drawn, but collision off
+        this.physObj.draw();      // floor & platforms drawn, but collision off
         this.coins.draw();
         this.winObject.draw();
 
