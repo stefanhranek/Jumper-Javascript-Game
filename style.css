@@ -125,22 +125,26 @@ html {
     }
 
     body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: rgb(101, 148, 146, 100%);
-        text-align: center;
-        cursor: pointer;
+        display             : flex;
+        justify-content     : center;
+        align-items         : center;
+        background-color    : rgb(101, 148, 146, 100%);
+        text-align          : center;
+        cursor              : pointer;
         }
 
     .gameOver {
-        display: flex;
-        flex-direction: column;
+        display             : flex;
+        flex-direction      : column;
+    }
 
+    .gameWin {
+        display             : flex;
+        flex-direction      : column;
     }
 
     .title {
-        padding-bottom: 30px;
+        padding-bottom      : 30px;
     }  
     .title img {
         height: auto;

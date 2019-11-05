@@ -32,7 +32,7 @@ Game.prototype.start = function() {
     this.canvas.setAttribute('width', this.containerWidth);
     this.canvas.setAttribute('height', this.containerHeight);
 
-    //draw walls & coins
+    //draw walls & coins & winObject
     this.physObj = new PhysicalObjects(this.canvas); // *************************************** edit/remove
     this.coins = new Coins(this.canvas);
     this.winObject = new WinObject(this.canvas);
@@ -138,23 +138,24 @@ Game.prototype.startLoop = function() {
 
 // end of loop function
 
-Game.prototype.checkCollisions = function() {         // USE SIMILAR FOR COIN COLLISION + COUNTER
+Game.prototype.checkCollisions = function() {          // win collision not working???
+    if (this.player.didCollideWin(this.winObject)) {this.youWin();}             // 1st checks win collision
+    else {
+        this.enemies.forEach(function(enemy) {              // 2nd checks lose collision
+            if ( this.player.didCollide(enemy) ) {
 
-    this.enemies.forEach(function(enemy) {
-        if ( this.player.didCollide(enemy) ) {
+                this.player.removeLife();                    // REFER TO FOR COIN COLLISION + COUNTER
+                console.log('lives', this.player.lives);
 
-            this.player.removeLife();
-            console.log('lives', this.player.lives);
+                // move enemy off the screen to the bottom
+                enemy.y = this.canvas.height + enemy.size; 
 
-            // move enemy off the screen to the bottom
-            enemy.y = this.canvas.height + enemy.size; 
-
-            if (this.player.lives === 0) {
-                this.gameOver();
+                if (this.player.lives === 0) {
+                    this.gameOver();
+                }
             }
-        }
-    }, this);
-
+        }, this);
+    }
 }
 
 

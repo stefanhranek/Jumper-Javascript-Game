@@ -44,7 +44,6 @@ Player.prototype.draw = function() {
 }
 
 
-
 Player.prototype.didCollide = function(enemy) {     // later rename
     var playerLeft = this.x;
     var playerRight = this.x + this.size;
@@ -69,12 +68,17 @@ Player.prototype.didCollide = function(enemy) {     // later rename
 };
 
 
-Player.prototype.didCollideWin = function(WinObject) {    //////////////////////////// verify that its working , log
+Player.prototype.didCollideWin = function(winObject) {    //////////////////////////// verify that its working , log
 
-    var winLeft = WinObject.x;
-    var winRight = WinObject.x + WinObject.size;
-    var winTop = WinObject.y;
-    var winBottom = WinObject.y + WinObject.size;
+    var playerLeft = this.x;
+    var playerRight = this.x + this.size;
+    var playerTop = this.y;
+    var playerBottom = this.y + this.size;
+
+    var winLeft = winObject.x - winObject.width/2;
+    var winRight = winObject.x + winObject.width/2;
+    var winTop = winObject.y - winObject.height/2;
+    var winBottom = winObject.y + winObject.height/2;
 
     // Check if the winObj intersects any of the player's sides
     var crossLeftWin = winLeft <= playerRight && winLeft >= playerLeft;
@@ -82,11 +86,11 @@ Player.prototype.didCollideWin = function(WinObject) {    //////////////////////
     var crossBottomWin = winBottom >= playerTop && winBottom <= playerBottom;
     var crossTopWin = winTop <= playerBottom && winTop >= playerTop;
 
-    if ((crossLeftWin || crossRightWin || crossTopWin || crossBottomWin)) {
-        console.log('WIN COLLISION IS WORKING');
+    if ((crossLeftWin || crossRightWin) && (crossTopWin || crossBottomWin)) {
+        console.log('WIN COLLISION IS WORKING YAY');
         return true;
     }
-    console.log('WIN COLLISION IS WORKING');
+    
     return false;
 };
 

@@ -626,8 +626,8 @@ function WinObject(canvas) {
         this.ctx            = canvas.getContext('2d');
         this.height         = 30;
         this.width          = 15;
-        this.x              = canvas.width-60;             
-        this.y              = canvas.height-835;
+        this.x              = 2330;             
+        this.y              = 355;
     };
 
 
