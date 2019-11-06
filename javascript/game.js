@@ -83,6 +83,14 @@ console.log(this.platforms);
 
 }
 
+
+
+
+
+
+
+
+
 // LOOP START ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Game.prototype.startLoop = function() {
