@@ -14,99 +14,99 @@ var mapInfo = [
      {
         height         : 60,
         width          : 60,
-        x              : 1625,                     
-        y              : 110
+        x              : 778,                     
+        y              : 1100 // floor 
     },
     
      {
         height         : 160,
         width          : 60,
-        x              : 1423,                     
-        y              : 210
+        x              : 978,                     
+        y              : 1000
     },
     
     {
         height         : 60,
         width          : 60,
-        x              : 1220,                     
-        y              : 110
+        x              : 1178,                     
+        y              : 1100   // all set above
     },
     
     {
         height         : 10,
         width          : 100,  // 100 width for platforms
-        x              : 100,                     
-        y              : 150
-    },
-    
-    {
-        height         : 10,
-        width          : 100,
-        x              : 400,                     
+        x              : 203,                     
         y              : 250
     },
     
     {
         height         : 10,
         width          : 100,
-        x              : 700,                    
+        x              : 285,                     
+        y              : 630
+    },
+    
+    {
+        height         : 10,
+        width          : 100,
+        x              : 500,                    
         y              : 350
     },
     
     {
         height         : 10,
         width          : 100,
-        x              : 1000,                     
+        x              : 750,                     
         y              : 450
     },
     
     {
         height         : 10,
         width          : 100,
-        x              : 1300,                   
+        x              : 1000,                   
         y              : 550
     },
     
     {
         height         : 10,
         width          : 100,
-        x              : 1600,                    
+        x              : 1000,                    
+        y              : 300
+    },
+    
+    
+    {
+        height         : 10,
+        width          : 100,
+        x              : 1250,                
         y              : 650
     },
     
-    
     {
         height         : 10,
         width          : 100,
-        x              : 1900,                
-        y              : 750
-    },
-    
-    {
-        height         : 10,
-        width          : 100,
-        x              : 2200,                    
-        y              : 850
+        x              : 2030,                    
+        y              : 960
     },,
     
     {              
         height         : 10,
         width          : 100,
-        x              : 2350,                    
-        y              : 350
+        x              : 52,                    
+        y              : 900
     },
     
     {             
         height         : 10,
         width          : 100,
-        x              : 2200,                    
-        y              : 1000
+        x              : 2300,    // right wall                
+        y              : 1050
     },
     
     {
         height         : 10,
         width          : 100,
-        x              : 1600,               
+        x              : 1770,               
         y              : 850
     },
     
@@ -114,42 +114,42 @@ var mapInfo = [
         height         : 10,
         width          : 100,
         x              : 1300,                     
-        y              : 950
+        y              : 300
     },
     
      {
         height         : 10,
         width          : 100,
-        x              : 1000,                
+        x              : 1500,                
         y              : 750
     },
     
      {
         height         : 10,
-        width          : 50,
-        x              : 700,                
-        y              : 650
+        width          : 50,    // 3 stacks
+        x              : 1698,                
+        y              : 175
     },
     
      {
         height         : 10,
-        width          : 50,
-        x              : 700,                
-        y              : 850
+        width          : 50,    // 3 stacks
+        x              : 1698,                
+        y              : 375
     },
     
     {
         height         : 10,
         width          : 50,
-        x              : 700,                
-        y              : 1050
+        x              : 1698,      //     3 stacks     
+        y              : 575
     },
     
      {
         height         : 10,
-        width          : 10,
-        x              : 400,                
-        y              : 950
+        width          : 100,
+        x              : 1950,                
+        y              : 350
     },
     
     //  {
@@ -164,16 +164,16 @@ var mapInfo = [
      {
         height         : 10,
         width          : 200,
-        x              : 100,                
-        y              : 950
+        x              : 2270,                
+        y              : 450
     },
     
      {
     
         height         : 10,
         width          : 200,
-        x              : 100,                
-        y              : 750
+        x              : 2270,                
+        y              : 250
     }
 ];
 

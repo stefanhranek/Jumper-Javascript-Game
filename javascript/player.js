@@ -150,7 +150,7 @@ Player.prototype.didCollideCoins = function(winObject) {
 };
 
 
-Player.prototype.handleObjectCollision = function(coins) {
+Player.prototype.handleObjectCollision = function() {
     // CURRENTLY WORKING ON ***  collision not working **********************************************
 
     // var playerLeft = this.x;
@@ -158,7 +158,7 @@ Player.prototype.handleObjectCollision = function(coins) {
     // var playerTop = this.y;
     // var playerBottom = this.y + this.size;
 
-    // var coinLeft = coins.x - coins.width/2;
+    // var Left = coins.x - coins.width/2;
     // var coinRight = coins.x + coins.width/2;
     // var coinTop = coins.y - coins.height/2;
     // var coinBottom = coins.y + coins.height/2;

@@ -44,6 +44,9 @@ console.log(this.platforms);
         return new Platforms(this.canvas, platformData.height,platformData.width,platformData.x,platformData.y);
     },this)
 
+    console.log(this.drawPlatforms);
+    // 2300 1050 100 10 ...etc (this.x, this.y, this.width, this.height)
+    
 
     // Add event listener for keydown movements 
 
@@ -95,10 +98,13 @@ Game.prototype.startLoop = function() {
         }
 
         // platforms /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// console.log("map infooooooooo",mapInfo)
-//         mapInfo.forEach(function(platforms) {
-//             console.log("platforms", platforms)
-//         })
+
+        mapInfo.forEach(function(platforms) {
+            
+            if (this.player.y+this.player.size/2 > platforms.y - platforms.height/2) {
+                this.player.y = platforms.y - platforms.height/2;
+            }
+        },this);
 
         // Check enemy collisions
         this.checkCollisions();
@@ -136,8 +142,7 @@ Game.prototype.startLoop = function() {
         });
 
         // Draw the platforms *************************************************************************************************************************
-        this.platforms.forEach(function(onePlatform) {
-            debugger;
+        this.drawPlatforms.forEach(function(onePlatform) {
             onePlatform.draw();
         });
 
