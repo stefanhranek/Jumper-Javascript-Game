@@ -100,10 +100,25 @@ Game.prototype.startLoop = function() {
         // platforms /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         mapInfo.forEach(function(platforms) {
-            
-            if (this.player.y+this.player.size/2 > platforms.y - platforms.height/2) {
-                this.player.y = platforms.y - platforms.height/2;
-            }
+            var playerTop       = this.player.y - this.player.size/2;
+            var playerLeft      = this.player.x - this.player.size/2;
+            var playerRight     = this.player.x + this.player.size/2;
+            var playerBottom    = this.player.y + this.player.size/2; 
+            var platformTop     = platforms.y - platforms.height/2; // -45
+            var platformLeft    = platforms.x - platforms.width/2;
+            var platformRight   = platforms.x + platforms.width/2;
+            var platformBottom  = platforms.y + platforms.height/2;
+            var crossTop        = playerBottom >= platformTop;
+            var crossLeft       = playerLeft <= platformRight
+            var crossRight      = playerRight >= platformLeft;
+            var crossBottom     = playerTop <= platformBottom;        // not working right for some reason (BELOW)
+
+            if (crossTop && crossRight && crossLeft && crossBottom) {this.player.y = platformTop-45;}
+
+            // if      (crossLeft && crossTop && crossBottom) {this.player.x = platformLeft} 
+            // else if (crossRight && crossTop && crossBottom) {this.player.x = platformRight} 
+            // else if (crossTop && crossRight && crossLeft && crossTop) {this.player.y = platformTop;}
+            // else if (crossBottom && crossLeft && crossRight) {this.player.y = platformBottom;}
         },this);
 
         // Check enemy collisions
