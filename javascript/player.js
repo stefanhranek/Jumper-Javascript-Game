@@ -5,36 +5,64 @@ function Player(canvas, lives) {
 
     this.canvas         = canvas;
     this.ctx            = this.canvas.getContext('2d');
-    this.lives          = lives;    // may not use lives *******************
+    this.lives          = lives;    
     this.size           = 50;
     this.x              = canvas.width / 2;
     this.y              = canvas.height / 2; 
     
-    this.speed          = 11;
-    this.velocityX      = 0;    // implement for movement fluidity
-    this.velocityY      = 0;    //(backlog)  for movement fluidity
-    this.friction       = 0.98;
-    this.jumping        = true; // utilize to prevent double jump
+    this.speed          = 3;
+    this.jumpSpeed      = 5;  
+    this.velX           = 0;    
+    this.velY           = 0;    
+    this.maxVelX        = 6;
+    this.maxVelY        = 6;
+    this.friction       = 0.88;
+    this.gravity        = 3;
+    this.gravitySpeed   = 0;
+    this.jumping        = false; // utilize to prevent double jump
 
 }
 
-
+Player.prototype.updateGravity = function() {
+    this.y += this.jumpSpeed*this.gravity;
+}
 
 Player.prototype.movePlayer = function(direction) {
 // +1 y:down/x:right    -1 y::up/x:left
 
+
     if (direction === 'up') {
-        this.y -= this.speed;
+        if (this.velY < this.jumpSpeed) {
+            this.velY -= this.jumpSpeed;
+            this.velY -= this.jumpSpeed;this.velY -= this.jumpSpeed;
+            this.velY *= this.friction
+            this.y += this.velY*3;
+
+        }
     }
-    if (direction === 'down') {
-        this.y += this.speed;
+    if (direction === 'down' /*&& this.jumping != true*/) {
+        if (this.velY < this.speed) {
+            this.velY -= this.speed;
+            this.velY *= this.friction
+            this.y -= this.velY;
+        }
     }
     if (direction === 'left') {
-        this.x -= this.speed;
+        if (this.velX > -this.speed) {
+            this.velX += this.speed;
+            this.velX *= this.friction;
+            this.x -= this.velX;
+        }
     }
     if (direction === 'right') {
-        this.x += this.speed;
+        if (this.velX > -this.speed) {
+            this.velX += this.speed;
+            this.velX *= this.friction;
+            this.x += this.velX;
+        }
     }
+  
+
 }
 
 Player.prototype.draw = function() {
@@ -44,7 +72,7 @@ Player.prototype.draw = function() {
 }
 
 
-Player.prototype.didCollide = function(enemy) {     // later rename
+Player.prototype.didCollideEnemy = function(enemy) {     // later rename
     var playerLeft = this.x;
     var playerRight = this.x + this.size;
     var playerTop = this.y;
@@ -68,7 +96,7 @@ Player.prototype.didCollide = function(enemy) {     // later rename
 };
 
 
-Player.prototype.didCollideWin = function(winObject) {    //////////////////////////// verify that its working , log
+Player.prototype.didCollideWin = function(winObject) {   
 
     var playerLeft = this.x;
     var playerRight = this.x + this.size;
@@ -87,7 +115,7 @@ Player.prototype.didCollideWin = function(winObject) {    //////////////////////
     var crossTopWin = winTop <= playerBottom && winTop >= playerTop;
 
     if ((crossLeftWin || crossRightWin) && (crossTopWin || crossBottomWin)) {
-        console.log('WIN COLLISION IS WORKING YAY');
+
         return true;
     }
     
@@ -95,19 +123,71 @@ Player.prototype.didCollideWin = function(winObject) {    //////////////////////
 };
 
 
+Player.prototype.didCollideCoins = function(winObject) {   
 
-Player.prototype.handleObjectCollision = function() {
+    // var playerLeft = this.x;
+    // var playerRight = this.x + this.size;
+    // var playerTop = this.y;
+    // var playerBottom = this.y + this.size;
+
+    // var coinsLeft = winObject.x - winObject.width/2;
+    // var winRight = winObject.x + winObject.width/2;
+    // var winTop = winObject.y - winObject.height/2;
+    // var winBottom = winObject.y + winObject.height/2;
+
+    // // Check if the winObj intersects any of the player's sides
+    // var crossLeftWin = winLeft <= playerRight && winLeft >= playerLeft;
+    // var crossRightWin = winRight >= playerLeft && winRight <= playerRight;
+    // var crossBottomWin = winBottom >= playerTop && winBottom <= playerBottom;
+    // var crossTopWin = winTop <= playerBottom && winTop >= playerTop;
+
+    // if ((crossLeftWin || crossRightWin) && (crossTopWin || crossBottomWin)) {
+    //     console.log('WIN COLLISION IS WORKING YAY');
+    //     return true;
+    // }
+    
+    // return false;
+};
+
+
+Player.prototype.handleObjectCollision = function(coins) {
     // CURRENTLY WORKING ON ***  collision not working **********************************************
 
-    // USE FOR WALL COLLISION
+    // var playerLeft = this.x;
+    // var playerRight = this.x + this.size;
+    // var playerTop = this.y;
+    // var playerBottom = this.y + this.size;
+
+    // var coinLeft = coins.x - coins.width/2;
+    // var coinRight = coins.x + coins.width/2;
+    // var coinTop = coins.y - coins.height/2;
+    // var coinBottom = coins.y + coins.height/2;
+
+    // // Check if the winObj intersects any of the player's sides
+    // var crossLeftCoin = coinLeft <= playerRight && coinLeft >= playerLeft;
+    // var crossRightCoin = coinRight >= playerLeft && coinRight <= playerRight;
+    // var crossBottomCoin = coinBottom >= playerTop && coinBottom <= playerBottom;
+    // var crossTopCoin = coinTop <= playerBottom && coinTop >= playerTop;
+
+    // // edit below for re-drawing
+    // if ((crossLeftObj || crossRightObj) && (crossTopObj || crossBottomObj)) {
+    //     console.log('WALL COLLISION IS WORKING YAY');
+    //     return true;
+    // }
+    
+    // return false;
+
+    // *****************************************************************************************
+
+    // USE FOR WALL COLLISION        (scrapped)
     // var wallTop = 0;
     //     if (this.y<wallTop && this.x>wallLeft && this.x<wallRight) this.y = wallTop-1;
 
 
     // top of floor collision
-    var objectTop = PhysicalObjects.y // hard coded without Floor 
+    // var objectTop = PhysicalObjects.y // hard coded without Floor 
 
-    if (this.y > objectTop) this.y = PhysicalObjects.y - 1;
+    // if (this.y > objectTop) this.y = PhysicalObjects.y - 1;
 
 };
 
@@ -137,13 +217,24 @@ Player.prototype.handleScreenCollision = function() {
 
 
 
+// FLOOR (hard-coded test)
+
+Player.prototype.handleFloorCollision = function(floorObj) {   
+
+    if (this.y/2 > 560) {
+        this.y = this.canvas.height-100;    // *** hard-coded cheater method *** need to fix once I figure out collision on platforms
+    }  
+};
+
+
+
 // window.addEventListener("keydown", Player.prototype,update.keyListener);
 /*
 window.addEventListener("keyup", controller.keyListener);
 window.requestAnimationFrame(moveLoop);
 */
 
-// BELOW IS UN-USED GRAVITY & FRICTION CODE IN TESTING *******************************************************
+// GRAVITY & FRICTION CODE IN TESTING BELOW *******************************************************
 
 /*
 var controller = {

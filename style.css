@@ -143,6 +143,10 @@ html {
         flex-direction      : column;
     }
 
+    .win-title {
+        font-size: 100px;
+    }
+
     .title {
         padding-bottom      : 30px;
     }  

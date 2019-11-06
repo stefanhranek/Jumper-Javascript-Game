@@ -103,8 +103,9 @@ function main() {
         function createGameWinScreen(coins) {     // has SCORE as argument on example
             gameWinScreen = buildDom(`
             <main class ="gameWin">
-            <h1 class="win-title">YOU WIN (place picture)</h1>
-            <h2 class="congrats">Good Job!</h2>
+            <h1 class="win-title">WINNER !!!</h1>
+            <h2 class="congrats">Good Job !</h2>
+            <h3> * work in progress * </h3>
             <div class="button-container"><button class="start-button">START GAME</button></div>
             </main>
             `); 
@@ -142,7 +143,7 @@ function main() {
         // end the game
             //lose
         game.passGameOverCallback(function() {
-            gameOver(game.coins);  // score may need to be changed or removed ***
+            gameOver(game.coins);  
         });
             //win
         game.passGameWinCallback(function() {
@@ -154,7 +155,7 @@ function main() {
     function gameOver(coins) {
         
         removeGameScreen();
-        createGameOverScreen(coins); // added score as argument, may need to remove or change *******
+        createGameOverScreen(coins); 
     }
 
 
@@ -169,9 +170,3 @@ function main() {
 
     window.addEventListener('load', main);
 
-
-
-
-
-
-    // DOUBLE-CHECKED
