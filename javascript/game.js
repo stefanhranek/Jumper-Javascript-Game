@@ -5,67 +5,52 @@ function Game() {
     this.ctx        = null;
     this.enemies    = [];
     this.platforms  = mapInfo;
+    this.coins      = coinInfo;
     this.player     = null;
     this.gameIsOver = false;
     this.gameWin    = false;
     this.gameScreen = null;
     this.coinCount  = 0;
-    // this.physObj    = null;
     this.winObject  = null;
-    this.floorObj = null;
+    this.floorObj   = null;
 }
 
 
 Game.prototype.start = function() {
 console.log(this.platforms);
 
-    // Here... get canvas element, create ctx, save canvas & ctx in the game object
+    // Get canvas element, create ctx, save canvas & ctx in the game object
     this.canvasContainer = document.querySelector('.canvas-container');
     this.canvas          = document.querySelector('canvas');
     this.ctx             = this.canvas.getContext('2d');
 
-    // save reference to coins collected
-    this.coinsElement = this.gameScreen.querySelector('coins'); // ('.coins .value') in code-along
+
+    // Save reference to coins collected
+    this.coinsElement = this.gameScreen.querySelector('.coins-update'); // ('.coins .value') in code-along
+
 
     // Setting the canvas (ctx) to be the same as the viewport size
     // @@@@@@@  MIGHT BE THE CAUSE OF SHIFTING ELEMENTS IN GAME ON DIFFERENT VIEWPORT SIZES @@@@@@@
-    this.containerWidth     = this.canvasContainer.offsetWidth; // look back at 'offset' functionality
-    this.containerHeight    = this.canvasContainer.offsetHeight; // same as above
+    this.containerWidth     = this.canvasContainer.offsetWidth;     // look back at 'offset' functionality
+    this.containerHeight    = this.canvasContainer.offsetHeight;    // same as above
     this.canvas.setAttribute('width', this.containerWidth);
     this.canvas.setAttribute('height', this.containerHeight);
 
-    //draw walls & coins & winObject & player
-    // this.physObj    = new PhysicalObjects(this.canvas); // *************************************** edit/remove
-    this.coins          = new Coins(this.canvas);
+    // Draw walls & coins & winObject & player
     this.winObject      = new WinObject(this.canvas);
     this.player         = new Player(this.canvas, 1);
     this.floorObj       = new Floor(this.canvas);
-    this.drawPlatforms  = this.platforms.map(function(platformData){
-        return new Platforms(this.canvas, platformData.height,platformData.width,platformData.x,platformData.y);
-    },this)
+    this.drawPlatforms  = this.platforms.map(function(platformData) {return new Platforms(this.canvas, platformData.height,platformData.width,platformData.x,platformData.y);} ,this);
+    this.drawCoins      = this.coins.map(function(coinData) {return new Coins(this.canvas, coinData.height,coinData.width,coinData.x,coinData.y);} ,this);
 
-    console.log(this.drawPlatforms);
-    // 2300 1050 100 10 ...etc (this.x, this.y, this.width, this.height)
     
-
     // Add event listener for keydown movements 
-
-    
     this.handleKeyDown = function(event) {
     
-        if (event.keyCode === 38) {
-
-            this.player.movePlayer('up');   // change movement to jump
-            } 
-        else if (event.key === 'ArrowDown') {;
-            this.player.movePlayer('down');   // disable once gravity is in place
-            }
-        else if (event.keyCode === 37) {
-            this.player.movePlayer('left');
-        }
-        else if (event.keyCode === 39) {
-            this.player.movePlayer('right');
-        }
+        if      (event.keyCode === 38) {this.player.movePlayer('up');}               // change movement to jump
+        else if (event.key === 'ArrowDown') {this.player.movePlayer('down');}       // disable once gravity is in place
+        else if (event.keyCode === 37) {this.player.movePlayer('left');}
+        else if (event.keyCode === 39) {this.player.movePlayer('right');}
         };
 
 
@@ -74,16 +59,12 @@ console.log(this.platforms);
             this.handleKeyDown.bind(this)
         );
 
-
-
-
+            // Add 'keyup; listener to improve movement; running & jumping at the same time
 
     // Start the game loop
     this.startLoop();
 
 }
-
-
 
 
 
@@ -97,15 +78,13 @@ Game.prototype.startLoop = function() {
 
     var loop = function() {
     
-
-
         // Random enemies
         if (Math.random() > 0.98) {
         var randomX = this.canvas.width * Math.random();    
         this.enemies.push(new Enemy(this.canvas, randomX, 5));  
         }
 
-        // platforms /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // Check platform collisions
 
         mapInfo.forEach(function(platforms) {
             var playerTop       = this.player.y - this.player.size/2;
@@ -129,11 +108,39 @@ Game.prototype.startLoop = function() {
             // else if (crossBottom && crossLeft && crossRight) {this.player.y = platformBottom;}
         },this);
 
+        
+        // Check coin collisions
+
+        coinInfo.forEach(function(coins) {
+            var playerTop       = this.player.y - this.player.size/2;
+            var playerLeft      = this.player.x - this.player.size/2;
+            var playerRight     = this.player.x + this.player.size/2;
+            var playerBottom    = this.player.y + this.player.size/2; 
+            var coinsTop     = coins.y - coins.height/2; // -45
+            var coinsLeft    = coins.x - coins.width/2;
+            var coinsRight   = coins.x + coins.width/2;
+            var coinsBottom  = coins.y + coins.height/2;
+            var crossTop        = playerBottom >= coinsTop;
+            var crossLeft       = playerLeft <= coinsRight
+            var crossRight      = playerRight >= coinsLeft;
+            var crossBottom     = playerTop <= coinsBottom;        // not working right for some reason (BELOW)
+
+            if (crossTop && crossRight && crossLeft && crossBottom) {console.log("upgrade the coin count",); 
+                                                                    (coins.x = this.canvas.width+1) && (coins.y = this.canvas.height+1);    // have to do a for loop to remove
+                                                                    this.coinCount += 1;  
+                                                                    this.updateGameStats();}   // need to send coin outside of map
+
+            // if      (crossLeft && crossTop && crossBottom) {this.player.x = platformLeft} 
+            // else if (crossRight && crossTop && crossBottom) {this.player.x = platformRight} 
+            // else if (crossTop && crossRight && crossLeft && crossTop) {this.player.y = platformTop;}
+            // else if (crossBottom && crossLeft && crossRight) {this.player.y = platformBottom;}
+        },this);
+
+
         // Check enemy collisions
         this.checkCollisions();
 
         // Check screen & object collisions
-        this.player.handleObjectCollision();          // doesn't work ??? ***********************************                           WORKING ON WIN COLLISION @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
         this.player.handleScreenCollision();
         this.player.handleFloorCollision(this.floorObj);
 
@@ -149,9 +156,7 @@ Game.prototype.startLoop = function() {
         // Clear the canvas
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-        // Update the canvas: floor - walls - platforms - coins - winObject
-        // this.physObj.draw();      
-        this.coins.draw();
+        // Update the canvas: floor - walls - platforms - coins - winObject    
         this.winObject.draw();
         this.floorObj.draw();
         
@@ -159,15 +164,22 @@ Game.prototype.startLoop = function() {
          // Draw the player
         this.player.draw();
         this.player.updateGravity();
+        
         // Draw the enemies
         this.enemies.forEach(function(enemy) {  
             enemy.draw();
         });
 
-        // Draw the platforms *************************************************************************************************************************
+        // Draw the platforms 
         this.drawPlatforms.forEach(function(onePlatform) {
             onePlatform.draw();
         });
+
+        // Draw the coins  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        this.drawCoins.forEach(function(oneCoin) {
+            oneCoin.draw();
+        });
+
 
         // Terminate loop when game 'WIN' or 'LOSE'
         if (!this.gameIsOver && !this.gameWin) {
@@ -175,9 +187,11 @@ Game.prototype.startLoop = function() {
         }
 
         // Update Game data/stats
-        this.updateGameStats();	    // ************************************update this later for coin counter
+        this.updateGameStats();	  
 
     }.bind(this);
+
+
 
     window.requestAnimationFrame(loop);
 }
@@ -210,8 +224,7 @@ Game.prototype.checkCollisions = function() {
 
 Game.prototype.updateGameStats = function() {
 
-    this.coinCount += 1;                                // UPDATE FOR COIN COUNTER
-    // this.coinsElement.innerHTML = this.coins;
+    this.coinsElement.innerHTML = this.coinCount;
 }
 
 Game.prototype.passGameOverCallback = function(gameOver) {

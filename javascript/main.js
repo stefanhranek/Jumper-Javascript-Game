@@ -51,7 +51,7 @@ function main() {
         var gameScreen = buildDom(`
         <main class="game">
             <div class ="game-dom-container">
-            <span id="coins">Coins: </span><span id="coins">0</span><span>/10</span>
+            <span id="coins">Coins: </span><span class="coins-update">0</span><span>/10</span>
             </div>
             <section class="canvas-container">
             <canvas></canvas>

@@ -1,4 +1,4 @@
-function Platforms(canvas, height, width, x, y) {
+function Coins(canvas, height, width, x, y) {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
     this.height = height;
@@ -8,10 +8,8 @@ function Platforms(canvas, height, width, x, y) {
 
 }
 
-Platforms.prototype.draw = function() {
-    this.ctx.fillStyle = "rgba(87, 195, 209, 0.65)"; // for some reason this is changing COIN color too
-
-    
+Coins.prototype.draw = function() {
+    this.ctx.fillStyle = 'gold';    // COIN color is being changed by the platforms draw prototype
     this.ctx.fillRect( 
         this.x,
         this.y,

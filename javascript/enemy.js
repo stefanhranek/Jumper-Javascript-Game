@@ -16,7 +16,7 @@ function Enemy(canvas, x, speed) {
 
 Enemy.prototype.draw = function() {
 
-    this.ctx.fillStyle = "white";
+    this.ctx.fillStyle = "#dda4de";
     this.ctx.fillRect(
         this.x,
         this.y,
@@ -29,13 +29,13 @@ Enemy.prototype.draw = function() {
 
 Enemy.prototype.updatePosition = function() {
 
-    this.y = this.y + this.speed;  // change for top screen
+    this.y = this.y + this.speed; 
 
 };
 
 
 Enemy.prototype.isInsideScreen = function() {
 
-    return this.y + this.size / 2 < this.canvas.height; // change to bottom of screen ****REVISE
+    return this.y + this.size / 2 < this.canvas.height; 
 
 };

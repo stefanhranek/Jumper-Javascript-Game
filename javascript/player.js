@@ -123,7 +123,8 @@ Player.prototype.didCollideWin = function(winObject) {
     var crossTopWin    = winTop <= playerBottom && winTop >= playerTop;
 
     if ((crossLeftWin || crossRightWin) && (crossTopWin || crossBottomWin)) {
-
+        console.log("YOU WONNNNNN");
+        
         return true;
     }
     
@@ -136,72 +137,30 @@ Player.prototype.didCollideWin = function(winObject) {
     //////////////////////////////////////
 
 
-Player.prototype.didCollideCoins = function(winObject) {   
+Player.prototype.didCollideCoins = function(coinObject) {   
 
     // var playerLeft = this.x;
     // var playerRight = this.x + this.size;
     // var playerTop = this.y;
     // var playerBottom = this.y + this.size;
 
-    // var coinsLeft = winObject.x - winObject.width/2;
-    // var winRight = winObject.x + winObject.width/2;
-    // var winTop = winObject.y - winObject.height/2;
-    // var winBottom = winObject.y + winObject.height/2;
+    // var coinsLeft = coinObject.x - coinObject.width/2;
+    // var coinRight = coinObject.x + coinObject.width/2;
+    // var coinTop = coinObject.y - coinObject.height/2;
+    // var coinBottom = coinObject.y + coinObject.height/2;
 
-    // // Check if the winObj intersects any of the player's sides
-    // var crossLeftWin = winLeft <= playerRight && winLeft >= playerLeft;
-    // var crossRightWin = winRight >= playerLeft && winRight <= playerRight;
-    // var crossBottomWin = winBottom >= playerTop && winBottom <= playerBottom;
-    // var crossTopWin = winTop <= playerBottom && winTop >= playerTop;
-
-    // if ((crossLeftWin || crossRightWin) && (crossTopWin || crossBottomWin)) {
-    //     console.log('WIN COLLISION IS WORKING YAY');
-    //     return true;
-    // }
-    
-    // return false;
-};
-
-
-Player.prototype.handleObjectCollision = function() {
-    // CURRENTLY WORKING ON ***  collision not working **********************************************
-
-    // var playerLeft = this.x;
-    // var playerRight = this.x + this.size;
-    // var playerTop = this.y;
-    // var playerBottom = this.y + this.size;
-
-    // var Left = coins.x - coins.width/2;
-    // var coinRight = coins.x + coins.width/2;
-    // var coinTop = coins.y - coins.height/2;
-    // var coinBottom = coins.y + coins.height/2;
-
-    // // Check if the winObj intersects any of the player's sides
+    // // Check if the coinObj intersects any of the player's sides
     // var crossLeftCoin = coinLeft <= playerRight && coinLeft >= playerLeft;
     // var crossRightCoin = coinRight >= playerLeft && coinRight <= playerRight;
     // var crossBottomCoin = coinBottom >= playerTop && coinBottom <= playerBottom;
     // var crossTopCoin = coinTop <= playerBottom && coinTop >= playerTop;
 
-    // // edit below for re-drawing
-    // if ((crossLeftObj || crossRightObj) && (crossTopObj || crossBottomObj)) {
-    //     console.log('WALL COLLISION IS WORKING YAY');
+    // if ((crossLeftCoin || crossRightCoin) && (crossTopCoin || crossBottomCoin)) {
+    //     console.log('COIN COLLISION IS WORKING YAY');
     //     return true;
     // }
     
     // return false;
-
-    // *****************************************************************************************
-
-    // USE FOR WALL COLLISION        (scrapped)
-    // var wallTop = 0;
-    //     if (this.y<wallTop && this.x>wallLeft && this.x<wallRight) this.y = wallTop-1;
-
-
-    // top of floor collision
-    // var objectTop = PhysicalObjects.y // hard coded without Floor 
-
-    // if (this.y > objectTop) this.y = PhysicalObjects.y - 1;
-
 };
 
 
@@ -286,7 +245,7 @@ var moveLoop = function() {
     if (controller.left) {
 
         Player.xVelocity -= 0.5;
-        // take away - to make more rigid
+    
     }
 
     if (controller.right) {
