@@ -117,7 +117,6 @@ html {
     }
 
     .canvas-container {
-
         margin: 0 20px;
     }
 
@@ -126,22 +125,42 @@ html {
     }
 
     body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: rgb(101, 148, 146, 100%);
-        text-align: center;
-        cursor: pointer;
+        display             : flex;
+        justify-content     : center;
+        align-items         : center;
+        background-color    : rgb(101, 148, 146, 100%);
+        text-align          : center;
+        cursor              : pointer;
         }
 
     .gameOver {
-        display: flex;
-        flex-direction: column;
+        display             : flex;
+        flex-direction      : column;
+    }
 
+    .gameWin {
+        display             : flex;
+        flex-direction      : column;
+    }
+
+    .win-title {
+        font-size: 120px;
+    }
+
+    .congrats {
+        font-size: 70px;
+    }
+
+    .best {
+        font-size: 30px;
+    }
+
+    .anything h4 {
+        font-size: 15px;
     }
 
     .title {
-        padding-bottom: 30px;
+        padding-bottom      : 30px;
     }  
     .title img {
         height: auto;
