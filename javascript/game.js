@@ -17,7 +17,6 @@ function Game() {
 
 
 Game.prototype.start = function() {
-console.log(this.platforms);
 
     // Get canvas element, create ctx, save canvas & ctx in the game object
     this.canvasContainer = document.querySelector('.canvas-container');
@@ -77,6 +76,7 @@ console.log(this.platforms);
 Game.prototype.startLoop = function() {
 
     var loop = function() {
+    console.log(this.player.y);
     
         // Random enemies
         if (Math.random() > 0.98) {
@@ -111,7 +111,7 @@ Game.prototype.startLoop = function() {
         
         // Check coin collisions
 
-        coinInfo.forEach(function(coins) {
+        this.drawCoins.forEach(function(coins) {
             var playerTop       = this.player.y - this.player.size/2;
             var playerLeft      = this.player.x - this.player.size/2;
             var playerRight     = this.player.x + this.player.size/2;
@@ -126,7 +126,7 @@ Game.prototype.startLoop = function() {
             var crossBottom     = playerTop <= coinsBottom;        // not working right for some reason (BELOW)
 
             if (crossTop && crossRight && crossLeft && crossBottom) {console.log("upgrade the coin count",); 
-                                                                    (coins.x = this.canvas.width+1) && (coins.y = this.canvas.height+1);    // have to do a for loop to remove
+                                                                    (coins.y = 3001);    // have to do a for loop to remove
                                                                     this.coinCount += 1;  
                                                                     this.updateGameStats();}   // need to send coin outside of map
 

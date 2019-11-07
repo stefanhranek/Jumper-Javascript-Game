@@ -10,7 +10,7 @@ function Player(canvas, lives) {
     this.x              = 150;
     this.y              = 900; 
     
-    this.speed          = 3;
+    this.speed          = 3
     this.jumpSpeed      = 5;  
     this.velX           = 0;    
     this.velY           = 0;    
@@ -106,6 +106,8 @@ Player.prototype.didCollideEnemy = function(enemy) {
 
 Player.prototype.didCollideWin = function(winObject) {   
 
+    console.log("8888888888888888888",winObject);
+    
     var playerLeft   = this.x;
     var playerRight  = this.x + this.size;
     var playerTop    = this.y;

@@ -7,21 +7,28 @@ var mapInfo  = [
         height         : 60,
         width          : 60,
         x              : 778,                     
-        y              : 1100 // floor 
+        y              : 1100 // floor          start of 4 floor blocks
     },
     
     {
-        height         : 160,
+        height         : 60,
         width          : 60,
-        x              : 978,                     
-        y              : 1000
+        x              : 978,               // tall middle block      
+        y              : 1040
+    },
+
+    {
+        height         : 60,
+        width          : 60,
+        x              : 978,               // tall middle block      *bottom*
+        y              : 1100
     },
     
     {
         height         : 60,
         width          : 60,
         x              : 1178,                     
-        y              : 1100   // all set above
+        y              : 1100               //// end of 4 floor blocks
     },
     
     {
@@ -155,16 +162,16 @@ var mapInfo  = [
     
     {
         height         : 10,
-        width          : 200,
-        x              : 2270,                
+        width          : 100,
+        x              : 2290,                
         y              : 450
     },
     
     {
     
         height         : 10,
-        width          : 200,
-        x              : 2270,                
+        width          : 100,
+        x              : 2290,                
         y              : 250
     }
 ];
@@ -221,21 +228,21 @@ var coinInfo = [
         height         : 30,
         width          : 15,
         x              : 1200,                
-        y              : 1025
+        y              : 1025       // 3 horizontal
     },
 
     {        
         height         : 30,
         width          : 15,
         x              : 1000,                
-        y              : 900
+        y              : 930        // middle of 3 coins (horizontal)
     },
 
     {        
         height         : 30,
         width          : 15,
         x              : 800,                
-        y              : 1025
+        y              : 1025   //3 horizontal
     },
 
     {        
