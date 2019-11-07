@@ -57,16 +57,14 @@ Game.prototype.start = function() {
     this.handleKeyDown = function(event) {
     
         if      (event.keyCode === 38) {this.player.movePlayer('up');}               // change movement to jump
-        else if (event.key === 'ArrowDown') {this.player.movePlayer('down');}       // disable once gravity is in place
+        // else if (event.key === 'ArrowDown') {this.player.movePlayer('down');}       // disable once gravity is in place
         else if (event.keyCode === 37) {this.player.movePlayer('left');}
         else if (event.keyCode === 39) {this.player.movePlayer('right');}
         };
 
 
-        document.body.addEventListener(
-            'keydown', 
-            this.handleKeyDown.bind(this)
-        );
+        document.body.addEventListener('keydown', this.handleKeyDown.bind(this));
+        document.body.addEventListener('keyup', this.handleKeyDown.bind(this));
 
             // Add 'keyup; listener to improve movement; running & jumping at the same time
 
