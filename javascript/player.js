@@ -8,10 +8,10 @@ function Player(canvas, lives) {
     this.lives          = lives;    
     this.size           = 50;
     this.x              = 150;
-    this.y              = 900; 
+    this.y              = 1100; 
     
     this.speed          = 3
-    this.jumpSpeed      = 3;  
+    this.jumpSpeed      = 10;  
     this.velX           = 0;    
     this.velY           = 0;    
     this.maxVelX        = 6;
@@ -20,6 +20,9 @@ function Player(canvas, lives) {
     this.gravity        = 4;
     this.gravitySpeed   = 0;
     this.jumping        = false; // utilize to prevent double jump
+    this.direction      = 0;
+    this.directionY     = 0;
+    this.directionX     = 0;
 
 }
 
@@ -29,52 +32,27 @@ function Player(canvas, lives) {
         /////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-Player.prototype.updateGravity = function() {
-    this.y += this.jumpSpeed * this.gravity;
-}
+// Player.prototype.updateGravity = function() {
+
+//         this.y += this.jumpSpeed * this.gravity;
+
+// }
 
 Player.prototype.movePlayer = function(direction) {
 // +1 y:down/x:right    -1 y::up/x:left
 
+        this.y = this.y + this.jumpSpeed * this.directionY;
+
+        this.x = this.x + this.speed * this.directionX;
         
-    if (direction === 'up') {
-        if (this.velY < this.jumpSpeed) {
-            this.velY -= this.jumpSpeed;
-            this.velY -= this.jumpSpeed;
-            this.velY *= this.friction
-            this.y    += this.velY*3;
-
-        }
-    }
-    // if (direction === 'down' /*&& this.jumping != true*/) {
-    //     if (this.velY < this.speed) {
-    //         this.velY -= this.speed;
-    //         this.velY *= this.friction
-    //         this.y    -= this.velY;
-    //     }
-    // }
-    if (direction === 'left') {
-        if (this.velX > -this.speed) {
-            this.velX += this.speed;
-            this.velX *= this.friction;
-            this.x    -= this.velX;
-        }
-    }
-    if (direction === 'right') {
-        if (this.velX > -this.speed) {
-            this.velX += this.speed;
-            this.velX *= this.friction;
-            this.x    += this.velX;
-        }
-    }
-
+}
 
             ////////////////////////////////////////////////////////////////////////////////////////////
           ////  CONTROLLER END  //////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////
     
 
-}
+
 
 Player.prototype.draw = function() {
     this.ctx.fillStyle = 'salmon';

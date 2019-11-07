@@ -56,15 +56,37 @@ Game.prototype.start = function() {
     // Add event listener for keydown movements 
     this.handleKeyDown = function(event) {
     
-        if      (event.keyCode === 38) {this.player.movePlayer('up');}               // change movement to jump
-        // else if (event.key === 'ArrowDown') {this.player.movePlayer('down');}       // disable once gravity is in place
-        else if (event.keyCode === 37) {this.player.movePlayer('left');}
-        else if (event.keyCode === 39) {this.player.movePlayer('right');}
+        if (event.keyCode === 38) {
+            console.log("UP")
+            this.player.directionY = -1;
+
+        }              
+        else if (event.keyCode === 37) {
+            console.log("Let")
+
+            this.player.directionX = -1;
+        }
+        else if (event.keyCode === 39) {
+            console.log("Right")
+
+            this.player.directionX = 1;
         };
+    }
 
 
-        document.body.addEventListener('keydown', this.handleKeyDown.bind(this));
-        document.body.addEventListener('keyup', this.handleKeyDown.bind(this));
+    this.handleKeyUp = function(event) {
+    
+        if (event.keyCode === 38) {
+            this.player.directionY = 1;
+
+        }              
+        else if (event.keyCode === 37 || event.keyCode === 39) {
+            this.player.directionX = 0;
+        };
+    }
+
+    document.body.addEventListener('keydown', this.handleKeyDown.bind(this));
+    document.body.addEventListener('keyup', this.handleKeyUp.bind(this));
 
             // Add 'keyup; listener to improve movement; running & jumping at the same time
 
@@ -204,8 +226,10 @@ Game.prototype.startLoop = function() {
         
          // Draw the player
         this.player.draw();
-        this.player.updateGravity();
-        
+        // this.player.updateGravity();
+
+
+        this.player.movePlayer(); /////////////////////////////////////////////////////////////////////////////////////////
         // Draw the enemies
         this.enemies.forEach(function(enemy) {  
             enemy.draw();
