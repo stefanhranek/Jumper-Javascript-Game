@@ -1,8 +1,7 @@
 'use strict'
 
-var floor;
-var mapInfo  = [
-    
+var blockInfo = [
+
     {
         height         : 60,
         width          : 60,
@@ -29,7 +28,16 @@ var mapInfo  = [
         width          : 60,
         x              : 1178,                     
         y              : 1100               //// end of 4 floor blocks
-    },
+    }
+
+]
+
+
+
+
+var floor;
+var mapInfo  = [
+    
     
     {
         height         : 10,

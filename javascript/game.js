@@ -13,6 +13,7 @@ function Game() {
     this.coinCount  = 0;
     this.winObject  = null;
     this.floorObj   = null;
+    this.blocks     = blockInfo;
 }
 
 
@@ -41,6 +42,7 @@ Game.prototype.start = function() {
     this.floorObj       = new Floor(this.canvas);
     this.drawPlatforms  = this.platforms.map(function(platformData) {return new Platforms(this.canvas, platformData.height,platformData.width,platformData.x,platformData.y);} ,this);
     this.drawCoins      = this.coins.map(function(coinData) {return new Coins(this.canvas, coinData.height,coinData.width,coinData.x,coinData.y);} ,this);
+    this.drawBlocks     = this.blocks.map(function(blockData) {return new Blocks(this.canvas, blockData.height,blockData.width,blockData.x,blockData.y);} ,this);
 
     
     // Add event listener for keydown movements 
@@ -108,7 +110,32 @@ Game.prototype.startLoop = function() {
             // else if (crossBottom && crossLeft && crossRight) {this.player.y = platformBottom;}
         },this);
 
-        
+
+        // Check block collision
+
+        blockInfo.forEach(function(blocks) {
+            var playerTop       = this.player.y - this.player.size/2;
+            var playerLeft      = this.player.x - this.player.size/2;
+            var playerRight     = this.player.x + this.player.size/2;
+            var playerBottom    = this.player.y + this.player.size/2; 
+            var blockTop     = blocks.y - blocks.height/2; // -45
+            var blockLeft    = blocks.x - blocks.width/2;
+            var blockRight   = blocks.x + blocks.width/2;
+            var blockBottom  = blocks.y + blocks.height/2;
+            var crossTop        = playerBottom >= blockTop;
+            var crossLeft       = playerLeft <= blockRight
+            var crossRight      = playerRight >= blockLeft;
+            var crossBottom     = playerTop <= blockBottom;        // not working right for some reason (BELOW)
+
+            if (crossTop && crossRight && crossLeft && crossBottom) {this.player.y = blockTop-20;}
+
+            // if      (crossLeft && crossTop && crossBottom) {this.player.x = platformLeft} 
+            // else if (crossRight && crossTop && crossBottom) {this.player.x = platformRight} 
+            // else if (crossTop && crossRight && crossLeft && crossTop) {this.player.y = platformTop;}
+            // else if (crossBottom && crossLeft && crossRight) {this.player.y = platformBottom;}
+        },this);
+
+
         // Check coin collisions
 
         this.drawCoins.forEach(function(coins) {
@@ -173,6 +200,11 @@ Game.prototype.startLoop = function() {
         // Draw the platforms 
         this.drawPlatforms.forEach(function(onePlatform) {
             onePlatform.draw();
+        });
+
+        // Draw the blocks
+        this.drawBlocks.forEach(function(oneBlock) {
+            oneBlock.draw();
         });
 
         // Draw the coins  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
