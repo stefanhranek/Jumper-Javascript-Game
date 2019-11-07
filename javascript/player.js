@@ -36,7 +36,7 @@ Player.prototype.updateGravity = function() {
 Player.prototype.movePlayer = function(direction) {
 // +1 y:down/x:right    -1 y::up/x:left
 
-
+        
     if (direction === 'up') {
         if (this.velY < this.jumpSpeed) {
             this.velY -= this.jumpSpeed;
@@ -46,13 +46,13 @@ Player.prototype.movePlayer = function(direction) {
 
         }
     }
-    if (direction === 'down' /*&& this.jumping != true*/) {
-        if (this.velY < this.speed) {
-            this.velY -= this.speed;
-            this.velY *= this.friction
-            this.y    -= this.velY;
-        }
-    }
+    // if (direction === 'down' /*&& this.jumping != true*/) {
+    //     if (this.velY < this.speed) {
+    //         this.velY -= this.speed;
+    //         this.velY *= this.friction
+    //         this.y    -= this.velY;
+    //     }
+    // }
     if (direction === 'left') {
         if (this.velX > -this.speed) {
             this.velX += this.speed;
