@@ -92,8 +92,8 @@ Game.prototype.startLoop = function() {
             var playerTop       = this.player.y - this.player.size/2;
             var playerLeft      = this.player.x - this.player.size/2;
             var playerRight     = this.player.x + this.player.size/2;
-            var playerBottom    = this.player.y + this.player.size/2; 
-            var platformTop     = platforms.y - platforms.height/2; // -45
+            var playerBottom    = (this.player.y + 4) + this.player.size/2; 
+            var platformTop     = platforms.y - platforms.height/2 ; // -41
             var platformLeft    = platforms.x - platforms.width/2;
             var platformRight   = platforms.x + platforms.width/2;
             var platformBottom  = platforms.y + platforms.height/2;
@@ -102,7 +102,8 @@ Game.prototype.startLoop = function() {
             var crossRight      = playerRight >= platformLeft;
             var crossBottom     = playerTop <= platformBottom;        // not working right for some reason (BELOW)
 
-            if (crossTop && crossRight && crossLeft && crossBottom) {this.player.y = platformTop-45;}
+            if      (crossTop && crossRight && crossLeft && crossBottom) {this.player.y = platformTop-45;}
+            
 
             // if      (crossLeft && crossTop && crossBottom) {this.player.x = platformLeft} 
             // else if (crossRight && crossTop && crossBottom) {this.player.x = platformRight} 

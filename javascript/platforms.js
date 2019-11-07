@@ -9,7 +9,7 @@ function Platforms(canvas, height, width, x, y) {
 }
 
 Platforms.prototype.draw = function() {
-    this.ctx.fillStyle = "rgba(87, 195, 209, 0.65)"; // for some reason this is changing COIN color too
+    this.ctx.fillStyle = "rgba(87, 195, 209, .65)"; // for some reason this is changing COIN color too
 
     
     this.ctx.fillRect( 

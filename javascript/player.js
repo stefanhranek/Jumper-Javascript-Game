@@ -11,7 +11,7 @@ function Player(canvas, lives) {
     this.y              = 900; 
     
     this.speed          = 3
-    this.jumpSpeed      = 5;  
+    this.jumpSpeed      = 4;  
     this.velX           = 0;    
     this.velY           = 0;    
     this.maxVelX        = 6;

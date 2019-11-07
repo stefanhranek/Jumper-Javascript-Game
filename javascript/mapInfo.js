@@ -94,7 +94,7 @@ var mapInfo  = [
         width          : 100,
         x              : 2030,                    
         y              : 960
-    },,
+    },
     
     {              
         height         : 10,
@@ -172,7 +172,7 @@ var mapInfo  = [
         height         : 10,
         width          : 100,
         x              : 2290,                
-        y              : 450
+        y              : 550
     },
     
     {
@@ -275,7 +275,7 @@ function WinObject(canvas) {
         this.height         = 30;
         this.width          = 15;
         this.x              = 2325;             
-        this.y              = 355;
+        this.y              = 455;
     };
 
 
