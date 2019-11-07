@@ -11,7 +11,7 @@ function Player(canvas, lives) {
     this.y              = 900; 
     
     this.speed          = 3
-    this.jumpSpeed      = 4;  
+    this.jumpSpeed      = 3;  
     this.velX           = 0;    
     this.velY           = 0;    
     this.maxVelX        = 6;
@@ -22,6 +22,12 @@ function Player(canvas, lives) {
     this.jumping        = false; // utilize to prevent double jump
 
 }
+
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////
+          ////  CONTROLLER & GRAVITY //////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 Player.prototype.updateGravity = function() {
     this.y += this.jumpSpeed * this.gravity;
@@ -62,6 +68,11 @@ Player.prototype.movePlayer = function(direction) {
         }
     }
 
+
+            ////////////////////////////////////////////////////////////////////////////////////////////
+          ////  CONTROLLER END  //////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////
+    
 
 }
 
@@ -104,9 +115,7 @@ Player.prototype.didCollideEnemy = function(enemy) {
       /////////// WIN COLLISION ////////////
     //////////////////////////////////////
 
-Player.prototype.didCollideWin = function(winObject) {   
-
-    console.log("8888888888888888888",winObject);
+Player.prototype.didCollideWin = function(winObject) {
     
     var playerLeft   = this.x;
     var playerRight  = this.x + this.size;
@@ -133,37 +142,6 @@ Player.prototype.didCollideWin = function(winObject) {
     return false;
 };
 
-
-        //////////////////////////////////////
-      /////////// COIN COLLISION ///////////
-    //////////////////////////////////////
-
-
-Player.prototype.didCollideCoins = function(coinObject) {   
-
-    // var playerLeft = this.x;
-    // var playerRight = this.x + this.size;
-    // var playerTop = this.y;
-    // var playerBottom = this.y + this.size;
-
-    // var coinsLeft = coinObject.x - coinObject.width/2;
-    // var coinRight = coinObject.x + coinObject.width/2;
-    // var coinTop = coinObject.y - coinObject.height/2;
-    // var coinBottom = coinObject.y + coinObject.height/2;
-
-    // // Check if the coinObj intersects any of the player's sides
-    // var crossLeftCoin = coinLeft <= playerRight && coinLeft >= playerLeft;
-    // var crossRightCoin = coinRight >= playerLeft && coinRight <= playerRight;
-    // var crossBottomCoin = coinBottom >= playerTop && coinBottom <= playerBottom;
-    // var crossTopCoin = coinTop <= playerBottom && coinTop >= playerTop;
-
-    // if ((crossLeftCoin || crossRightCoin) && (crossTopCoin || crossBottomCoin)) {
-    //     console.log('COIN COLLISION IS WORKING YAY');
-    //     return true;
-    // }
-    
-    // return false;
-};
 
 
 Player.prototype.handleScreenCollision = function() {

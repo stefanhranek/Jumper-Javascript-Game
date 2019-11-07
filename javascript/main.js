@@ -100,12 +100,20 @@ function main() {
 
         // game WIN screen creation
 
+        // use later for updating coins on win screen
+        //<div class="coin-statement-container>
+        // <h3> You collected </h3> <
+        // <p class="coins-update"> 0 </p>
+        // <p> coins! AMAZING!!! </p>
+        //</div>
+
         function createGameWinScreen(coins) {     // has SCORE as argument on example
             gameWinScreen = buildDom(`
             <main class ="gameWin">
-            <h1 class="win-title">WINNER !!!</h1>
+            <h1 class="win-title">YOU WIN !!!</h1>
             <h2 class="congrats">Good Job !</h2>
-            <h3> * work in progress * </h3>
+            <h3 class="best"> You're the best ! </h3> 
+            <h4 class="anything"> You can do anything ! </h4>
             <div class="button-container"><button class="start-button">START GAME</button></div>
             </main>
             `); 
@@ -113,7 +121,7 @@ function main() {
             var button = gameWinScreen.querySelector('button');
             button.addEventListener('click', startGame);
     
-            var span = gameWinScreen.querySelector('span');    // change span
+            var coins = gameWinScreen.querySelector('.coins-update');    // change span
             // span.innerText = coins;     // coins --------- update later
     
             document.body.appendChild(gameWinScreen);

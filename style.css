@@ -144,7 +144,19 @@ html {
     }
 
     .win-title {
-        font-size: 100px;
+        font-size: 120px;
+    }
+
+    .congrats {
+        font-size: 70px;
+    }
+
+    .best {
+        font-size: 30px;
+    }
+
+    .anything h4 {
+        font-size: 15px;
     }
 
     .title {

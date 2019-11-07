@@ -10,6 +10,7 @@ function Game() {
     this.gameIsOver = false;
     this.gameWin    = false;
     this.gameScreen = null;
+    this.gameWinScreen = null;
     this.coinCount  = 0;
     this.winObject  = null;
     this.floorObj   = null;
@@ -26,7 +27,8 @@ Game.prototype.start = function() {
 
 
     // Save reference to coins collected
-    this.coinsElement = this.gameScreen.querySelector('.coins-update'); // ('.coins .value') in code-along
+    this.coinsElement = this.gameScreen.querySelector('.coins-update'); 
+    // this.coinsFinish = this.gameWinScreen.querySelector('.coins-update');        ///////////////////////////// for coin update on game win
 
 
     // Setting the canvas (ctx) to be the same as the viewport size
@@ -45,6 +47,12 @@ Game.prototype.start = function() {
     this.drawBlocks     = this.blocks.map(function(blockData) {return new Blocks(this.canvas, blockData.height,blockData.width,blockData.x,blockData.y);} ,this);
 
     
+
+            ////////////////////////////////////////////////////////////////////////////////////////
+          ////  CONTROLLER  //////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////
+
+
     // Add event listener for keydown movements 
     this.handleKeyDown = function(event) {
     
@@ -61,6 +69,13 @@ Game.prototype.start = function() {
         );
 
             // Add 'keyup; listener to improve movement; running & jumping at the same time
+
+
+            ////////////////////////////////////////////////////////////////////////////////////////////
+          ////  CONTROLLER END  //////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
     // Start the game loop
     this.startLoop();
@@ -92,7 +107,7 @@ Game.prototype.startLoop = function() {
             var playerTop       = this.player.y - this.player.size/2;
             var playerLeft      = this.player.x - this.player.size/2;
             var playerRight     = this.player.x + this.player.size/2;
-            var playerBottom    = (this.player.y + 4) + this.player.size/2; 
+            var playerBottom    = (this.player.y + 16) + this.player.size/2; 
             var platformTop     = platforms.y - platforms.height/2 ; // -41
             var platformLeft    = platforms.x - platforms.width/2;
             var platformRight   = platforms.x + platforms.width/2;
@@ -258,6 +273,7 @@ Game.prototype.checkCollisions = function() {
 Game.prototype.updateGameStats = function() {
 
     this.coinsElement.innerHTML = this.coinCount;
+    // this.coinsFinish.innerHTML = this.coinCount; ///////////////////////////////// for coin update on game win screen
 }
 
 Game.prototype.passGameOverCallback = function(gameOver) {

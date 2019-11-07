@@ -16,7 +16,7 @@ function Enemy(canvas, x, speed) {
 
 Enemy.prototype.draw = function() {
 
-    this.ctx.fillStyle = "#dda4de";
+    this.ctx.fillStyle = "#FF4946";
     this.ctx.fillRect(
         this.x,
         this.y,
