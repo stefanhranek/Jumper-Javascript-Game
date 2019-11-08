@@ -10,7 +10,7 @@ function Coins(canvas, height, width, x, y) {
 
 Coins.prototype.draw = function() {
     var image = new Image();
-    image.src = '/images/8bitmariocoin.png';
+    image.src = './images/8bitmariocoin.png';
     this.ctx.drawImage( 
         image,
         this.x,

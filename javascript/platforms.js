@@ -10,7 +10,7 @@ function Platforms(canvas, height, width, x, y) {
 
 Platforms.prototype.draw = function() {
     var floorImage = new Image();
-    floorImage.src = '/images/ice-platform.png';
+    floorImage.src = './images/ice-platform.png';
     this.ctx.drawImage( 
         floorImage,
         this.x,
