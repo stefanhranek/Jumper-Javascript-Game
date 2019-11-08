@@ -2,10 +2,8 @@
 
 // var winSound;
 var coinSound;
-var snowSound;
 function preload() {
 coinSound = loadSound("./sound/retroCoinSound.wav");
-snowSound = loadSound("./sound/snowHit.wav");
 // winSound = loadSound("sound/win.wav");
 }
 

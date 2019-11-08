@@ -280,10 +280,10 @@ function WinObject(canvas) {
 
 
 WinObject.prototype.draw = function() {
-    var floorImage = new Image();
-    floorImage.src = 'images/Mushroom-3.png';
+    var winImage = new Image();
+    winImage.src = './images/Mushroom-3.png';
     this.ctx.drawImage( 
-        floorImage,
+        winImage,
         this.x,
         this.y,
         this.width,
@@ -308,7 +308,7 @@ function Floor(canvas) {
 
 Floor.prototype.draw = function() {
     var floorImage = new Image();
-    floorImage.src = '/images/ice-platform.png';
+    floorImage.src = './images/ice-platform.png';
     this.ctx.drawImage( 
         floorImage,
         this.x,
