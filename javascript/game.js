@@ -64,12 +64,6 @@ Game.prototype.start = function() {
         if (event.keyCode === 38) {
             console.log("UP")
             this.player.directionY = -1;
-            if (soundFlag) {
-                sound.pause();
-                sound.currentTime = 0;
-                sound.play();
-                soundFlag = false;
-            }
         }              
         else if (event.keyCode === 37) {
             console.log("Let")
