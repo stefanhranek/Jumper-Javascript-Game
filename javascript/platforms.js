@@ -9,10 +9,10 @@ function Platforms(canvas, height, width, x, y) {
 }
 
 Platforms.prototype.draw = function() {
-    this.ctx.fillStyle = "rgba(87, 195, 209, .65)"; // for some reason this is changing COIN color too
-
-    
-    this.ctx.fillRect( 
+    var floorImage = new Image();
+    floorImage.src = '/images/ice-platform.png';
+    this.ctx.drawImage( 
+        floorImage,
         this.x,
         this.y,
         this.width,

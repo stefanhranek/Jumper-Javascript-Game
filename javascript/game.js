@@ -1,5 +1,8 @@
 'use strict'
 
+var jumpSound;
+var sound = document.getElementById('sound');
+
 function Game() {
     this.canvas     = null;
     this.ctx        = null;
@@ -15,6 +18,8 @@ function Game() {
     this.winObject  = null;
     this.floorObj   = null;
     this.blocks     = blockInfo;
+    var jumpSound   = new Audio();
+    jumpSound.src   = "./sound/lightJump.wav"
 }
 
 
@@ -55,11 +60,16 @@ Game.prototype.start = function() {
 
     // Add event listener for keydown movements 
     this.handleKeyDown = function(event) {
-    
+    var soundFlag = true;
         if (event.keyCode === 38) {
             console.log("UP")
             this.player.directionY = -1;
-
+            if (soundFlag) {
+                sound.pause();
+                sound.currentTime = 0;
+                sound.play();
+                soundFlag = false;
+            }
         }              
         else if (event.keyCode === 37) {
             console.log("Let")
@@ -118,7 +128,7 @@ Game.prototype.startLoop = function() {
         // Random enemies
         if (Math.random() > 0.98) {
         var randomX = this.canvas.width * Math.random();    
-        this.enemies.push(new Enemy(this.canvas, randomX, 5));  
+        this.enemies.push(new Enemy(this.canvas, randomX, 8));  
         }
 
         // Check platform collisions
@@ -137,7 +147,7 @@ Game.prototype.startLoop = function() {
             var crossRight      = playerRight >= platformLeft;
             var crossBottom     = playerTop <= platformBottom;        // not working right for some reason (BELOW)
 
-            if      (crossTop && crossRight && crossLeft && crossBottom) {this.player.y = platformTop-45;}
+            if      (crossTop && crossRight && crossLeft && crossBottom) {this.player.y = platformTop-41;}
             
 
             // if      (crossLeft && crossTop && crossBottom) {this.player.x = platformLeft} 

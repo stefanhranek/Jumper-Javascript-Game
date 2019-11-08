@@ -1,5 +1,5 @@
 'use strict'
-
+var coinSound = new Audio("sound/coinSound.wav");
 
 function Player(canvas, lives) {
 
@@ -10,8 +10,8 @@ function Player(canvas, lives) {
     this.x              = 150;
     this.y              = 1100; 
     
-    this.speed          = 3
-    this.jumpSpeed      = 10;  
+    this.speed          = 7;
+    this.jumpSpeed      = 15;  
     this.velX           = 0;    
     this.velY           = 0;    
     this.maxVelX        = 6;
@@ -85,6 +85,7 @@ Player.prototype.didCollideEnemy = function(enemy) {
 
     if ((crossLeft || crossRight) && (crossTop || crossBottom)) {
         return true;
+        coinSound.play();
     }
     return false;
 };
@@ -152,46 +153,18 @@ Player.prototype.handleScreenCollision = function() {
 Player.prototype.handleFloorCollision = function(floorObj) {   
 
     if (this.y/2 >= 560) {
-        this.y = this.canvas.height-100;    // *** hard-coded cheater method *** need to fix once I figure out collision on platforms
+        this.y = this.canvas.height-99;    // *** hard-coded cheater method *** need to fix once I figure out collision on platforms
     }  
 };
 
 
 
-// window.addEventListener("keydown", Player.prototype,update.keyListener);
-/*
-window.addEventListener("keyup", controller.keyListener);
-window.requestAnimationFrame(moveLoop);
-*/
+
+
 
 // GRAVITY & FRICTION CODE IN TESTING BELOW *******************************************************
 
 /*
-var controller = {
-    left : false,
-    right : false,
-    up : false,
-
-    keyListener : function(event) {
-
-        var key_state = (event.type == "keydown")?true:false;
-
-        switch(event.keyCode) {
-
-            case 37: //left key
-                controller.left = key_state;
-                break;
-            case 38: //up key
-                controller.up = key_state;
-                break;
-            case 39: //right key
-                controller.right = key_state;
-                break;
-        }
-    }
-}
-
-
 var moveLoop = function() {
     if (controller.up && Player.jumping == false) {
 

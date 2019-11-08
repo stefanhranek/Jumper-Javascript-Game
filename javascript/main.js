@@ -29,6 +29,9 @@ function main() {
         <p class="controls"><img src="./images/arrow-keys.png"></p>
         <p class="controls-text"><img src="./images/controls-text.png" alt=""></p>
         <div class="button-container"><button class="start-button">START GAME</button></div>
+        <h3 class = "copyright"><img src="./images/copyright.png"></h3>
+        <h4 class = "all-rights"><img src="./images/rightsreserved.png"></h4>
+        <h5 class = "stefco"><img src="./images/stefcoRed.png"></h5>
         </main>
         `);
 
@@ -78,7 +81,7 @@ function main() {
         <main class ="gameOver">
         <h1 class="gO-title"><img src="./images/GameOverNoob.png" alt=""></h1>
         <h2 class="gO-tryAgain"><img src="./images/try-again.png" alt=""></h2>
-        <div class="button-container"><button class="start-button">START GAME</button></div>
+        <div class="button-container"><button class="start-button">ABSOLUTELY</button></div>
         </main>
         `); 
 
@@ -111,10 +114,11 @@ function main() {
             gameWinScreen = buildDom(`
             <main class ="gameWin">
             <h1 class="win-title">YOU WIN !!!</h1>
-            <h2 class="congrats">Good Job !</h2>
+            <h2 class="congrats">Good Job !!</h2>
             <h3 class="best"> You're the best ! </h3> 
             <h4 class="anything"> You can do anything ! </h4>
-            <div class="button-container"><button class="start-button">START GAME</button></div>
+            <h5 class="mushroom"><img src="images/Mushroom-3.png" alt=""></h5>
+            <div class="button-container"><button class="start-button">PLAY AGAIN?</button></div>
             </main>
             `); 
     

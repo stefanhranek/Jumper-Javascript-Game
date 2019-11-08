@@ -40,42 +40,42 @@ var mapInfo  = [
     
     
     {
-        height         : 10,
+        height         : 20,
         width          : 100,  // 100 width for platforms
         x              : 203,                     
         y              : 250
     },
     
     {
-        height         : 10,
+        height         : 20,
         width          : 100,
         x              : 285,                     
         y              : 630
     },
     
     {
-        height         : 10,
+        height         : 20,
         width          : 100,
         x              : 500,                    
         y              : 350
     },
     
     {
-        height         : 10,
+        height         : 20,
         width          : 100,
         x              : 750,                     
         y              : 450
     },
     
     {
-        height         : 10,
+        height         : 20,
         width          : 100,
         x              : 1000,                   
         y              : 550
     },
     
     {
-        height         : 10,
+        height         : 20,
         width          : 100,
         x              : 1000,                    
         y              : 300
@@ -83,77 +83,77 @@ var mapInfo  = [
     
     
     {
-        height         : 10,
+        height         : 20,
         width          : 100,
         x              : 1250,                
         y              : 650
     },
     
     {
-        height         : 10,
+        height         : 20,
         width          : 100,
         x              : 2030,                    
         y              : 960
     },
     
     {              
-        height         : 10,
+        height         : 20,
         width          : 100,
         x              : 52,                    
         y              : 900
     },
     
     {             
-        height         : 10,
+        height         : 20,
         width          : 100,
         x              : 2300,    // right wall                
         y              : 1050
     },
     
     {
-        height         : 10,
+        height         : 20,
         width          : 100,
         x              : 1770,               
         y              : 850
     },
     
     {
-        height         : 10,
+        height         : 20,
         width          : 100,
         x              : 1300,                     
         y              : 300
     },
     
     {
-        height         : 10,
+        height         : 20,
         width          : 100,
         x              : 1500,                
         y              : 750
     },
     
     {
-        height         : 10,
+        height         : 20,
         width          : 50,    // 3 stacks
         x              : 1698,                
         y              : 175
     },
     
     {
-        height         : 10,
+        height         : 20,
         width          : 50,    // 3 stacks
         x              : 1698,                
         y              : 375
     },
     
     {
-        height         : 10,
+        height         : 20,
         width          : 50,
         x              : 1698,      //     3 stacks     
         y              : 575
     },
     
     {
-        height         : 10,
+        height         : 20,
         width          : 100,
         x              : 1950,                
         y              : 350
@@ -169,7 +169,7 @@ var mapInfo  = [
     // },
     
     {
-        height         : 10,
+        height         : 20,
         width          : 100,
         x              : 2290,                
         y              : 550
@@ -177,7 +177,7 @@ var mapInfo  = [
     
     {
     
-        height         : 10,
+        height         : 20,
         width          : 100,
         x              : 2290,                
         y              : 250
@@ -191,71 +191,71 @@ var mapInfo  = [
 var coinInfo = [
 
     {       
-        height         : 30,
-        width          : 15,
+        height         : 40,
+        width          : 25,
         x              : 2322,                    
         y              : 155
     },
 
     {       
-        height         : 30,
-        width          : 15,
+        height         : 40,
+        width          : 25,
         x              : 242,                    
         y              : 165
     },
 
     {            
-        height         : 30,
-        width          : 15,
+        height         : 40,
+        width          : 25,
         x              : 2340,                    
         y              : 1090
     },
 
     {        
-        height         : 30,
-        width          : 15,
-        x              : 1714,                
+        height         : 40,
+        width          : 25,
+        x              : 1709,                
         y              : 105
     },
 
     {      
-        height         : 30,
-        width          : 15,
-        x              : 1714,                
+        height         : 40,
+        width          : 25,
+        x              : 1709,                
         y              : 305
     },
 
     {       
-        height         : 30,
-        width          : 15,
-        x              : 1714,                
+        height         : 40,
+        width          : 25,
+        x              : 1709,                
         y              : 505
     },
 
     {        
-        height         : 30,
-        width          : 15,
-        x              : 1200,                
+        height         : 40,
+        width          : 25,
+        x              : 1195,                
         y              : 1025       // 3 horizontal
     },
 
     {        
-        height         : 30,
-        width          : 15,
-        x              : 1000,                
+        height         : 40,
+        width          : 25,
+        x              : 995,                
         y              : 930        // middle of 3 coins (horizontal)
     },
 
     {        
-        height         : 30,
-        width          : 15,
-        x              : 800,                
+        height         : 40,
+        width          : 25,
+        x              : 795,                
         y              : 1025   //3 horizontal
     },
 
     {        
-        height         : 30,
-        width          : 15,
+        height         : 40,
+        width          : 25,
         x              : 92,              
         y              : 805
     }
@@ -272,23 +272,22 @@ function WinObject(canvas) {
 
         this.canvas         = canvas;
         this.ctx            = canvas.getContext('2d');
-        this.height         = 30;
-        this.width          = 15;
-        this.x              = 2325;             
+        this.height         = 80;
+        this.width          = 80;
+        this.x              = 2300;             
         this.y              = 455;
     };
 
 
 WinObject.prototype.draw = function() {
-
-    this.ctx.fillStyle = "cyan";
-    this.ctx.fillRect(
+    var floorImage = new Image();
+    floorImage.src = 'images/Mushroom-3.png';
+    this.ctx.drawImage( 
+        floorImage,
         this.x,
         this.y,
         this.width,
-        this.height    
-    );
-
+        this.height)
 }
 
 
@@ -296,24 +295,24 @@ WinObject.prototype.draw = function() {
 
 function Floor(canvas) {
 
-    floor = {
-        canvas         : canvas,
-        ctx            : canvas.getContext('2d'), 
-        height         : 30,
-        width          : canvas.width,
-        x              : 0,                     
-        y              : canvas.height-50
+    {
+        this.canvas    = canvas,
+        this.ctx            = canvas.getContext('2d'), 
+        this.height         = 50;
+        this.width          = canvas.width;
+        this.x              = 0;                     
+        this.y              = canvas.height-50;
     }
 }
 
 
 Floor.prototype.draw = function() {
-
-    floor.ctx.fillStyle = "rgba(87, 195, 209, 0.65)";
-    floor.ctx.fillRect(
-        floor.x,
-        floor.y,
-        floor.width,
-        floor.height
-    );
+    var floorImage = new Image();
+    floorImage.src = '/images/ice-platform.png';
+    this.ctx.drawImage( 
+        floorImage,
+        this.x,
+        this.y,
+        this.width,
+        this.height)
 }

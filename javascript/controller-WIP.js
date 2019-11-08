@@ -8,7 +8,7 @@ function Player(canvas, lives) {
     this.lives          = lives;    
     this.size           = 50;
     this.x              = 150;
-    this.y              = 900;
+    this.y              = 800;
     this.w              = 30  ;
     this.h              = 50  ; 
     
