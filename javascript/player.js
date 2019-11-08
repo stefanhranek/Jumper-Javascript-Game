@@ -1,12 +1,16 @@
 'use strict'
-var coinSound = new Audio("sound/coinSound.wav");
+var coinSound = new Audio("./sound/retroCoinSound.wav");
+var snowSound = new Audio("./sound/snowHit.wav");
+
+// winSound = loadSound("sound/win.wav");
+
 
 function Player(canvas, lives) {
 
     this.canvas         = canvas;
     this.ctx            = this.canvas.getContext('2d');
     this.lives          = lives;    
-    this.size           = 80;
+    this.size           = 81;
     this.x              = 150;
     this.y              = 1100; 
     
@@ -90,7 +94,7 @@ Player.prototype.didCollideEnemy = function(enemy) {
 
     if ((crossLeft || crossRight) && (crossTop || crossBottom)) {
         return true;
-        coinSound.play();
+        snowSound.play();
     }
     return false;
 };

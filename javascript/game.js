@@ -2,8 +2,10 @@
 
 // var winSound;
 var coinSound;
+var snowSound;
 function preload() {
-coinSound = loadSound("sound/coin.wav");
+coinSound = loadSound("./sound/retroCoinSound.wav");
+snowSound = loadSound("./sound/snowHit.wav");
 // winSound = loadSound("sound/win.wav");
 }
 
@@ -64,19 +66,16 @@ Game.prototype.start = function() {
     // Add event listener for keydown movements 
     this.handleKeyDown = function(event) {
         if (event.keyCode === 38) {
-            console.log("UP")
             this.player.directionY = -1;
             // jumpSound.pause();
             // jumpSound.currentTime = 0;         
             // jumpSound.play();            //////////////////////////// JUMP SOUND EFFECT //////////////////////////////
         }              
         else if (event.keyCode === 37) {
-            console.log("Let")
 
             this.player.directionX = -1;
         }
         else if (event.keyCode === 39) {
-            console.log("Right")
 
             this.player.directionX = 1;
         };
@@ -122,7 +121,6 @@ Game.prototype.start = function() {
 Game.prototype.startLoop = function() {
 
     var loop = function() {
-    console.log(this.player.y);
     
         // Random enemies
         if (Math.random() > 0.98) {
@@ -188,10 +186,10 @@ Game.prototype.startLoop = function() {
             var playerLeft      = this.player.x - this.player.size/2;
             var playerRight     = this.player.x + this.player.size/2;
             var playerBottom    = this.player.y + this.player.size/2; 
-            var coinsTop     = coins.y - coins.height/2; // -45
-            var coinsLeft    = coins.x - coins.width/2;
-            var coinsRight   = coins.x + coins.width/2;
-            var coinsBottom  = coins.y + coins.height/2;
+            var coinsTop        = coins.y - coins.height/2; // -45
+            var coinsLeft       = coins.x - coins.width/2;
+            var coinsRight      = coins.x + coins.width/2;
+            var coinsBottom     = coins.y + coins.height/2;
             var crossTop        = playerBottom >= coinsTop;
             var crossLeft       = playerLeft <= coinsRight
             var crossRight      = playerRight >= coinsLeft;
@@ -285,7 +283,6 @@ Game.prototype.checkCollisions = function() {
             if ( this.player.didCollideEnemy(enemy) ) {
 
                 this.player.removeLife();                    // REFER TO FOR COIN COLLISION + COUNTER ****************************************************
-                console.log('lives', this.player.lives);
 
                 // move enemy off the screen to the bottom
                 enemy.y = this.canvas.height + enemy.size; 

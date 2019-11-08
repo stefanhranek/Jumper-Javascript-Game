@@ -116,7 +116,7 @@ function main() {
             <main class ="gameWin">
             <h1 class="win-title">YOU WIN !!!</h1>
             <h2 class="congrats">Good Job !!</h2>
-            <h3 class="best"> You're the best ! </h3> 
+            <h6 class="thanks">Thank you for playing !</h6> 
             <h5 class="mushroom"><img src="images/Mushroom-3.png" alt=""></h5>
             <div class="button-container"><button class="start-button">PLAY AGAIN?</button></div>
             </main>

@@ -148,8 +148,16 @@ html {
         font-size: 120px;
     }
 
+    .thanks {
+        padding-top: 2px;
+        color: white;
+        font-size: 22px;
+
+    }
+
     .mushroom img {
-        height: 75px;
+        padding-top: 0px;
+        height: 65px;
         width: auto;
     }
 
@@ -204,10 +212,10 @@ html {
     }
 
     .stefco img {
-        height      : auto;
+        height      : 30px;;
         width       : 15vw;
         max-width   : 300px;
-        padding-top : 5px;
+        padding-top : 0px;
     }
 
     .how-to-play img {
