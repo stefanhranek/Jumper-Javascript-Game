@@ -1,7 +1,6 @@
 'use strict'
 
 
-
 function buildDom(htmlString) {
     var div       = document.createElement('div');
     div.innerHTML = htmlString;
@@ -17,6 +16,8 @@ function main() {
     var splashScreen;
     var gameOverScreen;
     var gameWinScreen;
+    // var jumpSound = document.getElementById('jump');
+
 
 
     // splash screen creation
@@ -116,7 +117,6 @@ function main() {
             <h1 class="win-title">YOU WIN !!!</h1>
             <h2 class="congrats">Good Job !!</h2>
             <h3 class="best"> You're the best ! </h3> 
-            <h4 class="anything"> You can do anything ! </h4>
             <h5 class="mushroom"><img src="images/Mushroom-3.png" alt=""></h5>
             <div class="button-container"><button class="start-button">PLAY AGAIN?</button></div>
             </main>

@@ -6,18 +6,19 @@ function Enemy(canvas, x, speed) {
     this.canvas         = canvas;
     this.ctx            = canvas.getContext('2d'); // this.canvas?
     // this.lives          = lives;    // may not use lives *****************
-    this.size           = 10;
+    this.size           = 20;
     this.x              = x;                        // change for top screen drop
     this.y              = 0 - this.size;  // change for top screen drop
     this.speed          = speed;
-
+    this.snowImage = new Image();
+    this.snowImage.src = './images/blueSnowball.png';
 }
 
 
 Enemy.prototype.draw = function() {
 
-    this.ctx.fillStyle = "white";
-    this.ctx.fillRect(
+    this.ctx.drawImage(
+        this.snowImage,
         this.x,
         this.y,
         this.size,

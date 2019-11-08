@@ -6,12 +6,12 @@ function Player(canvas, lives) {
     this.canvas         = canvas;
     this.ctx            = this.canvas.getContext('2d');
     this.lives          = lives;    
-    this.size           = 50;
+    this.size           = 80;
     this.x              = 150;
     this.y              = 1100; 
     
     this.speed          = 7;
-    this.jumpSpeed      = 15;  
+    this.jumpSpeed      = 20;  
     this.velX           = 0;    
     this.velY           = 0;    
     this.maxVelX        = 6;
@@ -23,7 +23,8 @@ function Player(canvas, lives) {
     this.direction      = 0;
     this.directionY     = 0;
     this.directionX     = 0;
-
+    this.playerImage = new Image();
+    this.playerImage.src = './images/spike.png';
 }
 
 
@@ -55,9 +56,13 @@ Player.prototype.movePlayer = function(direction) {
 
 
 Player.prototype.draw = function() {
-    this.ctx.fillStyle = 'salmon';
-    // fillRect (x, y, width, height)
-    this.ctx.fillRect(Math.floor(this.x), Math.floor(this.y), this.size, this.size);
+
+    this.ctx.drawImage( 
+        this.playerImage,
+        this.x,
+        this.y,
+        this.size,
+        this.size)
 }
 
 
@@ -153,7 +158,7 @@ Player.prototype.handleScreenCollision = function() {
 Player.prototype.handleFloorCollision = function(floorObj) {   
 
     if (this.y/2 >= 560) {
-        this.y = this.canvas.height-99;    // *** hard-coded cheater method *** need to fix once I figure out collision on platforms
+        this.y = this.canvas.height-100;    // *** hard-coded cheater method *** need to fix once I figure out collision on platforms
     }  
 };
 

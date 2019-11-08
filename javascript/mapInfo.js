@@ -120,8 +120,8 @@ var mapInfo  = [
     {
         height         : 20,
         width          : 100,
-        x              : 1300,                     
-        y              : 300
+        x              : 1350,                     
+        y              : 390
     },
     
     {
@@ -296,9 +296,9 @@ WinObject.prototype.draw = function() {
 function Floor(canvas) {
 
     {
-        this.canvas    = canvas,
+        this.canvas         = canvas,
         this.ctx            = canvas.getContext('2d'), 
-        this.height         = 50;
+        this.height         = 60;
         this.width          = canvas.width;
         this.x              = 0;                     
         this.y              = canvas.height-50;

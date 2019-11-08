@@ -1,7 +1,12 @@
 'use strict'
 
-var jumpSound;
-var sound = document.getElementById('sound');
+// var winSound;
+var coinSound;
+function preload() {
+coinSound = loadSound("sound/coin.wav");
+// winSound = loadSound("sound/win.wav");
+}
+
 
 function Game() {
     this.canvas     = null;
@@ -18,8 +23,6 @@ function Game() {
     this.winObject  = null;
     this.floorObj   = null;
     this.blocks     = blockInfo;
-    var jumpSound   = new Audio();
-    jumpSound.src   = "./sound/lightJump.wav"
 }
 
 
@@ -60,10 +63,12 @@ Game.prototype.start = function() {
 
     // Add event listener for keydown movements 
     this.handleKeyDown = function(event) {
-    var soundFlag = true;
         if (event.keyCode === 38) {
             console.log("UP")
             this.player.directionY = -1;
+            // jumpSound.pause();
+            // jumpSound.currentTime = 0;         
+            // jumpSound.play();            //////////////////////////// JUMP SOUND EFFECT //////////////////////////////
         }              
         else if (event.keyCode === 37) {
             console.log("Let")
@@ -135,13 +140,13 @@ Game.prototype.startLoop = function() {
             var platformTop     = platforms.y - platforms.height/2 ; // -41
             var platformLeft    = platforms.x - platforms.width/2;
             var platformRight   = platforms.x + platforms.width/2;
-            var platformBottom  = platforms.y + platforms.height/2;
+            var platformBottom  = platforms.y + (platforms.height/2) - 80;
             var crossTop        = playerBottom >= platformTop;
             var crossLeft       = playerLeft <= platformRight
             var crossRight      = playerRight >= platformLeft;
             var crossBottom     = playerTop <= platformBottom;        // not working right for some reason (BELOW)
 
-            if      (crossTop && crossRight && crossLeft && crossBottom) {this.player.y = platformTop-41;}
+            if      (crossTop && crossRight && crossLeft && crossBottom) {this.player.y = platformTop-69;}
             
 
             // if      (crossLeft && crossTop && crossBottom) {this.player.x = platformLeft} 
@@ -167,7 +172,7 @@ Game.prototype.startLoop = function() {
             var crossRight      = playerRight >= blockLeft;
             var crossBottom     = playerTop <= blockBottom;        // not working right for some reason (BELOW)
 
-            if (crossTop && crossRight && crossLeft && crossBottom) {this.player.y = blockTop-20;}
+            if (crossTop && crossRight && crossLeft && crossBottom) {this.player.y = blockTop-50;}
 
             // if      (crossLeft && crossTop && crossBottom) {this.player.x = platformLeft} 
             // else if (crossRight && crossTop && crossBottom) {this.player.x = platformRight} 
@@ -193,6 +198,7 @@ Game.prototype.startLoop = function() {
             var crossBottom     = playerTop <= coinsBottom;        // not working right for some reason (BELOW)
 
             if (crossTop && crossRight && crossLeft && crossBottom) {console.log("upgrade the coin count",); 
+                                                                    coinSound.play();
                                                                     (coins.y = 3001);    // have to do a for loop to remove
                                                                     this.coinCount += 1;  
                                                                     this.updateGameStats();}   // need to send coin outside of map
