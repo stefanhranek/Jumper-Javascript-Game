@@ -294,6 +294,7 @@ Game.prototype.startLoop = function() {
 
 Game.prototype.checkCollisions = function() {         
     if (this.player.didCollideWin(this.winObject)) {this.youWin(); this.backgroundMusic.pause();}       // 1st checks win collision
+    
     else if (!this.player.didCollideWin(this.winObject)) {
         this.enemies.forEach(function(enemy) {                            // 2nd checks lose collision
             if ( this.player.didCollideEnemy(enemy) ) {
@@ -309,6 +310,7 @@ Game.prototype.checkCollisions = function() {
                 }
             }
         }, this);
+        
     } else {
         this.shurikens.forEach(function(shuriken) {                            // 2nd checks lose collision
             if ( this.player.didCollideEnemy(shuriken) ) {
