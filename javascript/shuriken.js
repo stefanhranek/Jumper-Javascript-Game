@@ -1,17 +1,18 @@
 'use strict'
 
 
-function Shuriken(canvas, x, speed) {
+function Shuriken(canvas, y, speed) {
 
-    this.canvas         = canvas;
-    this.ctx            = canvas.getContext('2d'); // this.canvas?
-    // this.lives          = lives;    // may not use lives *****************
-    this.size           = 20;
-    this.x              = x;                        
-    this.y              = 0 - this.size;  
-    this.speed          = speed;
-    this.shurikenImage = new Image();
-    this.shurikenImage.src = './images/steely.png';
+    this.canvas             = canvas;
+    this.ctx                = canvas.getContext('2d'); // this.canvas?
+    // this.lives           = lives;    // may not use lives *****************
+    this.sizeX              = 64;
+    this.sizeY              = 13;
+    this.x                  = canvas.width + this.sizeX;                        
+    this.y                  = y;  
+    this.speed              = speed;
+    this.shurikenImage      = new Image();
+    this.shurikenImage.src  = './images/steely.png';
 }
 
 
@@ -21,8 +22,8 @@ Shuriken.prototype.draw = function() {
         this.shurikenImage,
         this.x,
         this.y,
-        this.size,
-        this.size
+        this.sizeX,
+        this.sizeY
     );
 
 };
@@ -30,13 +31,13 @@ Shuriken.prototype.draw = function() {
 
 Shuriken.prototype.updatePosition = function() {
 
-    this.y = this.y + this.speed; 
+    this.x = this.x - this.speed; 
 
 };
 
 
 Shuriken.prototype.isInsideScreen = function() {
 
-    return this.y + this.size / 2 < this.canvas.height; 
+    return this.x - this.sizeX / 2 > -this.canvas.height; 
 
 };

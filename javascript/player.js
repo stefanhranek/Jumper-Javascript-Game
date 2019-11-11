@@ -75,6 +75,29 @@ Player.prototype.draw = function() {
     //////////////////////////////////////
 
 
+Player.prototype.didCollideEnemy = function(shuriken) {     
+    var playerLeft   = this.x;
+    var playerRight  = this.x + this.size;
+    var playerTop    = this.y;
+    var playerBottom = this.y + this.size;
+
+    var shurikenLeft   = shuriken.x;
+    var shurikenRight  = shuriken.x + shuriken.sizeX;
+    var shurikenTop    = shuriken.y;
+    var shurikenBottom = shuriken.y + shuriken.sizeY;
+
+    // Check if the shuriken intersects any of the player's sides
+    var crossLeft   = shurikenLeft   <= playerRight && shurikenLeft >= playerLeft;
+    var crossRight  = shurikenRight  >= playerLeft && shurikenRight <= playerRight;
+    var crossBottom = shurikenBottom >= playerTop && shurikenBottom <= playerBottom;
+    var crossTop    = shurikenTop    <= playerBottom && shurikenTop >= playerTop;
+
+    if ((crossLeft || crossRight) && (crossTop || crossBottom)) {
+        return true;
+    }
+    return false;
+};
+
 Player.prototype.didCollideEnemy = function(enemy) {     
     var playerLeft   = this.x;
     var playerRight  = this.x + this.size;
@@ -97,6 +120,7 @@ Player.prototype.didCollideEnemy = function(enemy) {
     }
     return false;
 };
+
 
 
 

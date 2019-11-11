@@ -130,8 +130,8 @@ Game.prototype.startLoop = function() {
         var randomX = this.canvas.width * Math.random();    
         this.enemies.push(new Enemy(this.canvas, randomX, 8)); 
         
-        var randomX = this.canvas.width * Math.random();    
-        this.shurikens.push(new Shuriken(this.canvas, randomX, 8)); 
+        var randomY = this.canvas.height * Math.random();    
+        this.shurikens.push(new Shuriken(this.canvas, randomY, 20)); 
         }
 
 
@@ -316,7 +316,7 @@ Game.prototype.checkCollisions = function() {
                 this.player.removeLife();                    // REFER TO FOR COIN COLLISION + COUNTER ****************************************************
 
                 // move enemy off the screen to the bottom
-                shuriken.y = this.canvas.height + shuriken.size; 
+                shuriken.x = this.canvas.width - shuriken.sizeX; 
 
                 if (this.player.lives === 0) {
                     this.gameOver();
