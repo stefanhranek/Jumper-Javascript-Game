@@ -1,7 +1,7 @@
 'use strict'
 
 
-function Enemy(canvas, x, speed) {
+function Shuriken(canvas, x, speed) {
 
     this.canvas         = canvas;
     this.ctx            = canvas.getContext('2d'); // this.canvas?
@@ -10,15 +10,15 @@ function Enemy(canvas, x, speed) {
     this.x              = x;                        
     this.y              = 0 - this.size;  
     this.speed          = speed;
-    this.snowImage = new Image();
-    this.snowImage.src = './images/blueSnowball.png';
+    this.shurikenImage = new Image();
+    this.shurikenImage.src = './images/steely.png';
 }
 
 
-Enemy.prototype.draw = function() {
+Shuriken.prototype.draw = function() {
 
     this.ctx.drawImage(
-        this.snowImage,
+        this.shurikenImage,
         this.x,
         this.y,
         this.size,
@@ -28,14 +28,14 @@ Enemy.prototype.draw = function() {
 };
 
 
-Enemy.prototype.updatePosition = function() {
+Shuriken.prototype.updatePosition = function() {
 
     this.y = this.y + this.speed; 
 
 };
 
 
-Enemy.prototype.isInsideScreen = function() {
+Shuriken.prototype.isInsideScreen = function() {
 
     return this.y + this.size / 2 < this.canvas.height; 
 

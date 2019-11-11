@@ -94,10 +94,13 @@ Player.prototype.didCollideEnemy = function(enemy) {
 
     if ((crossLeft || crossRight) && (crossTop || crossBottom)) {
         return true;
-        snowSound.play();
     }
     return false;
 };
+
+
+
+
 
         //////////////////////////////////////
       /////////// WIN COLLISION ////////////

@@ -100,6 +100,17 @@ html {
         padding         : 30px;
         width           : 100vw;
         justify-content : flex-end;
+        padding-top     : 80px;
+    }
+
+    .mushroom-container {
+        display         : inline-flex;
+        position        : absolute;
+        color           : white;
+        padding         : 30px;
+        width           : 100vw;
+        justify-content : flex-end;
+        font-size       : 25px; 
     }
 
     .game-dom-container span {
@@ -261,3 +272,6 @@ html {
         padding-top: 20px;
     }
 
+    audio {
+        display: none;
+      }

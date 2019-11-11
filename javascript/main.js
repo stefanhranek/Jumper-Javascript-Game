@@ -1,5 +1,6 @@
 'use strict'
 
+const audio = document.querySelector("audio");
 
 function buildDom(htmlString) {
     var div       = document.createElement('div');
@@ -54,6 +55,9 @@ function main() {
     function createGameScreen() {
         var gameScreen = buildDom(`
         <main class="game">
+            <div class ="mushroom-container">
+            <span id="mushroom">Mushroom: </span><span class="mushroom-update">0</span><span>/1</span>
+            </div>
             <div class ="game-dom-container">
             <span id="coins">Coins: </span><span class="coins-update">0</span><span>/10</span>
             </div>

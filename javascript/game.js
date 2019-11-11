@@ -1,5 +1,4 @@
 'use strict'
-
 // var winSound;
 var coinSound;
 function preload() {
@@ -12,6 +11,7 @@ function Game() {
     this.canvas     = null;
     this.ctx        = null;
     this.enemies    = [];
+    this.shurikens  = []; 
     this.platforms  = mapInfo;
     this.coins      = coinInfo;
     this.player     = null;
@@ -23,10 +23,15 @@ function Game() {
     this.winObject  = null;
     this.floorObj   = null;
     this.blocks     = blockInfo;
+    this.backgroundMusic = undefined;
+    this.backgroundSprite = undefined;
 }
 
 
 Game.prototype.start = function() {
+
+    this.backgroundMusic = new Audio();
+    this.backgroundMusic.src = "./sound/narutoBackround.mp3";
 
     // Get canvas element, create ctx, save canvas & ctx in the game object
     this.canvasContainer = document.querySelector('.canvas-container');
@@ -101,7 +106,7 @@ Game.prototype.start = function() {
           ////  CONTROLLER END  //////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////
 
-
+    this.backgroundMusic.play();
 
     // Start the game loop
     this.startLoop();
@@ -123,8 +128,13 @@ Game.prototype.startLoop = function() {
         // Random enemies
         if (Math.random() > 0.98) {
         var randomX = this.canvas.width * Math.random();    
-        this.enemies.push(new Enemy(this.canvas, randomX, 8));  
+        this.enemies.push(new Enemy(this.canvas, randomX, 8)); 
+        
+        var randomX = this.canvas.width * Math.random();    
+        this.shurikens.push(new Shuriken(this.canvas, randomX, 8)); 
         }
+
+
 
         // Check platform collisions
 
@@ -219,6 +229,10 @@ Game.prototype.startLoop = function() {
             return enemy.isInsideScreen();
         });
 
+        this.shurikens = this.shurikens.filter(function(shuriken) {
+            shuriken.updatePosition();
+            return shuriken.isInsideScreen();
+        });
 
 
 
@@ -239,6 +253,10 @@ Game.prototype.startLoop = function() {
         // Draw the enemies
         this.enemies.forEach(function(enemy) {  
             enemy.draw();
+        });
+
+        this.shurikens.forEach(function(shuriken) {  
+            shuriken.draw();
         });
 
         // Draw the platforms 
@@ -275,8 +293,8 @@ Game.prototype.startLoop = function() {
 // LOOP END ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Game.prototype.checkCollisions = function() {         
-    if (this.player.didCollideWin(this.winObject)) {this.youWin();}       // 1st checks win collision
-    else {
+    if (this.player.didCollideWin(this.winObject)) {this.youWin(); this.backgroundMusic.pause();}       // 1st checks win collision
+    else if (!this.player.didCollideWin(this.winObject)) {
         this.enemies.forEach(function(enemy) {                            // 2nd checks lose collision
             if ( this.player.didCollideEnemy(enemy) ) {
 
@@ -287,6 +305,22 @@ Game.prototype.checkCollisions = function() {
 
                 if (this.player.lives === 0) {
                     this.gameOver();
+                    this.backgroundMusic.pause();
+                }
+            }
+        }, this);
+    } else {
+        this.shurikens.forEach(function(shuriken) {                            // 2nd checks lose collision
+            if ( this.player.didCollideEnemy(shuriken) ) {
+
+                this.player.removeLife();                    // REFER TO FOR COIN COLLISION + COUNTER ****************************************************
+
+                // move enemy off the screen to the bottom
+                shuriken.y = this.canvas.height + shuriken.size; 
+
+                if (this.player.lives === 0) {
+                    this.gameOver();
+                    this.backgroundMusic.pause();
                 }
             }
         }, this);
