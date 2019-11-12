@@ -1,11 +1,9 @@
 'use strict'
-// var winSound;
+
 var coinSound;
 function preload() {
 coinSound = loadSound("./sound/retroCoinSound.wav");
-// winSound = loadSound("sound/win.wav");
 }
-
 
 function Game() {
     this.canvas     = null;
@@ -14,6 +12,8 @@ function Game() {
     this.shurikens  = []; 
     this.platforms  = mapInfo;
     this.coins      = coinInfo;
+    this.moon       = null;
+    this.ramen      = null;
     this.player     = null;
     this.gameIsOver = false;
     this.gameWin    = false;
@@ -22,37 +22,38 @@ function Game() {
     this.coinCount  = 0;
     this.winObject  = null;
     this.floorObj   = null;
-    this.blocks     = blockInfo;
-    this.backgroundMusic = undefined;
-    this.backgroundSprite = undefined;
+    this.blocks             = blockInfo;
+    this.backgroundMusic    = undefined;
+    this.moonMusic          = undefined;
+    this.backgroundSprite   = undefined;
 }
-
 
 Game.prototype.start = function() {
 
     this.backgroundMusic = new Audio();
     this.backgroundMusic.src = "./sound/narutoBackround.mp3";
 
+    this.moonMusic       = new Audio();
+    this.moonMusic.src   = "./sound/infiniteBackgroundMusic.mp3";
+
     // Get canvas element, create ctx, save canvas & ctx in the game object
     this.canvasContainer = document.querySelector('.canvas-container');
     this.canvas          = document.querySelector('canvas');
     this.ctx             = this.canvas.getContext('2d');
 
-
-    // Save reference to coins collected
+    // COINS COLLECTED REFERENCE
     this.coinsElement = this.gameScreen.querySelector('.coins-update'); 
-    // this.coinsFinish = this.gameWinScreen.querySelector('.coins-update');        ///////////////////////////// for coin update on game win
 
-
-    // Setting the canvas (ctx) to be the same as the viewport size
-    // @@@@@@@  MIGHT BE THE CAUSE OF SHIFTING ELEMENTS IN GAME ON DIFFERENT VIEWPORT SIZES @@@@@@@
-    this.containerWidth     = this.canvasContainer.offsetWidth;     // look back at 'offset' functionality
-    this.containerHeight    = this.canvasContainer.offsetHeight;    // same as above
+    // Setting the canvas size (ctx) 
+    this.containerWidth     = 2400;     
+    this.containerHeight    = 1200;    
     this.canvas.setAttribute('width', this.containerWidth);
     this.canvas.setAttribute('height', this.containerHeight);
 
     // Draw walls & coins & winObject & player
     this.winObject      = new WinObject(this.canvas);
+    this.moon           = new Moon(this.canvas);
+    this.ramen          = new Ramen(this.canvas);
     this.player         = new Player(this.canvas, 1);
     this.floorObj       = new Floor(this.canvas);
     this.drawPlatforms  = this.platforms.map(function(platformData) {return new Platforms(this.canvas, platformData.height,platformData.width,platformData.x,platformData.y);} ,this);
@@ -128,7 +129,7 @@ Game.prototype.startLoop = function() {
         // Random enemies
         if (Math.random() > 0.98) {
         var randomX = this.canvas.width * Math.random();    
-        this.enemies.push(new Enemy(this.canvas, randomX, 8)); 
+        this.enemies.push(new Enemy(this.canvas, randomX, 0)); 
         
         var randomY = this.canvas.height * Math.random();    
         this.shurikens.push(new Shuriken(this.canvas, randomY, 20)); 
@@ -239,10 +240,17 @@ Game.prototype.startLoop = function() {
         // Clear the canvas
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-        // Update the canvas: floor - walls - platforms - coins - winObject    
+        // Update the canvas: floor - walls - platforms - coins - winObject  
+        if (this.coinsElement.innerHTML === '25') {
+            console.log('INFINITE TSYUKIYOMI');
+            this.backgroundMusic.pause();
+            this.moonMusic.play();
+            this.moon.draw();
+        }
+
         this.winObject.draw();
+        this.ramen.draw()
         this.floorObj.draw();
-        
         
          // Draw the player
         this.player.draw();
@@ -310,7 +318,7 @@ Game.prototype.checkCollisions = function() {
                 }
             }
         }, this);
-        
+
     } else {
         this.shurikens.forEach(function(shuriken) {                            // 2nd checks lose collision
             if ( this.player.didCollideEnemy(shuriken) ) {

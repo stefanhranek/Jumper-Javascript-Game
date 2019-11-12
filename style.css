@@ -2,20 +2,21 @@
 
 html {
     box-sizing: border-box;
-    }
-    *, *:before, *:after {
+}
+
+*, *:before, *:after {
     box-sizing: inherit;
-    }
+}
 
-    body {
-    margin:  0;
-    padding: 0;
-    }
+body {
+    margin  :  0;
+    padding : 0;
+}
 
 
-    /* ---- typography ---- */
+/* ---- typography ---- */
 
-    body {
+body {
     color           : #111;
     font-family     : 'Press Start 2P', cursive;
     font-size       : 16px;
@@ -24,254 +25,251 @@ html {
     justify-content : center;
     align-items     : center;
     background-color: rgb(101, 148, 146, 100%);
+}
 
-    }
 
-
-    p {
+p {
     margin: 0;
-    }
+}
 
 
 
-    /* ---- layout ---- */
+/* ---- layout ---- */
 
-    html, body {
+html, body {
     height: 100%;
-    }
+}
 
-    .container {
+.container {
     margin: 0 20px;
-    }
+}
 
-    @media (min-width: 768px) {
+@media (min-width: 768px) {
     .container {
         max-width: 728px;
-        margin: 0 auto;
+        margin   : 0 auto;
     }
-    }
+}
 
 
-    /* ---- components ---- */
+/* ---- components ---- */
 
-    .game {
+.game {
     text-align    : center;
     display       : flex;
     flex-direction: column;
     height        : 100%;                   
     width         : 100%   
-    }
+}
 
-    .game header {
+.game header {
     height      : 50px;
     display     : flex;
     align-items : center;
-    }
+}
 
-    .game .lives {
+.game .lives {
     flex: 1;
-    }
+}
 
-    .game .coins {
+.game .coins {
     flex: 1;
-    }
+}
 
-    .game .label {
+.game .label {
     font-weight: bold;
-    }
+}
 
-    .game .value {
+.game .value {
     font-style: italic;
-    }
+}
 
-    .game .canvas-container {
+.game .canvas-container {
     flex      : 1; 
     margin    : 0;
-    background: rgb(101, 148, 146, 100%);   /* change to black later ---------- */
-    }
-    
+    background: rgb(101, 148, 146, 100%);
+}
 
-    /* --- my addition --- */
 
-    .game-dom-container {
-        display         : inline-flex;
-        position        : absolute;
-        color           : white;
-        padding         : 30px;
-        width           : 100vw;
-        justify-content : flex-end;
-        padding-top     : 80px;
-    }
+.game-dom-container {
+    display         : inline-flex;
+    position        : absolute;
+    color           : white;
+    padding         : 30px;
+    width           : 100vw;
+    justify-content : flex-end;
+    padding-top     : 80px;
+}
 
-    .mushroom-container {
-        display         : inline-flex;
-        position        : absolute;
-        color           : white;
-        padding         : 30px;
-        width           : 100vw;
-        justify-content : flex-end;
-        font-size       : 25px; 
-    }
+.mushroom-container {
+    display         : inline-flex;
+    position        : absolute;
+    color           : white;
+    padding         : 30px;
+    width           : 100vw;
+    justify-content : flex-end;
+    font-size       : 25px; 
+}
 
-    .game-dom-container span {
-        font-size: 25px;
-    }
+.game-dom-container span {
+    font-size: 25px;
+}
 
-    canvas {
-        align-items     : center;
-        margin          : 260px;
-        justify-content : center;
-        align-content   : center;
-        width           : 60vw;
-        height          :55vh;
-        background      : black;
-        background-image: url('images/purpleMoon.png');
-    }
+canvas {
+    align-items     : center;
+    margin          : 260px;
+    justify-content : center;
+    align-content   : center;
+    width           : 60vw;
+    height          :55vh;
+    background      : black;
+    background-image: url('images/purpleMoon.png');
+}
 
-    .canvas-container {
-        margin: 0 20px;
-    }
+.canvas-container {
+    margin: 0 20px;
+}
 
-    .splashScreen {
-        background: url()
-    }
+.splashScreen {
+    background: url()
+}
 
-    body {
-        display             : flex;
-        justify-content     : center;
-        align-items         : center;
-        background-color    : rgb(101, 148, 146, 100%);
-        text-align          : center;
-        cursor              : pointer;
-        }
-
-    .gameOver {
-        display             : flex;
-        flex-direction      : column;
+body {
+    display             : flex;
+    justify-content     : center;
+    align-items         : center;
+    background-color    : rgb(101, 148, 146, 100%);
+    text-align          : center;
+    cursor              : pointer;
     }
 
-    .gameWin {
-        display             : flex;
-        flex-direction      : column;
-    }
+.gameOver {
+    display             : flex;
+    flex-direction      : column;
+}
 
-    .win-title {
-        font-size: 120px;
-    }
+.gameWin {
+    display             : flex;
+    flex-direction      : column;
+}
 
-    .thanks {
-        padding-top: 2px;
-        color: white;
-        font-size: 22px;
+.win-title {
+    font-size   : 120px;
+}
 
-    }
+.thanks {
+    padding-top : 2px;
+    color       : white;
+    font-size   : 22px;
 
-    .mushroom img {
-        padding-top: 0px;
-        height: 65px;
-        width: auto;
-    }
+}
 
-    .congrats {
-        font-size: 70px;
-    }
+.mushroom img {
+    padding-top : 0px;
+    height      : 65px;
+    width       : auto;
+}
 
-    .best {
-        font-size: 30px;
-    }
+.congrats {
+    font-size: 70px;
+}
 
-    .anything h4 {
-        font-size: 15px;
-    }
+.best {
+    font-size: 30px;
+}
 
-    .title {
-        padding-bottom      : 30px;
-    }  
-    .title img {
-        height: auto;
-        width: 60vw;
-        max-width: 750px;
-    }
+.anything h4 {
+    font-size: 15px;
+}
 
-    .gO-title {
-        margin: 20px;
-    }  
-    .gO-title img {
-        height      : auto;
-        width       : 60vw;
-        max-width   : 60vw;
-    }
+.title {
+    padding-bottom: 30px;
+}  
+.title img {
+    height      : auto;
+    width       : 60vw;
+    max-width   : 750px;
+}
 
-    .gO-tryAgain img {
-        height      : auto;
-        width       : 30vw;
-        max-width   : 300px;
-        padding-top : 20px;
-    }
+.gO-title {
+    margin: 20px;
+}  
+.gO-title img {
+    height      : auto;
+    width       : 60vw;
+    max-width   : 60vw;
+}
 
-    .copyright img {
-        height      : auto;
-        width       : 15vw;
-        max-width   : 300px;
-        padding-top : 60px;
-    }
+.gO-tryAgain img {
+    height      : auto;
+    width       : 30vw;
+    max-width   : 300px;
+    padding-top : 20px;
+}
 
-    .all-rights img {
-        height      : auto;
-        width       : 15vw;
-        max-width   : 300px;
-    }
+.copyright img {
+    height      : auto;
+    width       : 15vw;
+    max-width   : 300px;
+    padding-top : 60px;
+}
 
-    .stefco img {
-        height      : 30px;;
-        width       : 15vw;
-        max-width   : 300px;
-        padding-top : 0px;
-    }
+.all-rights img {
+    height      : auto;
+    width       : 15vw;
+    max-width   : 300px;
+}
 
-    .how-to-play img {
-        height      : auto;
-        width       : 30vw;
-        max-width   : 300px;
-        margin      : 20px;
-    }
+.stefco img {
+    height      : 30px;;
+    width       : 15vw;
+    max-width   : 300px;
+    padding-top : 0px;
+}
 
-    .controls {
-        margin: 20px;
-    }
+.how-to-play img {
+    height      : auto;
+    width       : 30vw;
+    max-width   : 300px;
+    margin      : 20px;
+}
 
-    .controls img {
-        height  : 70px;
-        width   : auto;
-    }
+.controls {
+    margin      : 20px;
+}
 
-    .controls-text img {
-        margin      : 20px;
-        max-width   : 20vw;
-        min-width   : 200px;
-        height      : auto;
-    }
+.controls img {
+    height      : 70px;
+    width       : auto;
+}
 
-    .start-button {
-        text-align      : center;
-        display         : inline-block;
-        margin          : 0;
-        font-weight     : bold;
-        padding         : auto;
-        background-color: lightgray;
-        text-shadow     : -1px -1px black, 1px 1px white;
-        color           : gray;
-        border-radius   : 1px;
-        box-shadow      : 0 .2em .2em gray; 
-        cursor          : pointer;
-        height          : 30px;
-        width           : auto;
-    }
+.controls-text img {
+    margin      : 20px;
+    max-width   : 20vw;
+    min-width   : 200px;
+    height      : auto;
+}
 
-    .button-container {
-        padding-top: 20px;
-    }
+.start-button {
+    text-align      : center;
+    display         : inline-block;
+    margin          : 0;
+    font-weight     : bold;
+    padding         : auto;
+    background-color: lightgray;
+    text-shadow     : -1px -1px black, 1px 1px white;
+    color           : gray;
+    border-radius   : 1px;
+    box-shadow      : 0 .2em .2em gray; 
+    cursor          : pointer;
+    height          : 30px;
+    width           : auto;
+}
 
-    audio {
-        display: none;
-      }
+.button-container {
+    padding-top: 20px;
+}
+
+audio {
+    display: none;
+}

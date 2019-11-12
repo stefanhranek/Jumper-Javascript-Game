@@ -5,24 +5,16 @@ const audio = document.querySelector("audio");
 function buildDom(htmlString) {
     var div       = document.createElement('div');
     div.innerHTML = htmlString;
-
     return div.children[0];
 }
 
-
 // Runs on initial start and contains calls all other functions that manage the game
 function main() {
-
     var game;
     var splashScreen;
     var gameOverScreen;
     var gameWinScreen;
-    // var jumpSound = document.getElementById('jump');
 
-
-
-    // splash screen creation
-    // re-create h1h2 images to save in local folder
     function createSplashScreen() {
         splashScreen = buildDom(`
         <main class ="splash">
@@ -45,12 +37,11 @@ function main() {
         });
     }
 
-
     function removeSplashScreen() {
         splashScreen.remove();
     }
 
-    // game screen creation
+// GAME SCREEN CREATION
 
     function createGameScreen() {
         var gameScreen = buildDom(`
@@ -59,7 +50,7 @@ function main() {
             <span id="mushroom">Mushroom: </span><span class="mushroom-update">0</span><span>/1</span>
             </div>
             <div class ="game-dom-container">
-            <span id="coins">Coins: </span><span class="coins-update">0</span><span>/10</span>
+            <span id="coins">Coins: </span><span class="coins-update">0</span><span>/25</span>
             </div>
             <section class="canvas-container">
             <canvas></canvas>
@@ -72,7 +63,7 @@ function main() {
         return gameScreen;
     }
 
-    // game screen removal
+    // GAME SCREEN REMOVAL
 
     function removeGameScreen() {
         game.removeGameScreen();
@@ -81,7 +72,7 @@ function main() {
 
     // game over screen creation
 
-    function createGameOverScreen(coins) {     // has SCORE as argument on example
+    function createGameOverScreen(coins) {
         gameOverScreen = buildDom(`
         <main class ="gameOver">
         <h1 class="gO-title"><img src="./images/GameOverNoob.png" alt=""></h1>
@@ -93,58 +84,55 @@ function main() {
         var button = gameOverScreen.querySelector('button');
         button.addEventListener('click', startGame);
 
-        var span = gameOverScreen.querySelector('span');    // change span
+        var span = gameOverScreen.querySelector('span');    // REVISE LATER FOR COIN WIN SCREEN
         // span.innerText = coins;     // coins --------- update later
 
         document.body.appendChild(gameOverScreen);
     }
 
-    
     function removeGameOverScreen() {
         if (gameOverScreen) {
             gameOverScreen.remove();
         }
     }
 
-        // game WIN screen creation
+// WIN SCREEN CREATION
 
-        // use later for updating coins on win screen
-        //<div class="coin-statement-container>
-        // <h3> You collected </h3> <
-        // <p class="coins-update"> 0 </p>
-        // <p> coins! AMAZING!!! </p>
-        //</div>
+    // use later for updating coins on win screen
+    //<div class="coin-statement-container>
+    // <h3> You collected </h3> <
+    // <p class="coins-update"> 0 </p>
+    // <p> coins! AMAZING!!! </p>
+    //</div>
 
-        function createGameWinScreen(coins) {     // has SCORE as argument on example
-            gameWinScreen = buildDom(`
-            <main class ="gameWin">
-            <h1 class="win-title">YOU WIN !!!</h1>
-            <h2 class="congrats">Good Job !!</h2>
-            <h6 class="thanks">Thank you for playing !</h6> 
-            <h5 class="mushroom"><img src="images/Mushroom-3.png" alt=""></h5>
-            <div class="button-container"><button class="start-button">PLAY AGAIN?</button></div>
-            </main>
-            `); 
+    function createGameWinScreen(coins) {
+        gameWinScreen = buildDom(`
+        <main class ="gameWin">
+        <h1 class="win-title">YOU WIN !!!</h1>
+        <h2 class="congrats">Good Job !!</h2>
+        <h6 class="thanks">Thank you for playing !</h6> 
+        <h5 class="mushroom"><img src="images/Mushroom-3.png" alt=""></h5>
+        <div class="button-container"><button class="start-button">PLAY AGAIN?</button></div>
+        </main>
+        `); 
     
-            var button = gameWinScreen.querySelector('button');
-            button.addEventListener('click', startGame);
-    
-            var coins = gameWinScreen.querySelector('.coins-update');    // change span
-            // span.innerText = coins;     // coins --------- update later
-    
-            document.body.appendChild(gameWinScreen);
+        var button = gameWinScreen.querySelector('button');
+        button.addEventListener('click', startGame);
+
+        var coins = gameWinScreen.querySelector('.coins-update');    // change span
+        // span.innerText = coins;     // coins --------- update later
+
+        document.body.appendChild(gameWinScreen);
+    }
+
+    function removeGameWinScreen() {
+        if (gameWinScreen) {
+            gameWinScreen.remove();
         }
-    
-        
-        function removeGameWinScreen() {
-            if (gameWinScreen) {
-                gameWinScreen.remove();
-            }
-        }
+    }
 
 
-    // setting the game state
-
+    // GAME INITIATION
 
     function startGame() {
         removeSplashScreen();
@@ -153,36 +141,32 @@ function main() {
 
         game = new Game();
         game.gameScreen = createGameScreen();
-
         game.start();
 
-        // end the game
+        // END GAME
             //lose
         game.passGameOverCallback(function() {
             gameOver(game.coins);  
         });
-            //win
+        // WIN
         game.passGameWinCallback(function() {
             gameWin(game.coins);
         });
     }
 
-
     function gameOver(coins) {
-        
         removeGameScreen();
         createGameOverScreen(coins); 
     }
-
 
     function gameWin(coins) {
         removeGameScreen();
         createGameWinScreen(coins); 
     }
-    // initialize Splash screen on initial start
 
+//  INITIALIZE SPLASH SCREEN ON START
     createSplashScreen();
-    }
+}
 
-    window.addEventListener('load', main);
+window.addEventListener('load', main);
 

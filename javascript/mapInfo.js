@@ -1,25 +1,24 @@
 'use strict'
 
-var blockInfo = [
-
+var blockInfo = [                    // ARRAY OF FLOOR BLOCKS
     {
         height         : 60,
         width          : 60,
         x              : 778,                     
-        y              : 1100 // floor          start of 4 floor blocks
+        y              : 1100                   // FLOOR BLOCKS (LEFT)
     },
     
     {
         height         : 60,
         width          : 60,
-        x              : 978,               // tall middle block      
+        x              : 978,                   // FLOOR BLOCKS (MIDDLE-TOP)     
         y              : 1040
     },
 
     {
         height         : 60,
         width          : 60,
-        x              : 978,               // tall middle block      *bottom*
+        x              : 978,                   // FLOOR BLOCKS (MIDDLE-BOTTOM)
         y              : 1100
     },
     
@@ -27,22 +26,15 @@ var blockInfo = [
         height         : 60,
         width          : 60,
         x              : 1178,                     
-        y              : 1100               //// end of 4 floor blocks
+        y              : 1100               // FLOOR BLOCKS (RIGHT)
     }
+];
 
-]
-
-
-
-
-var floor;
-var mapInfo  = [
-    
-    
+var mapInfo  = [                   // ARRAY OF PLATFORMS
     {
         height         : 20,
-        width          : 100,  // 100 width for platforms
-        x              : 203,                     
+        width          : 100,
+        x              : 203,
         y              : 250
     },
     
@@ -106,7 +98,7 @@ var mapInfo  = [
     {             
         height         : 20,
         width          : 100,
-        x              : 2300,    // right wall                
+        x              : 2300,              
         y              : 1050
     },
     
@@ -133,14 +125,14 @@ var mapInfo  = [
     
     {
         height         : 20,
-        width          : 50,    // 3 stacks
+        width          : 50,            // 3 stacks
         x              : 1698,                
         y              : 175
     },
     
     {
         height         : 20,
-        width          : 50,    // 3 stacks
+        width          : 50,            // 3 stacks
         x              : 1698,                
         y              : 375
     },
@@ -148,7 +140,7 @@ var mapInfo  = [
     {
         height         : 20,
         width          : 50,
-        x              : 1698,      //     3 stacks     
+        x              : 1698,          // 3 stacks     
         y              : 575
     },
     
@@ -158,15 +150,6 @@ var mapInfo  = [
         x              : 1950,                
         y              : 350
     },
-    
-    //  {
-    //     canvas         : canvas,
-    //     ctx            : canvas.getContext('2d'),
-    //     height         : 10,
-    //     width          : 5,
-    //     x              : canvas.width-250,                
-    //     y              : canvas.height-950
-    // },
     
     {
         height         : 20,
@@ -184,11 +167,7 @@ var mapInfo  = [
     }
 ];
 
-        /////////////////////////////////////
-      //////////////// COINS //////////////
-    /////////////////////////////////////
-
-var coinInfo = [
+var coinInfo = [                        // ARRAY OF COINS
 
     {       
         height         : 40,
@@ -200,8 +179,92 @@ var coinInfo = [
     {       
         height         : 40,
         width          : 25,
-        x              : 242,                    
-        y              : 165
+        x              : 324,                    
+        y              : 535
+    },
+
+    {       
+        height         : 40,
+        width          : 25,
+        x              : 535,                    
+        y              : 255
+    },
+
+    {       
+        height         : 40,
+        width          : 25,
+        x              : 890,                    
+        y              : 325
+    },
+
+    {       
+        height         : 40,
+        width          : 25,
+        x              : 1345,                    
+        y              : 330
+    },
+
+    {       
+        height         : 40,
+        width          : 25,
+        x              : 1115,                    
+        y              : 580
+    },
+
+    {       
+        height         : 40,
+        width          : 25,
+        x              : 937,                    
+        y              : 492
+    },
+
+    {       
+        height         : 40,
+        width          : 25,
+        x              : 945,                    
+        y              : 163
+    },
+
+    {       
+        height         : 40,
+        width          : 25,
+        x              : 1285,                    
+        y              : 170
+    },
+
+    {       
+        height         : 40,
+        width          : 25,
+        x              : 1290,                    
+        y              : 510
+    },
+
+    {       
+        height         : 40,
+        width          : 25,
+        x              : 1120,                    
+        y              : 95
+    },
+
+    {       
+        height         : 40,
+        width          : 25,
+        x              : 1535,                    
+        y              : 670
+    },
+
+    {       
+        height         : 40,
+        width          : 25,
+        x              : 1806,                    
+        y              : 760
+    },
+
+    {       
+        height         : 40,
+        width          : 25,
+        x              : 2065,                    
+        y              : 873
     },
 
     {            
@@ -250,7 +313,7 @@ var coinInfo = [
         height         : 40,
         width          : 25,
         x              : 795,                
-        y              : 1025   //3 horizontal
+        y              : 1025       //3 horizontal
     },
 
     {        
@@ -258,61 +321,118 @@ var coinInfo = [
         width          : 25,
         x              : 92,              
         y              : 805
-    }
+    },
 
+    {        
+        height         : 40,
+        width          : 25,
+        x              : 92,              
+        y              : 605
+    },    
+    
+    {        
+        height         : 40,
+        width          : 25,
+        x              : 92,              
+        y              : 405
+    },
+
+    {        
+        height         : 40,
+        width          : 25,
+        x              : 1985,              
+        y              : 253
+    }
 ];
 
+class Moon {                                           ///  'MOON' CONSTRUCTOR
+    constructor(canvas) {
+        this.canvas         = canvas;
+        this.ctx            = canvas.getContext('2d');
+        this.height         = 1200;
+        this.width          = 2400;
+        this.x              = 0;             
+        this.y              = 0;
+        // this.height         = 515;
+        // this.width          = 502;
+        // this.x              = 877;             
+        // this.y              = 96; //save these just in case I need to revert
+    };
+    
+    draw() {
+        var moonImage = new Image();
+        moonImage.src = './images/infiniteTsuki.png';   // possible to make this more fluid
+        this.ctx.drawImage( 
+            moonImage,
+            this.x,
+            this.y,
+            this.width,
+            this.height)
+    };
+};
 
-        //////////////////////////////
-      ///////// WIN OBJECT /////////
-    //////////////////////////////
-
-
-function WinObject(canvas) {
-
+class Ramen {                                           ///  RAMEN CONSTRUCTOR
+    constructor(canvas) {
         this.canvas         = canvas;
         this.ctx            = canvas.getContext('2d');
         this.height         = 80;
         this.width          = 80;
-        this.x              = 2300;             
-        this.y              = 455;
+        this.x              = 210;             
+        this.y              = 150;
     };
+    
+    draw() {
+        var ramenImage = new Image();
+        ramenImage.src = './images/ramenGame.png';
+        this.ctx.drawImage( 
+            ramenImage,
+            this.x,
+            this.y,
+            this.width,
+            this.height)
+    };
+};
 
+class WinObject {                                           /// WIN OBJECT CONSTRUCTOR
+        constructor(canvas) {
+            this.canvas         = canvas;
+            this.ctx            = canvas.getContext('2d');
+            this.height         = 80;
+            this.width          = 80;
+            this.x              = 2300;             
+            this.y              = 455;
+        };
+        
+        draw() {
+            var winImage = new Image();
+            winImage.src = './images/Mushroom-3.png';
+            this.ctx.drawImage( 
+                winImage,
+                this.x,
+                this.y,
+                this.width,
+                this.height)
+        };
+};
 
-WinObject.prototype.draw = function() {
-    var winImage = new Image();
-    winImage.src = './images/Mushroom-3.png';
-    this.ctx.drawImage( 
-        winImage,
-        this.x,
-        this.y,
-        this.width,
-        this.height)
-}
-
-
- /// FLOOR
-
-function Floor(canvas) {
-
-    {
+class Floor {                                               /// FLOOR CONSTRUCTOR 
+    constructor(canvas) {
         this.canvas         = canvas,
         this.ctx            = canvas.getContext('2d'), 
         this.height         = 60;
         this.width          = canvas.width;
         this.x              = 0;                     
         this.y              = canvas.height-50;
-    }
-}
+    };
 
-
-Floor.prototype.draw = function() {
-    var floorImage = new Image();
-    floorImage.src = './images/ice-platform.png';
-    this.ctx.drawImage( 
-        floorImage,
-        this.x,
-        this.y,
-        this.width,
-        this.height)
+    draw() {
+        var floorImage = new Image();
+        floorImage.src = './images/ice-platform.png';
+        this.ctx.drawImage( 
+            floorImage,
+            this.x,
+            this.y,
+            this.width,
+            this.height)
+    };
 }
