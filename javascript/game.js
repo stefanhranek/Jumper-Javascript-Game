@@ -12,6 +12,7 @@ function Game() {
     this.shurikens  = []; 
     this.platforms  = mapInfo;
     this.coins      = coinInfo;
+    this.sasuke     = null;
     this.moon       = null;
     this.ramen      = null;
     this.player     = null;
@@ -54,6 +55,7 @@ Game.prototype.start = function() {
     this.winObject      = new WinObject(this.canvas);
     this.moon           = new Moon(this.canvas);
     this.ramen          = new Ramen(this.canvas);
+    this.sasuke         = new Sasuke(this.canvas);
     this.player         = new Player(this.canvas, 1);
     this.floorObj       = new Floor(this.canvas);
     this.drawPlatforms  = this.platforms.map(function(platformData) {return new Platforms(this.canvas, platformData.height,platformData.width,platformData.x,platformData.y);} ,this);
@@ -251,6 +253,7 @@ Game.prototype.startLoop = function() {
         this.winObject.draw();
         this.ramen.draw()
         this.floorObj.draw();
+        this.sasuke.draw();
         
          // Draw the player
         this.player.draw();

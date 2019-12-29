@@ -172,8 +172,8 @@ var coinInfo = [                        // ARRAY OF COINS
     {       
         height         : 40,
         width          : 25,
-        x              : 2322,                    
-        y              : 155
+        x              : 93,                    
+        y              : 203
     },
 
     {       
@@ -344,6 +344,32 @@ var coinInfo = [                        // ARRAY OF COINS
         y              : 253
     }
 ];
+
+class Sasuke {                                           ///  'MOON' CONSTRUCTOR
+    constructor(canvas) {
+        this.canvas         = canvas;
+        this.ctx            = canvas.getContext('2d');
+        this.height         = 120;
+        this.width          = 60;
+        this.x              = 2305;             
+        this.y              = 130;
+        // this.height         = 515;
+        // this.width          = 502;
+        // this.x              = 877;             
+        // this.y              = 96; //save these just in case I need to revert
+    };
+    
+    draw() {
+        var sasukeImage = new Image();
+        sasukeImage.src = './images/sasukeFlipped.png';   // possible to make this more fluid
+        this.ctx.drawImage( 
+            sasukeImage,
+            this.x,
+            this.y,
+            this.width,
+            this.height)
+    };
+};
 
 class Moon {                                           ///  'MOON' CONSTRUCTOR
     constructor(canvas) {
