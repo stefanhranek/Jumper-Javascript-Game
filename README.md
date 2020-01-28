@@ -18,7 +18,8 @@ https://stefanhranek.github.io/jumper/
 ## Fixes to be made
 <ul>
   <li>Jumping - currently, you can fly around the map by holding 'up' key</li>
-  <li>Shuriken collision - no collision detection set yet</li>
+  <li>Shuriken - no game-over collision detection set yet</li>
+  <li>Ramen bowl - no acquisition collision detection set yet</li>
 </ul>
 
 ## Backlog
