@@ -131,7 +131,7 @@ Game.prototype.startLoop = function() {
         // Random enemies
         if (Math.random() > 0.98) {
         var randomX = this.canvas.width * Math.random();    
-        this.enemies.push(new Enemy(this.canvas, randomX, 0)); 
+        this.enemies.push(new Enemy(this.canvas, randomX, 8)); 
         
         var randomY = this.canvas.height * Math.random();    
         this.shurikens.push(new Shuriken(this.canvas, randomY, 20)); 
