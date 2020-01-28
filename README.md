@@ -3,8 +3,14 @@
 ## Description
 Jumper is a game where the player can move left, right and jump. The goal of the game is to move your character to reach the "mushroom" at the top of the map. Along the way, the player can "die" when they collide with obstacles (deadly snowballs & shuriken). Upon dying, a "Game Over" screen will appear with the ability to restart game.
 
+I like anime a lot, so if you do too then you'll probably catch all the little references :)
+
 ### Bonus
 Collect all coins <b>before</b> grabbing the mushroom. This unlocks a special anime reference that only I probably find cool. Enjoy!
+
+#### Link
+
+https://stefanhranek.github.io/jumper/
 
 ## MVP (DOM - CANVAS)
 <i>CANVAS</i>, This is a game where the player can move & jump from platform to platform with the ability to complete the game by reaching the top.
