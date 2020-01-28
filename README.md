@@ -15,6 +15,11 @@ https://stefanhranek.github.io/jumper/
 ## MVP (DOM - CANVAS)
 <i>CANVAS</i>, This is a game where the player can move & jump from platform to platform with the ability to complete the game by reaching the top.
 
+## Fixes to be made
+<ul>
+  <li>Jumping - currently, you can fly around the map by holding 'up' key</li>
+  <li>Shuriken collision - no collision detection set yet</li>
+</ul>
 
 ## Backlog
 <ul>
