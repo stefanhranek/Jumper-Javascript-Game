@@ -118,7 +118,7 @@ Enemy.prototype.isInsideScreen() {
 ```
 
 
-## States y States Transitions
+## States & Transitions
 ```
 - splashScreen
   - buildSplash()
