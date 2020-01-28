@@ -1,5 +1,4 @@
 # JUMPER
-Ironhack - Project One
 
 ## Description
 Jumper is a game where the player can move left, right and jump. The goal of the game is to move your character to reach the "mushroom" at the top of the map. Along the way, the player can "die" when they collide with obstacles (deadly snowballs & shuriken). Upon dying, a "Game Over" screen will appear with the ability to restart game.
