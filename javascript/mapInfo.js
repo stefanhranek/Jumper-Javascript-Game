@@ -371,13 +371,13 @@ class Speech {                                           ///  'MOON' CONSTRUCTOR
     };
 };
 
-class Sasuke {                                           ///  'MOON' CONSTRUCTOR
+class Roshi {                                           ///  'MOON' CONSTRUCTOR
     constructor(canvas) {
         this.canvas         = canvas;
         this.ctx            = canvas.getContext('2d');
         this.height         = 120;
-        this.width          = 60;
-        this.x              = 2305;             
+        this.width          = 95;
+        this.x              = 2290;             
         this.y              = 130;
         // this.height         = 515;
         // this.width          = 502;
@@ -386,10 +386,10 @@ class Sasuke {                                           ///  'MOON' CONSTRUCTOR
     };
     
     draw() {
-        var sasukeImage = new Image();
-        sasukeImage.src = './images/sasukeFlipped.png';   // possible to make this more fluid
+        var roshiImage = new Image();
+        roshiImage.src = './images/roshi.png';   // possible to make this more fluid
         this.ctx.drawImage( 
-            sasukeImage,
+            roshiImage,
             this.x,
             this.y,
             this.width,

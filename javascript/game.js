@@ -16,7 +16,7 @@ function Game() {
   this.shurikens = [];
   this.platforms = mapInfo;
   this.coins = coinInfo;
-  this.sasuke = null;
+  this.roshi = null;
   this.speechBubble = null;
   this.moon = null;
   this.ramen = null;
@@ -69,7 +69,7 @@ Game.prototype.start = function() {
   this.winObject = new WinObject(this.canvas);
   this.moon = new Moon(this.canvas);
   this.ramen = new Ramen(this.canvas);
-  this.sasuke = new Sasuke(this.canvas);
+  this.roshi = new Roshi(this.canvas);
   this.speechBubble = new Speech(this.canvas);
   this.player = new Player(this.canvas, 1);
   this.floorObj = new Floor(this.canvas);
@@ -274,7 +274,7 @@ Game.prototype.startLoop = function() {
     this.winObject.draw();
     this.ramen.draw();
     this.floorObj.draw();
-    this.sasuke.draw();
+    this.roshi.draw();
     this.speechBubble.draw();
 
     // Draw the player
