@@ -208,7 +208,7 @@ Game.prototype.startLoop = function() {
             var crossRight      = playerRight >= coinsLeft;
             var crossBottom     = playerTop <= coinsBottom;        // not working right for some reason (BELOW)
 
-            if (crossTop && crossRight && crossLeft && crossBottom) {console.log("upgrade the coin count",); 
+            if (crossTop && crossRight && crossLeft && crossBottom) ; 
                                                                     coinSound.play();
                                                                     
                                                                     (coins.y = 3001);    // have to do a for loop to remove
@@ -234,24 +234,28 @@ Game.prototype.startLoop = function() {
             enemy.updatePosition();
             return enemy.isInsideScreen();
         });
-
+        
         this.shurikens = this.shurikens.filter(function(shuriken) {
             shuriken.updatePosition();
             return shuriken.isInsideScreen();
         });
-
-
-
+        
+        
+        
         // Clear the canvas
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
+        
         // Update the canvas: floor - walls - platforms - coins - winObject  
         if (this.coinsElement.innerHTML === '25') {
             this.backgroundMusic.pause();
             this.moon.draw();
             this.moonMusic.play();
         }
-
+        
+        if (this.coinsElement.innerHTML === '25' && this.gameWin) {
+            this.coinCount = 'GG';
+            this.moonMusic.pause();
+        }
 
 
         this.winObject.draw();
@@ -289,10 +293,6 @@ Game.prototype.startLoop = function() {
             oneCoin.draw();
         });
 
-        if (this.coinCount === '25') {
-            this.coinCount = 'GG';
-            this.moonMusic.pause();
-        }
         // Terminate loop when game 'WIN' or 'LOSE'
         if (!this.gameIsOver && !this.gameWin) {
             window.requestAnimationFrame(loop);
@@ -315,9 +315,7 @@ Game.prototype.checkCollisions = function() {
     
     if (this.player.didCollideWin(this.winObject)) {
         this.youWin(); 
-        this.coinCount = 'GG';
         
-        this.moonMusic.pause();
         this.gameWinSound.play();
         this.backgroundMusic.pause();
     }       // 1st checks win collision
@@ -383,7 +381,7 @@ Game.prototype.gameOver = function() {
     // `gameIsOver = true` stops the loop
     this.gameIsOver = true;
 
-
+    this.moonMusic.pause();
 
     // call the gameOver function from `main` to show the Game Over Screen
     this.onGameOverCallback();
@@ -394,7 +392,7 @@ Game.prototype.youWin = function() {
     // `gameIsOver = true` stops the loop
     this.gameWin = true;                     
 
-    
+    this.moonMusic.pause();
 
     // call the gameOver function from `main` to show the Game Over Screen
     this.onYouWinCallback();
