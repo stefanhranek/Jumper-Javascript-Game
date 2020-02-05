@@ -42,16 +42,16 @@ class Player {
             this.size)
     };
 
-    didCollideEnemy(shuriken) {     
+    didCollideShuriken(shuriken) {     
         var playerLeft   = this.x;
         var playerRight  = this.x + this.size;
         var playerTop    = this.y;
         var playerBottom = this.y + this.size;
 
         var shurikenLeft   = shuriken.x;
-        var shurikenRight  = shuriken.x + shuriken.sizeX;
+        var shurikenRight  = shuriken.x + (shuriken.sizeX/2);
         var shurikenTop    = shuriken.y;
-        var shurikenBottom = shuriken.y + shuriken.sizeY;
+        var shurikenBottom = shuriken.y + (shuriken.sizeY/2);
 
         var crossLeft   = shurikenLeft   <= playerRight && shurikenLeft >= playerLeft;      // COLLISION CHECKS
         var crossRight  = shurikenRight  >= playerLeft && shurikenRight <= playerRight;     // COLLISION CHECKS

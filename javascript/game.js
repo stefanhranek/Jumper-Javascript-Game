@@ -321,7 +321,7 @@ Game.prototype.checkCollisions = function() {
     this.gameWinSound.play();
     this.backgroundMusic.pause();
   } // 1st checks win collision
-  else if (!this.player.didCollideWin(this.winObject)) {
+    if (!this.player.didCollideWin(this.winObject)) {
     this.enemies.forEach(function(enemy) {
       // 2nd checks lose collision
       if (this.player.didCollideEnemy(enemy)) {
@@ -338,10 +338,12 @@ Game.prototype.checkCollisions = function() {
         }
       }
     }, this);
-  } else {
+  } if (!this.player.didCollideWin(this.winObject)) {
     this.shurikens.forEach(function(shuriken) {
       // 2nd checks lose collision
-      if (this.player.didCollideEnemy(shuriken)) {
+      if (this.player.didCollideShuriken(shuriken)) {
+          console.log('COLLISION');
+          
         this.player.removeLife(); // REFER TO FOR COIN COLLISION + COUNTER ****************************************************
 
         // move enemy off the screen to the bottom
