@@ -36,8 +36,6 @@ function Game() {
 
 Game.prototype.start = function() {
     
-    console.log('here is the sound of winning', winSound);
-    
     this.backgroundMusic = new Audio();
     this.backgroundMusic.src = "./sound/narutoBackround.mp3";
 
@@ -46,7 +44,9 @@ Game.prototype.start = function() {
 
     this.gameWinSound       = new Audio();
     this.gameWinSound.src   = "./sound/winSoundFF.mp3";
-console.log('this',this.gameWinSound);
+
+    this.jumpSound       = new Audio();
+    this.jumpSound.src   = "./sound/loudJump.flac";
 
     // Get canvas element, create ctx, save canvas & ctx in the game object
     this.canvasContainer = document.querySelector('.canvas-container');
@@ -73,14 +73,14 @@ console.log('this',this.gameWinSound);
     this.drawCoins      = this.coins.map(function(coinData) {return new Coins(this.canvas, coinData.height,coinData.width,coinData.x,coinData.y);} ,this);
     this.drawBlocks     = this.blocks.map(function(blockData) {return new Blocks(this.canvas, blockData.height,blockData.width,blockData.x,blockData.y);} ,this);
 
-            ////////////////////////////////////////////////////////////////////////////////////////
-          ////  CONTROLLER  //////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////////////////////
+////  CONTROLLER  //////////////////////////////////////////////////////////////////////
 
     // Add event listener for keydown movements 
     this.handleKeyDown = function(event) {
         if (event.keyCode === 38) {
             this.player.directionY = -1;
+            this.jumpSound.volume = .4;
+            this.jumpSound.play();
             // jumpSound.pause();
             // jumpSound.currentTime = 0;         
             // jumpSound.play();            //////////////////////////// JUMP SOUND EFFECT //////////////////////////////
@@ -247,11 +247,12 @@ Game.prototype.startLoop = function() {
 
         // Update the canvas: floor - walls - platforms - coins - winObject  
         if (this.coinsElement.innerHTML === '25') {
-            console.log('INFINITE TSYUKIYOMI');
             this.backgroundMusic.pause();
-            this.moonMusic.play();
             this.moon.draw();
+            this.moonMusic.play();
         }
+
+
 
         this.winObject.draw();
         this.ramen.draw()
@@ -288,7 +289,10 @@ Game.prototype.startLoop = function() {
             oneCoin.draw();
         });
 
-
+        if (this.coinCount === '25') {
+            this.coinCount = 'GG';
+            this.moonMusic.pause();
+        }
         // Terminate loop when game 'WIN' or 'LOSE'
         if (!this.gameIsOver && !this.gameWin) {
             window.requestAnimationFrame(loop);
@@ -306,12 +310,16 @@ Game.prototype.startLoop = function() {
 
 // LOOP END ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Game.prototype.checkCollisions = function() {         
+Game.prototype.checkCollisions = function() {  
+    
+    
     if (this.player.didCollideWin(this.winObject)) {
         this.youWin(); 
+        this.coinCount = 'GG';
+        
+        this.moonMusic.pause();
         this.gameWinSound.play();
         this.backgroundMusic.pause();
-        this.moonMusic.pause();
     }       // 1st checks win collision
     
     else if (!this.player.didCollideWin(this.winObject)) {
@@ -355,7 +363,6 @@ Game.prototype.checkCollisions = function() {
 
 
 Game.prototype.updateGameStats = function() {
-
     this.coinsElement.innerHTML = this.coinCount;
     // this.coinsFinish.innerHTML = this.coinCount; ///////////////////////////////// for coin update on game win screen
 }
@@ -368,6 +375,7 @@ Game.prototype.passGameOverCallback = function(gameOver) {
 Game.prototype.passGameWinCallback = function(youWin) {
     // need to understand this better
     this.onYouWinCallback = youWin;
+    this.moonMusic.pause();
 }
 
 
