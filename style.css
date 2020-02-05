@@ -92,27 +92,24 @@ html, body {
 
 
 .game-dom-container {
-    display         : inline-flex;
+    display         : flex;
+    flex-direction: column;
     position        : absolute;
     color           : white;
     padding         : 30px;
     width           : 100vw;
     justify-content : flex-end;
-    padding-top     : 80px;
-}
-
-.mushroom-container {
-    display         : inline-flex;
-    position        : absolute;
-    color           : white;
-    padding         : 30px;
-    width           : 100vw;
-    justify-content : flex-end;
-    font-size       : 25px; 
+    padding-top     : 30px;
 }
 
 .game-dom-container span {
     font-size: 25px;
+}
+
+.flex {
+    display: flex;
+    margin: 10px;
+    justify-content: flex-end;
 }
 
 canvas {
