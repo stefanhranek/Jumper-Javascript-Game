@@ -17,6 +17,7 @@ function Game() {
   this.platforms = mapInfo;
   this.coins = coinInfo;
   this.sasuke = null;
+  this.speechBubble = null;
   this.moon = null;
   this.ramen = null;
   this.player = null;
@@ -69,6 +70,7 @@ Game.prototype.start = function() {
   this.moon = new Moon(this.canvas);
   this.ramen = new Ramen(this.canvas);
   this.sasuke = new Sasuke(this.canvas);
+  this.speechBubble = new Speech(this.canvas);
   this.player = new Player(this.canvas, 1);
   this.floorObj = new Floor(this.canvas);
   this.drawPlatforms = this.platforms.map(function(platformData) {
@@ -273,6 +275,7 @@ Game.prototype.startLoop = function() {
     this.ramen.draw();
     this.floorObj.draw();
     this.sasuke.draw();
+    this.speechBubble.draw();
 
     // Draw the player
     this.player.draw();
@@ -329,7 +332,7 @@ Game.prototype.checkCollisions = function() {
       // 2nd checks lose collision
       if (this.player.didCollideEnemy(enemy)) {
         snowSound.play();
-        this.player.removeLife(); // REFER TO FOR COIN COLLISION + COUNTER ****************************************************
+        // this.player.removeLife(); 
 
         // move enemy off the screen to the bottom
         enemy.y = this.canvas.height + enemy.size;
@@ -347,7 +350,7 @@ Game.prototype.checkCollisions = function() {
       if (this.player.didCollideShuriken(shuriken)) {
           this.ouchSound.play();
           
-        this.player.removeLife(); // REFER TO FOR COIN COLLISION + COUNTER ****************************************************
+        // this.player.removeLife(); 
 
         // move enemy off the screen to the bottom
         shuriken.x = this.canvas.width - shuriken.sizeX;

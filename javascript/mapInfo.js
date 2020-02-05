@@ -345,6 +345,32 @@ var coinInfo = [                        // ARRAY OF COINS
     }
 ];
 
+class Speech {                                           ///  'MOON' CONSTRUCTOR
+    constructor(canvas) {
+        this.canvas         = canvas;
+        this.ctx            = canvas.getContext('2d');
+        this.height         = 120;
+        this.width          = 400;
+        this.x              = 2000;             
+        this.y              = 35;
+        // this.height         = 515;
+        // this.width          = 502;
+        // this.x              = 877;             
+        // this.y              = 96; //save these just in case I need to revert
+    };
+    
+    draw() {
+        var speechBubble = new Image();
+        speechBubble.src = './images/speechBubble.png';   // possible to make this more fluid
+        this.ctx.drawImage( 
+            speechBubble,
+            this.x,
+            this.y,
+            this.width,
+            this.height)
+    };
+};
+
 class Sasuke {                                           ///  'MOON' CONSTRUCTOR
     constructor(canvas) {
         this.canvas         = canvas;
@@ -375,10 +401,10 @@ class Moon {                                           ///  'MOON' CONSTRUCTOR
     constructor(canvas) {
         this.canvas         = canvas;
         this.ctx            = canvas.getContext('2d');
-        this.height         = 1200;
-        this.width          = 2400;
-        this.x              = 0;             
-        this.y              = 0;
+        this.height         = 1100;
+        this.width          = 800;
+        this.x              = 800;             
+        this.y              = 50;
         // this.height         = 515;
         // this.width          = 502;
         // this.x              = 877;             
@@ -387,7 +413,7 @@ class Moon {                                           ///  'MOON' CONSTRUCTOR
     
     draw() {
         var moonImage = new Image();
-        moonImage.src = './images/infiniteTsuki.png';   // possible to make this more fluid
+        moonImage.src = './images/shenron.png';   // possible to make this more fluid
         this.ctx.drawImage( 
             moonImage,
             this.x,
