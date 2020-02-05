@@ -1,8 +1,10 @@
 'use strict'
 
 var coinSound;
+var snowSound;
 function preload() {
 coinSound = loadSound("./sound/retroCoinSound.wav");
+snowSound = loadSound("./sound/snowHit.wav");
 }
 
 function Game() {
@@ -62,12 +64,9 @@ Game.prototype.start = function() {
     this.drawCoins      = this.coins.map(function(coinData) {return new Coins(this.canvas, coinData.height,coinData.width,coinData.x,coinData.y);} ,this);
     this.drawBlocks     = this.blocks.map(function(blockData) {return new Blocks(this.canvas, blockData.height,blockData.width,blockData.x,blockData.y);} ,this);
 
-    
-
             ////////////////////////////////////////////////////////////////////////////////////////
           ////  CONTROLLER  //////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////
-
 
     // Add event listener for keydown movements 
     this.handleKeyDown = function(event) {
@@ -115,12 +114,6 @@ Game.prototype.start = function() {
     this.startLoop();
 
 }
-
-
-
-
-
-
 
 // LOOP START ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -304,12 +297,16 @@ Game.prototype.startLoop = function() {
 // LOOP END ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Game.prototype.checkCollisions = function() {         
-    if (this.player.didCollideWin(this.winObject)) {this.youWin(); this.backgroundMusic.pause();}       // 1st checks win collision
+    if (this.player.didCollideWin(this.winObject)) {
+        this.youWin(); 
+        this.backgroundMusic.pause();
+        this.moonMusic.pause();
+    }       // 1st checks win collision
     
     else if (!this.player.didCollideWin(this.winObject)) {
         this.enemies.forEach(function(enemy) {                            // 2nd checks lose collision
             if ( this.player.didCollideEnemy(enemy) ) {
-
+                snowSound.play();
                 this.player.removeLife();                    // REFER TO FOR COIN COLLISION + COUNTER ****************************************************
 
                 // move enemy off the screen to the bottom
@@ -318,6 +315,7 @@ Game.prototype.checkCollisions = function() {
                 if (this.player.lives === 0) {
                     this.gameOver();
                     this.backgroundMusic.pause();
+                    this.moonMusic.pause();
                 }
             }
         }, this);
@@ -334,6 +332,7 @@ Game.prototype.checkCollisions = function() {
                 if (this.player.lives === 0) {
                     this.gameOver();
                     this.backgroundMusic.pause();
+                    this.moonMusic.pause();
                 }
             }
         }, this);
