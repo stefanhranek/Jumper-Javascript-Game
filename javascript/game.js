@@ -2,11 +2,11 @@
 
 var coinSound;
 var snowSound;
-var winSound;
 
 function preload() {
   coinSound = loadSound("./sound/retroCoinSound.wav");
   snowSound = loadSound("./sound/snowHit.wav");
+  
 }
 
 function Game() {
@@ -46,6 +46,9 @@ Game.prototype.start = function() {
 
   this.jumpSound = new Audio();
   this.jumpSound.src = "./sound/loudJump.flac";
+
+  this.ouchSound = new Audio();
+  this.ouchSound.src = "./sound/ouch.wav";
 
   // Get canvas element, create ctx, save canvas & ctx in the game object
   this.canvasContainer = document.querySelector(".canvas-container");
@@ -342,7 +345,7 @@ Game.prototype.checkCollisions = function() {
     this.shurikens.forEach(function(shuriken) {
       // 2nd checks lose collision
       if (this.player.didCollideShuriken(shuriken)) {
-          console.log('COLLISION');
+          this.ouchSound.play();
           
         this.player.removeLife(); // REFER TO FOR COIN COLLISION + COUNTER ****************************************************
 
