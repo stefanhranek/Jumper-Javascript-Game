@@ -26,7 +26,7 @@ function Game() {
   this.gameScreen = null;
   this.gameWinScreen = null;
   this.coinCount = 0;
-  this.winObject = null;
+  this.dragonballImage = null;
   this.floorObj = null;
   this.blocks = blockInfo;
   this.backgroundMusic = undefined;
@@ -65,8 +65,8 @@ Game.prototype.start = function() {
   this.canvas.setAttribute("width", this.containerWidth);
   this.canvas.setAttribute("height", this.containerHeight);
 
-  // Draw walls & coins & winObject & player
-  this.winObject = new WinObject(this.canvas);
+  // Draw walls & coins & dragonballImage & player
+  this.dragonballImage = new Dragonball(this.canvas);
   this.moon = new Moon(this.canvas);
   this.ramen = new Ramen(this.canvas);
   this.roshi = new Roshi(this.canvas);
@@ -271,7 +271,7 @@ Game.prototype.startLoop = function() {
       this.moonMusic.pause();
     }
 
-    this.winObject.draw();
+    this.dragonballImage.draw();
     this.ramen.draw();
     this.floorObj.draw();
     this.roshi.draw();
@@ -321,13 +321,13 @@ Game.prototype.startLoop = function() {
 // LOOP END ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Game.prototype.checkCollisions = function() {
-  if (this.player.didCollideWin(this.winObject)) {
+  if (this.player.didCollideWin(this.roshi)) {
     this.youWin();
 
     this.gameWinSound.play();
     this.backgroundMusic.pause();
   } // 1st checks win collision
-    if (!this.player.didCollideWin(this.winObject)) {
+    if (!this.player.didCollideWin(this.roshi)) {
     this.enemies.forEach(function(enemy) {
       // 2nd checks lose collision
       if (this.player.didCollideEnemy(enemy)) {
@@ -344,7 +344,7 @@ Game.prototype.checkCollisions = function() {
         }
       }
     }, this);
-  } if (!this.player.didCollideWin(this.winObject)) {
+  } if (!this.player.didCollideWin(this.roshi)) {
     this.shurikens.forEach(function(shuriken) {
       // 2nd checks lose collision
       if (this.player.didCollideShuriken(shuriken)) {

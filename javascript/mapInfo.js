@@ -445,7 +445,7 @@ class Ramen {                                           ///  RAMEN CONSTRUCTOR
     };
 };
 
-class WinObject {                                           /// WIN OBJECT CONSTRUCTOR
+class Dragonball {                                           /// WIN OBJECT CONSTRUCTOR
         constructor(canvas) {
             this.canvas         = canvas;
             this.ctx            = canvas.getContext('2d');
@@ -456,10 +456,10 @@ class WinObject {                                           /// WIN OBJECT CONST
         };
         
         draw() {
-            var winImage = new Image();
-            winImage.src = './images/Mushroom-3.png';
+            var dragonballImage = new Image();
+            dragonballImage.src = './images/dragonball.png';
             this.ctx.drawImage( 
-                winImage,
+                dragonballImage,
                 this.x,
                 this.y,
                 this.width,
