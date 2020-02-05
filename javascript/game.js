@@ -2,9 +2,11 @@
 
 var coinSound;
 var snowSound;
+var winSound;
+
 function preload() {
-coinSound = loadSound("./sound/retroCoinSound.wav");
-snowSound = loadSound("./sound/snowHit.wav");
+    coinSound = loadSound("./sound/retroCoinSound.wav");
+    snowSound = loadSound("./sound/snowHit.wav");
 }
 
 function Game() {
@@ -29,15 +31,22 @@ function Game() {
     this.backgroundMusic    = undefined;
     this.moonMusic          = undefined;
     this.backgroundSprite   = undefined;
+    this.gameWinSound = undefined;
 }
 
 Game.prototype.start = function() {
-
+    
+    console.log('here is the sound of winning', winSound);
+    
     this.backgroundMusic = new Audio();
     this.backgroundMusic.src = "./sound/narutoBackround.mp3";
 
     this.moonMusic       = new Audio();
     this.moonMusic.src   = "./sound/infiniteBackgroundMusic.mp3";
+
+    this.gameWinSound       = new Audio();
+    this.gameWinSound.src   = "./sound/winSoundFF.mp3";
+console.log('this',this.gameWinSound);
 
     // Get canvas element, create ctx, save canvas & ctx in the game object
     this.canvasContainer = document.querySelector('.canvas-container');
@@ -201,6 +210,7 @@ Game.prototype.startLoop = function() {
 
             if (crossTop && crossRight && crossLeft && crossBottom) {console.log("upgrade the coin count",); 
                                                                     coinSound.play();
+                                                                    
                                                                     (coins.y = 3001);    // have to do a for loop to remove
                                                                     this.coinCount += 1;  
                                                                     this.updateGameStats();}   // need to send coin outside of map
@@ -299,6 +309,7 @@ Game.prototype.startLoop = function() {
 Game.prototype.checkCollisions = function() {         
     if (this.player.didCollideWin(this.winObject)) {
         this.youWin(); 
+        this.gameWinSound.play();
         this.backgroundMusic.pause();
         this.moonMusic.pause();
     }       // 1st checks win collision
