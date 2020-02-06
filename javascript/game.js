@@ -48,7 +48,7 @@ Game.prototype.start = function() {
   this.gameWinSound.src = "./sound/winSoundFF.mp3";
 
   this.jumpSound = new Audio();
-  this.jumpSound.src = "./sound/loudJump.flac";
+  this.jumpSound.src = "./sound/jump.wav";
 
   this.ouchSound = new Audio();
   this.ouchSound.src = "./sound/ouch.wav";
@@ -125,7 +125,6 @@ Game.prototype.start = function() {
   this.handleKeyDown = function(event) {
     if (event.keyCode === 38) {
       this.player.directionY = -1;
-      this.jumpSound.volume = 0.4;
       this.jumpSound.play();
       // jumpSound.pause();
       // jumpSound.currentTime = 0;

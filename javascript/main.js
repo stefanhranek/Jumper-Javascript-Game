@@ -61,9 +61,10 @@ function main() {
                 </section>
                 <section class="flex">
                     <span id="lives">Lives: </span><span class="lives-update">1</span><span></span>
-                </section>
-            </div>
-            <div class ="game-dom-container">
+                    </section>
+                    <div class ="bottom-game-text">
+                      <p>Collect all dragon balls, then bring them to Master Roshi to win.</p>
+                    </div>
             </div>
             <section class="canvas-container">
             <canvas></canvas>
