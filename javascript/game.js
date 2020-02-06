@@ -43,7 +43,7 @@ Game.prototype.start = function() {
   this.backgroundMusic.src = "./sound/narutoBackround.mp3";
 
   this.moonMusic = new Audio();
-  this.moonMusic.src = "./sound/infiniteBackgroundMusic.mp3";
+  this.moonMusic.src = "./sound/shenronMusic.mp3";
 
   this.gameWinSound = new Audio();
   this.gameWinSound.src = "./sound/winSoundFF.mp3";
