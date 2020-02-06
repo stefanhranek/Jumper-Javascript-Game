@@ -301,15 +301,15 @@ Game.prototype.startLoop = function() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
     // Update the canvas: floor - walls - platforms - coins - winObject
-    if (this.coinsElement.innerHTML === "25") {
+    if (this.dragonballsElement.innerHTML === "7") {
       this.backgroundMusic.pause();
       this.moon.draw();
       this.moonMusic.play();
     }
 
-    if (this.coinsElement.innerHTML === "25" && this.gameWin) {
-      this.coinCount = "GG";
-      this.moonMusic.pause();
+    if (this.dragonballsElement.innerHTML === "25" && this.gameWin) {
+        this.moonMusic.pause();
+      this.dragonballsElement.innerHTML = "GG";
     }
 
     this.ramen.draw();
@@ -370,6 +370,7 @@ Game.prototype.checkCollisions = function() {
 
     this.gameWinSound.play();
     this.backgroundMusic.pause();
+    this.moonMusic.pause();
   } // 1st checks win collision
     if (!this.player.didCollideWin(this.roshi)) {
     this.enemies.forEach(function(enemy) {
@@ -416,14 +417,12 @@ Game.prototype.updateGameStats = function() {
 };
 
 Game.prototype.passGameOverCallback = function(gameOver) {
-  // need to understand this better
   this.onGameOverCallback = gameOver;
 };
 
 Game.prototype.passGameWinCallback = function(youWin) {
-  // need to understand this better
+    this.moonMusic.pause();
   this.onYouWinCallback = youWin;
-  this.moonMusic.pause();
 };
 
 Game.prototype.gameOver = function() {
