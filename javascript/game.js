@@ -52,6 +52,9 @@ Game.prototype.start = function() {
   this.ouchSound = new Audio();
   this.ouchSound.src = "./sound/ouch.wav";
 
+  this.dragonballSound = new Audio();
+  this.dragonballSound.src = "./sound/special.wav";
+
   // Get canvas element, create ctx, save canvas & ctx in the game object
   this.canvasContainer = document.querySelector(".canvas-container");
   this.canvas = document.querySelector("canvas");
@@ -231,21 +234,18 @@ Game.prototype.startLoop = function() {
         var crossTop = playerBottom >= dragonballsTop;
         var crossLeft = playerLeft <= dragonballsRight;
         var crossRight = playerRight >= dragonballsLeft;
-        var crossBottom = playerTop <= dragonballsBottom; // not working right for some reason (BELOW)
+        var crossBottom = playerTop <= dragonballsBottom; 
   
         if (crossTop && crossRight && crossLeft && crossBottom) {
-          console.log("upgrade the coin count");
-          coinSound.play();
+          console.log("upgrade the ball count");
+          this.dragonballSound.volume = 0.6;
+          this.dragonballSound.play();
   
-          dragonballs.y = 3001; // have to do a for loop to remove
+          dragonballs.y = 3001;
           this.dragonballCount += 1;
-          this.updateGameStats();
-        } // need to send coin outside of map
+        //   this.updateGameStats();
+        } 
   
-        // if      (crossLeft && crossTop && crossBottom) {this.player.x = platformLeft}
-        // else if (crossRight && crossTop && crossBottom) {this.player.x = platformRight}
-        // else if (crossTop && crossRight && crossLeft && crossTop) {this.player.y = platformTop;}
-        // else if (crossBottom && crossLeft && crossRight) {this.player.y = platformBottom;}
       }, this);
 
     // Check coin collisions
@@ -270,7 +270,7 @@ Game.prototype.startLoop = function() {
 
         coins.y = 3001; // have to do a for loop to remove
         this.coinCount += 1;
-        this.updateGameStats();
+        // this.updateGameStats();
       } // need to send dragonball outside of map
 
       // if      (crossLeft && crossTop && crossBottom) {this.player.x = platformLeft}
@@ -307,9 +307,13 @@ Game.prototype.startLoop = function() {
       this.moonMusic.play();
     }
 
-    if (this.dragonballsElement.innerHTML === "25" && this.gameWin) {
+    if (this.dragonballsElement.innerHTML === "7" && this.gameWin) {  //THIS STOPS MUSIC ONCE GAME IS WON & COUNTER IS 7
         this.moonMusic.pause();
-      this.dragonballsElement.innerHTML = "GG";
+    //   this.dragonballsElement.innerHTML = "GG";
+    }
+
+    if (this.dragonballsElement.innerHTML === "7" && this.gameIsOver) {  //THIS STOPS MUSIC ONCE GAME IS WON & COUNTER IS 7
+        this.moonMusic.pause();
     }
 
     this.ramen.draw();
@@ -377,7 +381,7 @@ Game.prototype.checkCollisions = function() {
       // 2nd checks lose collision
       if (this.player.didCollideEnemy(enemy)) {
         snowSound.play();
-        // this.player.removeLife(); 
+        this.player.removeLife(); 
 
         // move enemy off the screen to the bottom
         enemy.y = this.canvas.height + enemy.size;
@@ -395,7 +399,7 @@ Game.prototype.checkCollisions = function() {
       if (this.player.didCollideShuriken(shuriken)) {
           this.ouchSound.play();
           
-        // this.player.removeLife(); 
+        this.player.removeLife(); 
 
         // move enemy off the screen to the bottom
         shuriken.x = this.canvas.width - shuriken.sizeX;
