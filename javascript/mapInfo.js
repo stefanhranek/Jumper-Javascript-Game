@@ -2,48 +2,48 @@
 
 var dragonballInfo = [                    // ARRAY OF FLOOR BLOCKS
     {
-        height         : 70,
-        width          : 70,
-        x              : 2300,             
+        height         : 60,
+        width          : 60,
+        x              : 2310,             
         y              : 470                  // TOP RIGHT DRAGONBALL
     },
     
     {
-        height         : 70,
-        width          : 70,
-        x              : 973,                   // FLOOR DRAGONBALL (PODIUM)     
+        height         : 60,
+        width          : 60,
+        x              : 978,                   // FLOOR DRAGONBALL (PODIUM)     
         y              : 955
     },
 
     {
-        height         : 70,
-        width          : 70,
-        x              : 2315,                   // BOTTOM RIGHT DRAGONBALL
+        height         : 60,
+        width          : 60,
+        x              : 2320,                   // BOTTOM RIGHT DRAGONBALL
         y              : 1075
     },
     
     {
-        height         : 70,
-        width          : 70,
-        x              : 1091,                     
+        height         : 60,
+        width          : 60,
+        x              : 1096,                     
         y              : 325               // MOON DRAGONBALL
     },
     {
-        height         : 70,
-        width          : 70,
-        x              : 65,                     
+        height         : 60,
+        width          : 60,
+        x              : 70,                     
         y              : 816               // BOTTOM LEFT DRAGONBALL
     },
     {
-        height         : 70,
-        width          : 70,
-        x              : 514,                     
+        height         : 60,
+        width          : 60,
+        x              : 519,                     
         y              : 269               // TOP LEFT DRAGONBALL
     },
     {
-        height         : 70,
-        width          : 70,
-        x              : 1688,                     
+        height         : 60,
+        width          : 60,
+        x              : 1693,                     
         y              : 93               // TOP STACK DRAGONBALL
     }
 ];
