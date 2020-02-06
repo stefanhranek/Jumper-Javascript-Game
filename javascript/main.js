@@ -54,10 +54,10 @@ function main() {
                     <span id="dragonballs">Dragon Balls: </span><span class="dragonballs-update">0</span><span>/7</span>
                 </section>
                 <section class="flex">
-                    <span id="mushroom">Mushroom: </span><span class="mushroom-update">0</span><span>/1</span>
+                    <span id="coins">Coins: </span><span class="coins-update">0</span><span>/20</span>
                 </section>
                 <section class="flex">
-                    <span id="coins">Coins: </span><span class="coins-update">0</span><span>/20</span>
+                    <span id="ramen">Ramen: </span><span class="ramen-update">0</span><span>/1</span>
                 </section>
                 <section class="flex">
                     <span id="lives">Lives: </span><span class="lives-update">1</span><span></span>
@@ -123,7 +123,7 @@ function main() {
         <h1 class="win-title">YOU WIN !!!</h1>
         <h2 class="congrats">Good Job !!</h2>
         <h6 class="thanks">Thank you for playing !</h6> 
-        <h5 class="mushroom"><img src="images/Mushroom-3.png" alt=""></h5>
+        <h5 class="mushroom"><img src="images/dragonball.png" alt=""></h5>
         <div class="button-container"><button class="start-button">PLAY AGAIN?</button></div>
         </main>
         `);
