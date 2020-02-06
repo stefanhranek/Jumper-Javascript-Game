@@ -429,6 +429,7 @@ Game.prototype.checkCollisions = function() {
 Game.prototype.updateGameStats = function() {
   this.coinsElement.innerHTML = this.coinCount;
   this.dragonballsElement.innerHTML = this.dragonballCount;
+  this.ramenElement.innerHTML = this.ramenCount;
   // this.coinsFinish.innerHTML = this.coinCount; ///////////////////////////////// for coin update on game win screen
 };
 

@@ -25,7 +25,7 @@ class Player {
         this.directionY      = 0;
         this.directionX      = 0;
         this.playerImage     = new Image();
-        this.playerImage.src = './images/spike.png';
+        this.playerImage.src = './images/goku.png';
     };
 
     movePlayer(direction) {
