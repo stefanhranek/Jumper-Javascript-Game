@@ -3,10 +3,7 @@
 ## Description
 Jumper is a game where the player can move left, right and jump (also fly). The goal of the game is to collect all seven "Dragon Balls" and bring them to "Master Roshi" at the top of the map. (Yes, this is DBZ themed) Along the way, the player can "die" when they collide with obstacles (deadly snowballs & shuriken). You have three lives, so be careful! Upon dying, a "Game Over" screen will appear with the ability to restart game. On the other hand, if you win, you'll receive a proper congratulatory "You Win" screen.
 
-I like anime a lot, so if you do too then you'll probably catch all the little references :)
-
-### Bonus
-Collect all coins <b>before</b> grabbing the mushroom. This unlocks a special anime reference that only I probably find cool. Enjoy!
+I like anime a lot, so if you do too then you'll probably enjoy the references :)
 
 #### Link
 
