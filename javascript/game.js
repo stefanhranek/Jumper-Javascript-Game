@@ -6,7 +6,6 @@ var snowSound;
 function preload() {
   coinSound = loadSound("./sound/retroCoinSound.wav");
   snowSound = loadSound("./sound/snowHit.wav");
-  
 }
 
 function Game() {
@@ -30,11 +29,13 @@ function Game() {
   this.coinCount = 0;
   this.dragonballCount = 0;
   this.ramenCount = 0;
+  this.livesCount = 0;
   this.floorObj = null;
   this.backgroundMusic = undefined;
   this.moonMusic = undefined;
   this.backgroundSprite = undefined;
   this.gameWinSound = undefined;
+  this.playerImage = undefined;
 }
 
 Game.prototype.start = function() {
@@ -66,8 +67,11 @@ Game.prototype.start = function() {
 
   // COINS COLLECTED REFERENCE
   this.coinsElement = this.gameScreen.querySelector(".coins-update");
-  this.dragonballsElement = this.gameScreen.querySelector(".dragonballs-update");
+  this.dragonballsElement = this.gameScreen.querySelector(
+    ".dragonballs-update"
+  );
   this.ramenElement = this.gameScreen.querySelector(".ramen-update");
+  this.livesElement = this.gameScreen.querySelector(".lives-update");
 
   // Setting the canvas size (ctx)
   this.containerWidth = 2400;
@@ -80,7 +84,11 @@ Game.prototype.start = function() {
   this.ramen = new Ramen(this.canvas);
   this.roshi = new Roshi(this.canvas);
   this.speechBubble = new Speech(this.canvas);
-  this.player = new Player(this.canvas, 1);
+  this.player = new Player(this.canvas, 3);
+  console.log('this',this.player);
+  this.playerImage = this.player.playerImage;
+  this.livesCount = this.player.lives;
+  
   this.floorObj = new Floor(this.canvas);
   this.drawPlatforms = this.platforms.map(function(platformData) {
     return new Platforms(
@@ -227,30 +235,29 @@ Game.prototype.startLoop = function() {
     // Check dragonball collisions
 
     this.drawDragonballs.forEach(function(dragonballs) {
-        var playerTop = this.player.y - this.player.size / 2;
-        var playerLeft = this.player.x - this.player.size / 2;
-        var playerRight = this.player.x + this.player.size / 2;
-        var playerBottom = this.player.y + this.player.size / 2;
-        var dragonballsTop = dragonballs.y - dragonballs.height / 2; // -45
-        var dragonballsLeft = dragonballs.x - dragonballs.width / 2;
-        var dragonballsRight = dragonballs.x + dragonballs.width / 2;
-        var dragonballsBottom = dragonballs.y + dragonballs.height / 2;
-        var crossTop = playerBottom >= dragonballsTop;
-        var crossLeft = playerLeft <= dragonballsRight;
-        var crossRight = playerRight >= dragonballsLeft;
-        var crossBottom = playerTop <= dragonballsBottom; 
-  
-        if (crossTop && crossRight && crossLeft && crossBottom) {
-          console.log("upgrade the ball count");
-          this.dragonballSound.volume = 0.6;
-          this.dragonballSound.play();
-  
-          dragonballs.y = 3001;
-          this.dragonballCount += 1;
+      var playerTop = this.player.y - this.player.size / 2;
+      var playerLeft = this.player.x - this.player.size / 2;
+      var playerRight = this.player.x + this.player.size / 2;
+      var playerBottom = this.player.y + this.player.size / 2;
+      var dragonballsTop = dragonballs.y - dragonballs.height / 2; // -45
+      var dragonballsLeft = dragonballs.x - dragonballs.width / 2;
+      var dragonballsRight = dragonballs.x + dragonballs.width / 2;
+      var dragonballsBottom = dragonballs.y + dragonballs.height / 2;
+      var crossTop = playerBottom >= dragonballsTop;
+      var crossLeft = playerLeft <= dragonballsRight;
+      var crossRight = playerRight >= dragonballsLeft;
+      var crossBottom = playerTop <= dragonballsBottom;
+
+      if (crossTop && crossRight && crossLeft && crossBottom) {
+        console.log("upgrade the ball count");
+        this.dragonballSound.volume = 0.6;
+        this.dragonballSound.play();
+
+        dragonballs.y = 3001;
+        this.dragonballCount += 1;
         //   this.updateGameStats();
-        } 
-  
-      }, this);
+      }
+    }, this);
 
     // Check coin collisions
 
@@ -311,13 +318,15 @@ Game.prototype.startLoop = function() {
       this.moonMusic.play();
     }
 
-    if (this.dragonballsElement.innerHTML === "7" && this.gameWin) {  //THIS STOPS MUSIC ONCE GAME IS WON & COUNTER IS 7
-        this.moonMusic.pause();
-    //   this.dragonballsElement.innerHTML = "GG";
+    if (this.dragonballsElement.innerHTML === "7" && this.gameWin) {
+      //THIS STOPS MUSIC ONCE GAME IS WON & COUNTER IS 7
+      this.moonMusic.pause();
+      //   this.dragonballsElement.innerHTML = "GG";
     }
 
-    if (this.dragonballsElement.innerHTML === "7" && this.gameIsOver) {  //THIS STOPS MUSIC ONCE GAME IS WON & COUNTER IS 7
-        this.moonMusic.pause();
+    if (this.dragonballsElement.innerHTML === "7" && this.gameIsOver) {
+      //THIS STOPS MUSIC ONCE GAME IS WON & COUNTER IS 7
+      this.moonMusic.pause();
     }
 
     this.ramen.draw();
@@ -355,8 +364,8 @@ Game.prototype.startLoop = function() {
     });
 
     this.drawDragonballs.forEach(function(oneDragonball) {
-        oneDragonball.draw();
-      });
+      oneDragonball.draw();
+    });
 
     // Terminate loop when game 'WIN' or 'LOSE'
     if (!this.gameIsOver && !this.gameWin) {
@@ -373,13 +382,15 @@ Game.prototype.startLoop = function() {
 // LOOP END ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Game.prototype.checkCollisions = function() {
-    if (this.player.didCollideRamen(this.ramen)) {
-        console.log("ITS RAMEN TIME");
-        this.soupSound.play();
+  if (this.player.didCollideRamen(this.ramen)) {
+    console.log("ITS RAMEN TIME");
+    this.soupSound.play();
 
-        this.ramen.y = 3001; // have to do a for loop to remove
-        this.ramenCount += 1;
-    }
+    this.ramen.y = 3001; // have to do a for loop to remove
+    this.ramenCount += 1;
+    this.playerImage.src = './images/gokuSS.png'
+    this.player.size = 85;
+  }
 
   if (this.player.didCollideWin(this.roshi)) {
     this.youWin();
@@ -388,12 +399,13 @@ Game.prototype.checkCollisions = function() {
     this.backgroundMusic.pause();
     this.moonMusic.pause();
   } // 1st checks win collision
-    if (!this.player.didCollideWin(this.roshi)) {
+  if (!this.player.didCollideWin(this.roshi)) {
     this.enemies.forEach(function(enemy) {
       // 2nd checks lose collision
       if (this.player.didCollideEnemy(enemy)) {
         snowSound.play();
-        this.player.removeLife(); 
+        this.livesCount--;
+        this.player.removeLife();
 
         // move enemy off the screen to the bottom
         enemy.y = this.canvas.height + enemy.size;
@@ -405,13 +417,15 @@ Game.prototype.checkCollisions = function() {
         }
       }
     }, this);
-  } if (!this.player.didCollideWin(this.roshi)) {
+  }
+  if (!this.player.didCollideWin(this.roshi)) {
     this.shurikens.forEach(function(shuriken) {
       // 2nd checks lose collision
       if (this.player.didCollideShuriken(shuriken)) {
-          this.ouchSound.play();
-          
-        this.player.removeLife(); 
+        this.ouchSound.play();
+        this.livesCount--;
+
+        this.player.removeLife();
 
         // move enemy off the screen to the bottom
         shuriken.x = this.canvas.width - shuriken.sizeX;
@@ -430,6 +444,8 @@ Game.prototype.updateGameStats = function() {
   this.coinsElement.innerHTML = this.coinCount;
   this.dragonballsElement.innerHTML = this.dragonballCount;
   this.ramenElement.innerHTML = this.ramenCount;
+  this.livesElement.innerHTML = this.livesCount;
+
   // this.coinsFinish.innerHTML = this.coinCount; ///////////////////////////////// for coin update on game win screen
 };
 
@@ -438,7 +454,7 @@ Game.prototype.passGameOverCallback = function(gameOver) {
 };
 
 Game.prototype.passGameWinCallback = function(youWin) {
-    this.moonMusic.pause();
+  this.moonMusic.pause();
   this.onYouWinCallback = youWin;
 };
 

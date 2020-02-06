@@ -60,7 +60,7 @@ function main() {
                     <span id="ramen">Ramen: </span><span class="ramen-update">0</span><span>/1</span>
                 </section>
                 <section class="flex">
-                    <span id="lives">Lives: </span><span class="lives-update">1</span><span></span>
+                    <span id="lives">Lives: </span><span class="lives-update">3</span><span></span>
                     </section>
                     <div class ="bottom-game-text">
                       <p>Collect all dragon balls, then bring them to Master Roshi to win.</p>
