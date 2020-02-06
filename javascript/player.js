@@ -105,6 +105,27 @@ class Player {
         return false;
     };
 
+    didCollideRamen(ramen) {
+        var playerLeft   = this.x;
+        var playerRight  = this.x + this.size;
+        var playerTop    = this.y;
+        var playerBottom = this.y + this.size;
+    
+        var ramenLeft   = ramen.x - ramen.width/2;
+        var ramenRight  = ramen.x + ramen.width/2;
+        var ramenTop    = ramen.y - ramen.height/2;
+        var ramenBottom = ramen.y + ramen.height/2;
+    
+        var crossLeftRamen   = ramenLeft <= playerRight && ramenLeft >= playerLeft;       // COLLISION CHECKS
+        var crossRightRamen  = ramenRight >= playerLeft && ramenRight <= playerRight;     // COLLISION CHECKS
+        var crossBottomRamen = ramenBottom >= playerTop && ramenBottom <= playerBottom;   // COLLISION CHECKS
+        var crossTopRamen    = ramenTop <= playerBottom && ramenTop >= playerTop;         // COLLISION CHECKS
+        if ((crossLeftRamen || crossRightRamen) && (crossTopRamen || crossBottomRamen)) {   // COLLISION CHECKS
+            return true;
+        };
+        return false;
+    };
+
     handleScreenCollision() {
         var screenTop    = 0;                                       // TOP & BOTTOM COLLISION
         var screenBottom = this.canvas.height-50;                   // TOP & BOTTOM COLLISION

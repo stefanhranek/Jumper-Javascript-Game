@@ -29,6 +29,7 @@ function Game() {
   this.gameWinScreen = null;
   this.coinCount = 0;
   this.dragonballCount = 0;
+  this.ramenCount = 0;
   this.floorObj = null;
   this.backgroundMusic = undefined;
   this.moonMusic = undefined;
@@ -55,6 +56,9 @@ Game.prototype.start = function() {
   this.dragonballSound = new Audio();
   this.dragonballSound.src = "./sound/special.wav";
 
+  this.soupSound = new Audio();
+  this.soupSound.src = "./sound/soup1.mp3";
+
   // Get canvas element, create ctx, save canvas & ctx in the game object
   this.canvasContainer = document.querySelector(".canvas-container");
   this.canvas = document.querySelector("canvas");
@@ -63,6 +67,7 @@ Game.prototype.start = function() {
   // COINS COLLECTED REFERENCE
   this.coinsElement = this.gameScreen.querySelector(".coins-update");
   this.dragonballsElement = this.gameScreen.querySelector(".dragonballs-update");
+  this.ramenElement = this.gameScreen.querySelector(".ramen-update");
 
   // Setting the canvas size (ctx)
   this.containerWidth = 2400;
@@ -369,6 +374,14 @@ Game.prototype.startLoop = function() {
 // LOOP END ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Game.prototype.checkCollisions = function() {
+    if (this.player.didCollideRamen(this.ramen)) {
+        console.log("ITS RAMEN TIME");
+        this.soupSound.play();
+
+        this.ramen.y = 3001; // have to do a for loop to remove
+        this.ramenCount += 1;
+    }
+
   if (this.player.didCollideWin(this.roshi)) {
     this.youWin();
 
