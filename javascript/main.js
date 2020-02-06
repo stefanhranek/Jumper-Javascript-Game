@@ -51,13 +51,13 @@ function main() {
 
             <div class ="game-dom-container">
                 <section class="flex">
-                    <span id="dragonball">Dragon Balls: </span><span class="dragonball-update">0</span><span>/7</span>
+                    <span id="dragonballs">Dragon Balls: </span><span class="dragonballs-update">0</span><span>/7</span>
                 </section>
                 <section class="flex">
                     <span id="mushroom">Mushroom: </span><span class="mushroom-update">0</span><span>/1</span>
                 </section>
                 <section class="flex">
-                    <span id="coins">Coins: </span><span class="coins-update">0</span><span>/25</span>
+                    <span id="coins">Coins: </span><span class="coins-update">0</span><span>/18</span>
                 </section>
                 <section class="flex">
                     <span id="lives">Lives: </span><span class="lives-update">1</span><span></span>

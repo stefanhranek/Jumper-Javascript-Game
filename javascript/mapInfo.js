@@ -1,5 +1,53 @@
 'use strict'
 
+var dragonballInfo = [                    // ARRAY OF FLOOR BLOCKS
+    {
+        height         : 70,
+        width          : 70,
+        x              : 2300,             
+        y              : 470                  // TOP RIGHT DRAGONBALL
+    },
+    
+    {
+        height         : 70,
+        width          : 70,
+        x              : 973,                   // FLOOR DRAGONBALL (PODIUM)     
+        y              : 955
+    },
+
+    {
+        height         : 70,
+        width          : 70,
+        x              : 2315,                   // BOTTOM RIGHT DRAGONBALL
+        y              : 1075
+    },
+    
+    {
+        height         : 70,
+        width          : 70,
+        x              : 1091,                     
+        y              : 325               // MOON DRAGONBALL
+    },
+    {
+        height         : 70,
+        width          : 70,
+        x              : 65,                     
+        y              : 816               // BOTTOM LEFT DRAGONBALL
+    },
+    {
+        height         : 70,
+        width          : 70,
+        x              : 514,                     
+        y              : 269               // TOP LEFT DRAGONBALL
+    },
+    {
+        height         : 70,
+        width          : 70,
+        x              : 1688,                     
+        y              : 93               // TOP STACK DRAGONBALL
+    }
+];
+
 var blockInfo = [                    // ARRAY OF FLOOR BLOCKS
     {
         height         : 60,
@@ -186,13 +234,6 @@ var coinInfo = [                        // ARRAY OF COINS
     {       
         height         : 40,
         width          : 25,
-        x              : 535,                    
-        y              : 255
-    },
-
-    {       
-        height         : 40,
-        width          : 25,
         x              : 890,                    
         y              : 325
     },
@@ -267,20 +308,6 @@ var coinInfo = [                        // ARRAY OF COINS
         y              : 873
     },
 
-    {            
-        height         : 40,
-        width          : 25,
-        x              : 2340,                    
-        y              : 1090
-    },
-
-    {        
-        height         : 40,
-        width          : 25,
-        x              : 1709,                
-        y              : 105
-    },
-
     {      
         height         : 40,
         width          : 25,
@@ -305,22 +332,8 @@ var coinInfo = [                        // ARRAY OF COINS
     {        
         height         : 40,
         width          : 25,
-        x              : 995,                
-        y              : 930        // middle of 3 coins (horizontal)
-    },
-
-    {        
-        height         : 40,
-        width          : 25,
         x              : 795,                
         y              : 1025       //3 horizontal
-    },
-
-    {        
-        height         : 40,
-        width          : 25,
-        x              : 92,              
-        y              : 805
     },
 
     {        
@@ -443,28 +456,6 @@ class Ramen {                                           ///  RAMEN CONSTRUCTOR
             this.width,
             this.height)
     };
-};
-
-class Dragonball {                                           /// WIN OBJECT CONSTRUCTOR
-        constructor(canvas) {
-            this.canvas         = canvas;
-            this.ctx            = canvas.getContext('2d');
-            this.height         = 80;
-            this.width          = 80;
-            this.x              = 2300;             
-            this.y              = 455;
-        };
-        
-        draw() {
-            var dragonballImage = new Image();
-            dragonballImage.src = './images/dragonball.png';
-            this.ctx.drawImage( 
-                dragonballImage,
-                this.x,
-                this.y,
-                this.width,
-                this.height)
-        };
 };
 
 class Floor {                                               /// FLOOR CONSTRUCTOR 
