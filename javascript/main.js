@@ -57,7 +57,7 @@ function main() {
                     <span id="mushroom">Mushroom: </span><span class="mushroom-update">0</span><span>/1</span>
                 </section>
                 <section class="flex">
-                    <span id="coins">Coins: </span><span class="coins-update">0</span><span>/18</span>
+                    <span id="coins">Coins: </span><span class="coins-update">0</span><span>/20</span>
                 </section>
                 <section class="flex">
                     <span id="lives">Lives: </span><span class="lives-update">1</span><span></span>
