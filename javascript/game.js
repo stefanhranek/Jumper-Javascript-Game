@@ -85,10 +85,9 @@ Game.prototype.start = function() {
   this.roshi = new Roshi(this.canvas);
   this.speechBubble = new Speech(this.canvas);
   this.player = new Player(this.canvas, 3);
-  console.log('this',this.player);
   this.playerImage = this.player.playerImage;
   this.livesCount = this.player.lives;
-  
+
   this.floorObj = new Floor(this.canvas);
   this.drawPlatforms = this.platforms.map(function(platformData) {
     return new Platforms(
@@ -127,7 +126,7 @@ Game.prototype.start = function() {
     );
   }, this);
 
-  ////  CONTROLLER  //////////////////////////////////////////////////////////////////////
+  ////  CONTROLLER  //////////////////////////
 
   // Add event listener for keydown movements
   this.handleKeyDown = function(event) {
@@ -136,7 +135,7 @@ Game.prototype.start = function() {
       this.jumpSound.play();
       // jumpSound.pause();
       // jumpSound.currentTime = 0;
-      // jumpSound.play();            //////////////////////////// JUMP SOUND EFFECT //////////////////////////////
+      // jumpSound.play();
     } else if (event.keyCode === 37) {
       this.player.directionX = -1;
     } else if (event.keyCode === 39) {
@@ -157,9 +156,7 @@ Game.prototype.start = function() {
 
   // Add 'keyup; listener to improve movement; running & jumping at the same time
 
-  ////////////////////////////////////////////////////////////////////////////////////////////
-  ////  CONTROLLER END  //////////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////////////////////////////
+  ////  CONTROLLER END  /////////////////////////////
 
   this.backgroundMusic.play();
 
@@ -167,7 +164,7 @@ Game.prototype.start = function() {
   this.startLoop();
 };
 
-// LOOP START ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// LOOP START ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Game.prototype.startLoop = function() {
   var loop = function() {
@@ -187,23 +184,18 @@ Game.prototype.startLoop = function() {
       var playerLeft = this.player.x - this.player.size / 2;
       var playerRight = this.player.x + this.player.size / 2;
       var playerBottom = this.player.y + 16 + this.player.size / 2;
-      var platformTop = platforms.y - platforms.height / 2; // -41
+      var platformTop = platforms.y - platforms.height / 2;
       var platformLeft = platforms.x - platforms.width / 2;
       var platformRight = platforms.x + platforms.width / 2;
       var platformBottom = platforms.y + platforms.height / 2 - 80;
       var crossTop = playerBottom >= platformTop;
       var crossLeft = playerLeft <= platformRight;
       var crossRight = playerRight >= platformLeft;
-      var crossBottom = playerTop <= platformBottom; // not working right for some reason (BELOW)
+      var crossBottom = playerTop <= platformBottom;
 
       if (crossTop && crossRight && crossLeft && crossBottom) {
         this.player.y = platformTop - 69;
       }
-
-      // if      (crossLeft && crossTop && crossBottom) {this.player.x = platformLeft}
-      // else if (crossRight && crossTop && crossBottom) {this.player.x = platformRight}
-      // else if (crossTop && crossRight && crossLeft && crossTop) {this.player.y = platformTop;}
-      // else if (crossBottom && crossLeft && crossRight) {this.player.y = platformBottom;}
     }, this);
 
     // Check block collision
@@ -213,23 +205,18 @@ Game.prototype.startLoop = function() {
       var playerLeft = this.player.x - this.player.size / 2;
       var playerRight = this.player.x + this.player.size / 2;
       var playerBottom = this.player.y + this.player.size / 2;
-      var blockTop = blocks.y - blocks.height / 2; // -45
+      var blockTop = blocks.y - blocks.height / 2;
       var blockLeft = blocks.x - blocks.width / 2;
       var blockRight = blocks.x + blocks.width / 2;
       var blockBottom = blocks.y + blocks.height / 2;
       var crossTop = playerBottom >= blockTop;
       var crossLeft = playerLeft <= blockRight;
       var crossRight = playerRight >= blockLeft;
-      var crossBottom = playerTop <= blockBottom; // not working right for some reason (BELOW)
+      var crossBottom = playerTop <= blockBottom;
 
       if (crossTop && crossRight && crossLeft && crossBottom) {
         this.player.y = blockTop - 50;
       }
-
-      // if      (crossLeft && crossTop && crossBottom) {this.player.x = platformLeft}
-      // else if (crossRight && crossTop && crossBottom) {this.player.x = platformRight}
-      // else if (crossTop && crossRight && crossLeft && crossTop) {this.player.y = platformTop;}
-      // else if (crossBottom && crossLeft && crossRight) {this.player.y = platformBottom;}
     }, this);
 
     // Check dragonball collisions
@@ -239,7 +226,7 @@ Game.prototype.startLoop = function() {
       var playerLeft = this.player.x - this.player.size / 2;
       var playerRight = this.player.x + this.player.size / 2;
       var playerBottom = this.player.y + this.player.size / 2;
-      var dragonballsTop = dragonballs.y - dragonballs.height / 2; // -45
+      var dragonballsTop = dragonballs.y - dragonballs.height / 2;
       var dragonballsLeft = dragonballs.x - dragonballs.width / 2;
       var dragonballsRight = dragonballs.x + dragonballs.width / 2;
       var dragonballsBottom = dragonballs.y + dragonballs.height / 2;
@@ -249,7 +236,6 @@ Game.prototype.startLoop = function() {
       var crossBottom = playerTop <= dragonballsBottom;
 
       if (crossTop && crossRight && crossLeft && crossBottom) {
-        console.log("upgrade the ball count");
         this.dragonballSound.volume = 0.6;
         this.dragonballSound.play();
 
@@ -266,28 +252,20 @@ Game.prototype.startLoop = function() {
       var playerLeft = this.player.x - this.player.size / 2;
       var playerRight = this.player.x + this.player.size / 2;
       var playerBottom = this.player.y + this.player.size / 2;
-      var coinsTop = coins.y - coins.height / 2; // -45
+      var coinsTop = coins.y - coins.height / 2;
       var coinsLeft = coins.x - coins.width / 2;
       var coinsRight = coins.x + coins.width / 2;
       var coinsBottom = coins.y + coins.height / 2;
       var crossTop = playerBottom >= coinsTop;
       var crossLeft = playerLeft <= coinsRight;
       var crossRight = playerRight >= coinsLeft;
-      var crossBottom = playerTop <= coinsBottom; // not working right for some reason (BELOW)
+      var crossBottom = playerTop <= coinsBottom;
 
       if (crossTop && crossRight && crossLeft && crossBottom) {
-        console.log("upgrade the coin count");
         coinSound.play();
-
-        coins.y = 3001; // have to do a for loop to remove
+        coins.y = 3001;
         this.coinCount += 1;
-        // this.updateGameStats();
-      } // need to send dragonball outside of map
-
-      // if      (crossLeft && crossTop && crossBottom) {this.player.x = platformLeft}
-      // else if (crossRight && crossTop && crossBottom) {this.player.x = platformRight}
-      // else if (crossTop && crossRight && crossLeft && crossTop) {this.player.y = platformTop;}
-      // else if (crossBottom && crossLeft && crossRight) {this.player.y = platformBottom;}
+      }
     }, this);
 
     // Check enemy collisions
@@ -338,7 +316,7 @@ Game.prototype.startLoop = function() {
     this.player.draw();
     // this.player.updateGravity();
 
-    this.player.movePlayer(); /////////////////////////////////////////////////////////////////////////////////////////
+    this.player.movePlayer(); ///////////////////////////////
     // Draw the enemies
     this.enemies.forEach(function(enemy) {
       enemy.draw();
@@ -358,7 +336,7 @@ Game.prototype.startLoop = function() {
       oneBlock.draw();
     });
 
-    // Draw the coins  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Draw the coins  //////////////////////////////////////
     this.drawCoins.forEach(function(oneCoin) {
       oneCoin.draw();
     });
@@ -379,16 +357,15 @@ Game.prototype.startLoop = function() {
   window.requestAnimationFrame(loop);
 };
 
-// LOOP END ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// LOOP END ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Game.prototype.checkCollisions = function() {
   if (this.player.didCollideRamen(this.ramen)) {
-    console.log("ITS RAMEN TIME");
     this.soupSound.play();
 
-    this.ramen.y = 3001; // have to do a for loop to remove
+    this.ramen.y = 3001;
     this.ramenCount += 1;
-    this.playerImage.src = './images/gokuSS.png'
+    this.playerImage.src = "./images/gokuSS.png";
     this.player.size = 85;
   }
 
@@ -446,7 +423,7 @@ Game.prototype.updateGameStats = function() {
   this.ramenElement.innerHTML = this.ramenCount;
   this.livesElement.innerHTML = this.livesCount;
 
-  // this.coinsFinish.innerHTML = this.coinCount; ///////////////////////////////// for coin update on game win screen
+  // this.coinsFinish.innerHTML = this.coinCount; //////////////// for coin update on game win screen
 };
 
 Game.prototype.passGameOverCallback = function(gameOver) {

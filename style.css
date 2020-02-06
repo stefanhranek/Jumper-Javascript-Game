@@ -1,278 +1,274 @@
 /* ---- reset ---- */
 
 html {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-*, *:before, *:after {
-    box-sizing: inherit;
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
 }
 
 body {
-    margin  :  0;
-    padding : 0;
+  margin: 0;
+  padding: 0;
 }
-
 
 /* ---- typography ---- */
 
 body {
-    color           : #111;
-    font-family     : 'Press Start 2P', cursive;
-    font-size       : 16px;
-    line-height     : 147%;
-    display         : flex;
-    justify-content : center;
-    align-items     : center;
-    background-color: rgb(101, 148, 146, 100%);
+  color: #111;
+  font-family: "Press Start 2P", cursive;
+  font-size: 16px;
+  line-height: 147%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(101, 148, 146, 100%);
 }
-
 
 p {
-    margin: 0;
+  margin: 0;
 }
-
-
 
 /* ---- layout ---- */
 
-html, body {
-    height: 100%;
+html,
+body {
+  height: 100%;
 }
 
 .container {
-    margin: 0 20px;
+  margin: 0 20px;
 }
 
 @media (min-width: 768px) {
-    .container {
-        max-width: 728px;
-        margin   : 0 auto;
-    }
+  .container {
+    max-width: 728px;
+    margin: 0 auto;
+  }
 }
-
 
 /* ---- components ---- */
 
 .game {
-    text-align    : center;
-    display       : flex;
-    flex-direction: column;
-    height        : 100%;                   
-    width         : 100%   
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
 }
 
 .game header {
-    height      : 50px;
-    display     : flex;
-    align-items : center;
+  height: 50px;
+  display: flex;
+  align-items: center;
 }
 
 .game .lives {
-    flex: 1;
+  flex: 1;
 }
 
 .game .coins {
-    flex: 1;
+  flex: 1;
 }
 
 .game .label {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .game .value {
-    font-style: italic;
+  font-style: italic;
 }
 
 .game .canvas-container {
-    flex      : 1; 
-    margin    : 0;
-    background: rgb(101, 148, 146, 100%);
+  flex: 1;
+  margin: 0;
+  background: rgb(101, 148, 146, 100%);
 }
 
-
 .game-dom-container {
-    display         : flex;
-    flex-direction: column;
-    position        : absolute;
-    color           : white;
-    padding         : 30px;
-    width           : 100vw;
-    justify-content : flex-end;
-    padding-top     : 30px;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  color: white;
+  padding: 30px;
+  width: 100vw;
+  justify-content: flex-end;
+  padding-top: 30px;
 }
 
 .game-dom-container span {
-    font-size: 25px;
+  font-size: 25px;
 }
 
 .bottom-game-text {
-    text-align: center;
-    
-    height: auto;
+  text-align: center;
+
+  height: auto;
 }
 
 .flex {
-    display: flex;
-    margin: 10px;
-    justify-content: flex-end;
+  display: flex;
+  margin: 10px;
+  justify-content: flex-end;
 }
 
 canvas {
-    align-items     : center;
-    margin          : 260px;
-    justify-content : center;
-    align-content   : center;
-    width           : 60vw;
-    height          :55vh;
-    background      : black;
-    background-image: url('images/purpleMoon.png');
+  align-items: center;
+  margin: 260px;
+  justify-content: center;
+  align-content: center;
+  width: 60vw;
+  height: 55vh;
+  background: black;
+  background-image: url("images/purpleMoon.png");
 }
 
 .canvas-container {
-    margin: 0 20px;
+  margin: 0 20px;
 }
 
 .splashScreen {
-    background: url()
+  background: url();
 }
 
 body {
-    display             : flex;
-    justify-content     : center;
-    align-items         : center;
-    background-color    : rgb(101, 148, 146, 100%);
-    text-align          : center;
-    cursor              : pointer;
-    }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(101, 148, 146, 100%);
+  text-align: center;
+  cursor: pointer;
+}
 
 .gameOver {
-    display             : flex;
-    flex-direction      : column;
+  display: flex;
+  flex-direction: column;
 }
 
 .gameWin {
-    display             : flex;
-    flex-direction      : column;
+  display: flex;
+  flex-direction: column;
 }
 
 .win-title {
-    font-size   : 120px;
+  font-size: 120px;
 }
 
 .thanks {
-    padding-top : 2px;
-    color       : white;
-    font-size   : 22px;
-
+  padding-top: 2px;
+  color: white;
+  font-size: 22px;
 }
 
 .mushroom img {
-    padding-top : 0px;
-    height      : 65px;
-    width       : auto;
+  padding-top: 0px;
+  height: 65px;
+  width: auto;
 }
 
 .congrats {
-    font-size: 70px;
+  font-size: 70px;
 }
 
 .best {
-    font-size: 30px;
+  font-size: 30px;
 }
 
 .anything h4 {
-    font-size: 15px;
+  font-size: 15px;
 }
 
 .title {
-    padding-bottom: 30px;
-}  
+  padding-bottom: 30px;
+}
 .title img {
-    height      : auto;
-    width       : 60vw;
-    max-width   : 750px;
+  height: auto;
+  width: 60vw;
+  max-width: 750px;
 }
 
 .gO-title {
-    margin: 20px;
-}  
+  margin: 20px;
+}
 .gO-title img {
-    height      : auto;
-    width       : 60vw;
-    max-width   : 60vw;
+  height: auto;
+  width: 60vw;
+  max-width: 60vw;
 }
 
 .gO-tryAgain img {
-    height      : auto;
-    width       : 30vw;
-    max-width   : 300px;
-    padding-top : 20px;
+  height: auto;
+  width: 30vw;
+  max-width: 300px;
+  padding-top: 20px;
 }
 
 .copyright img {
-    height      : auto;
-    width       : 15vw;
-    max-width   : 300px;
-    padding-top : 60px;
+  height: auto;
+  width: 15vw;
+  max-width: 300px;
+  padding-top: 60px;
 }
 
 .all-rights img {
-    height      : auto;
-    width       : 15vw;
-    max-width   : 300px;
+  height: auto;
+  width: 15vw;
+  max-width: 300px;
 }
 
 .stefco img {
-    height      : 30px;;
-    width       : 15vw;
-    max-width   : 300px;
-    padding-top : 0px;
+  height: 30px;
+  width: 15vw;
+  max-width: 300px;
+  padding-top: 0px;
 }
 
 .how-to-play img {
-    height      : auto;
-    width       : 30vw;
-    max-width   : 300px;
-    margin      : 20px;
+  height: auto;
+  width: 30vw;
+  max-width: 300px;
+  margin: 20px;
 }
 
 .controls {
-    margin      : 20px;
+  margin: 20px;
 }
 
 .controls img {
-    height      : 70px;
-    width       : auto;
+  height: 70px;
+  width: auto;
 }
 
 .controls-text img {
-    margin      : 20px;
-    max-width   : 20vw;
-    min-width   : 200px;
-    height      : auto;
+  margin: 20px;
+  max-width: 20vw;
+  min-width: 200px;
+  height: auto;
 }
 
 .start-button {
-    text-align      : center;
-    display         : inline-block;
-    margin          : 0;
-    font-weight     : bold;
-    padding         : auto;
-    background-color: lightgray;
-    text-shadow     : -1px -1px black, 1px 1px white;
-    color           : gray;
-    border-radius   : 1px;
-    box-shadow      : 0 .2em .2em gray; 
-    cursor          : pointer;
-    height          : 30px;
-    width           : auto;
+  text-align: center;
+  display: inline-block;
+  margin: 0;
+  font-weight: bold;
+  padding: auto;
+  background-color: lightgray;
+  text-shadow: -1px -1px black, 1px 1px white;
+  color: gray;
+  border-radius: 1px;
+  box-shadow: 0 0.2em 0.2em gray;
+  cursor: pointer;
+  height: 30px;
+  width: auto;
 }
 
 .button-container {
-    padding-top: 20px;
+  padding-top: 20px;
 }
 
 audio {
-    display: none;
+  display: none;
 }
